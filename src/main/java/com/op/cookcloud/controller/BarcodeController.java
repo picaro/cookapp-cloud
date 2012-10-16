@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
-import org.apache.xmlrpc.client.XMLRPCClient;
+import org.apache.xmlrpc.XmlRpcClient;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
 
 import com.op.cookcloud.model.Product;
 //import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -41,14 +43,14 @@ public class BarcodeController {
     
     //If not ok - look in barcodes DB return Product name 
     
-    HashMap result = searchUPCdatabase("ean", code);
+    //HashMap result = searchUPCdatabase("ean", code);
 
-		if (result != null) {
-			String resultSize = result.get("size").toString();
-			String resultDesc = result.get("description").toString();
+		//if (result != null) {
+		//	String resultSize = result.get("size").toString();
+		//	String resultDesc = result.get("description").toString();
 		//itemsFound.add(new Item(resultDesc, itemProductData, itemDataFormat));
 
-		}
+	//	}
     
     //If not found - return error
     if (1 == 1) 
@@ -58,7 +60,6 @@ public class BarcodeController {
 
     
 		return  product;
-;
 
 	}
  
@@ -70,11 +71,14 @@ public class BarcodeController {
  	@SuppressWarnings("unchecked")
 	private static HashMap searchUPCdatabase(String code, String codeFormat) {
 		try {
-			XMLRPCClient client = new XMLRPCClient("http://www.upcdatabase.com/xmlrpc");
+			XmlRpcClient client = new XmlRpcClient("http://www.upcdatabase.com/xmlrpc");
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("rpc_key", UPC_DATABASE_RPC_KEY);
 			params.put(codeFormat, code);
-			return (HashMap) client.call("lookup", params);
+     Vector paramsV = new Vector();
+     paramsV.addElement(UPC_DATABASE_RPC_KEY);
+     paramsV.addElement(code);
+			return (HashMap) client.execute("lookup", paramsV);
 			//return (HashMap) client.call("test", params);
 		} catch (Exception nl) {
 			nl.printStackTrace();
