@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+import org.apache.xmlrpc.client.XMLRPCClient;
+
+import java.util.HashMap;
 
 import com.op.cookcloud.model.Product;
 //import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -33,11 +36,19 @@ public class BarcodeController {
         product.setName("234");
         return product;
       }
-    //Try to find product by code from MondoDB
-    
+    //Try to find product by code from MondoDB    
     //If ok - return Product with seconds
     
     //If not ok - look in barcodes DB return Product name 
+    
+    HashMap result = searchUPCdatabase("ean", code);
+
+		if (result != null) {
+			String resultSize = result.get("size").toString();
+			String resultDesc = result.get("description").toString();
+		//itemsFound.add(new Item(resultDesc, itemProductData, itemDataFormat));
+
+		}
     
     //If not found - return error
     if (1 == 1) 
@@ -50,6 +61,28 @@ public class BarcodeController {
 ;
 
 	}
+ 
+ 	public static final String NAME_SEARCH = "Name Search";
+	public static final String BARCODE_SEARCH = "Barcode Search";
+	public static final String PRODUCTID_SEARCH = "ProductId Search";
+	public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
+ 
+ 	@SuppressWarnings("unchecked")
+	private static HashMap searchUPCdatabase(String code, String codeFormat) {
+		try {
+			XMLRPCClient client = new XMLRPCClient("http://www.upcdatabase.com/xmlrpc");
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("rpc_key", UPC_DATABASE_RPC_KEY);
+			params.put(codeFormat, code);
+			return (HashMap) client.call("lookup", params);
+			//return (HashMap) client.call("test", params);
+		} catch (Exception nl) {
+			nl.printStackTrace();
+		} 
+		return null;
+	}
+ 
+ 
  
  @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Id Not Found")
   public class NotFoundException extends Exception {
