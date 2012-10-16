@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
-import org.apache.xmlrpc.XmlRpcClient;
+import redstone.xmlrpc.XmlRpcClient;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 
@@ -73,14 +74,14 @@ public class BarcodeController {
  	@SuppressWarnings("unchecked")
 	private static HashMap searchUPCdatabase(String code, String codeFormat) {
 		try {
-			XmlRpcClient client = new XmlRpcClient("http://www.upcdatabase.com/xmlrpc");
+			XmlRpcClient client = new XmlRpcClient("http://www.upcdatabase.com/xmlrpc",false);
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("rpc_key", UPC_DATABASE_RPC_KEY);
 			params.put(codeFormat, code);
      Vector paramsV = new Vector();
      paramsV.addElement(UPC_DATABASE_RPC_KEY);
      paramsV.addElement(code);
-			return (HashMap) client.execute("lookup", paramsV);
+			return (HashMap) client.invoke("lookup", new Object[]{params});
 			//return (HashMap) client.call("test", params);
 		} catch (Exception nl) {
 			nl.printStackTrace();
