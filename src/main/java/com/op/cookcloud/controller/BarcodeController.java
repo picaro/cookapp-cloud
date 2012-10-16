@@ -43,14 +43,16 @@ public class BarcodeController {
     
     //If not ok - look in barcodes DB return Product name 
     
-    //HashMap result = searchUPCdatabase("ean", code);
+    HashMap result = searchUPCdatabase("ean", code);
 
-		//if (result != null) {
+		if (result != null) {
 		//	String resultSize = result.get("size").toString();
 		//	String resultDesc = result.get("description").toString();
 		//itemsFound.add(new Item(resultDesc, itemProductData, itemDataFormat));
-
-	//	}
+       product.setName("123");
+        return product;
+ 
+		}
     
     //If not found - return error
     if (1 == 1) 
