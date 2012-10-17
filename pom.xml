@@ -44,7 +44,12 @@
     <artifactId>xmlrpc-common</artifactId>
     <version>3.0</version>
 </dependency>
-            
+         
+  <dependency>
+    <groupId>org.apache.ws.commons.util</groupId>
+    <artifactId>ws-commons-util</artifactId>
+    <version>1.0.2</version>
+</dependency>  
             
   </dependencies>
 
