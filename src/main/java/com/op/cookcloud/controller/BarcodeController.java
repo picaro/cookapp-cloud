@@ -13,16 +13,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+import org.xml.sax.SAXException;
+
+import org.apache.ws.commons.util.NamespaceContextImpl;
 
 import org.apache.xmlrpc.common.TypeFactory;
+import org.apache.xmlrpc.common.TypeFactoryImpl;
+import org.apache.xmlrpc.common.XmlRpcController;
+import org.apache.xmlrpc.common.XmlRpcStreamConfig;
 import org.apache.xmlrpc.parser.DateParser;
 import org.apache.xmlrpc.parser.TypeParser;
+import org.apache.xmlrpc.serializer.DateSerializer;
+import org.apache.xmlrpc.serializer.TypeSerializer;
+import org.apache.xmlrpc.util.XmlRpcDateTimeDateFormat;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.Vector;
 
 import com.op.cookcloud.model.Product;
@@ -97,7 +112,7 @@ public class BarcodeController {
         config.setServerURL(new URL("http://www.upcdatabase.com/xmlrpc"));
       client.setConfig(config);
       
-final DateFormat format = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ss");
+final DateFormat format = new SimpleDateFormat("yyyy-MM-dd?HH:mm:ss");
 TypeFactory typeFactory = getCustomDateTypeFactory(client, format);
 client.setTypeFactory(typeFactory);
 
@@ -117,13 +132,23 @@ client.setTypeFactory(typeFactory);
   }
  
  
- private TypeFactory getCustomDateTypeFactory(XmlRpcController pController, final Format pFormat) {
+ private static TypeFactory getCustomDateTypeFactory(XmlRpcController pController, final Format pFormat) {
          return new TypeFactoryImpl(pController){
              private TypeSerializer dateSerializer = new DateSerializer(pFormat);
  
              public TypeParser getParser(XmlRpcStreamConfig pConfig, NamespaceContextImpl pContext, String pURI, String pLocalName) {
                  if (DateSerializer.DATE_TAG.equals(pLocalName)) {
-                     return new DateParser(pFormat);
+                     return new DateParser(pFormat){
+                    	 @Override
+                    	 protected void setResult(String result){
+                    		 try {
+								super.setResult("10");
+							} catch (SAXException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+                    	 }
+                     };
                  } else {
                      return super.getParser(pConfig, pContext, pURI, pLocalName);
                  }
