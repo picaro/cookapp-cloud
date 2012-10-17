@@ -73,23 +73,21 @@ public class BarcodeController {
     
     Map result = searchUPCdatabase("upc", code);
 
-    if (result != null) {
-    //  String resultSize = result.get("size").toString();
-    //  String resultDesc = result.get("description").toString();
+    System.out.println(result);
+    if (result != null && result.get("error") == null) {
+      String resultSize = result.get("size").toString();
+      String resultDesc = result.get("description").toString();
     //itemsFound.add(new Item(resultDesc, itemProductData, itemDataFormat));
-       product.setName("123");
-        return product;
+//    product.setName("123");
+//      product.setDescription(resultDesc );
+//return product;
  
     }
     
     //If not found - return error
-    if (1 == 1) 
-        throw new NotFoundException("Id not found in the request");
+    throw new NotFoundException("Id not found in the request");
     //Source source = new StreamSource(new StringReader(body));
     //Employee e = (Employee) jaxb2Mashaller.unmarshal(source);
-
-    
-    return  product;
 
   }
  
@@ -101,30 +99,23 @@ public class BarcodeController {
    @SuppressWarnings("unchecked")
   private static Map searchUPCdatabase(String code, String codeFormat) {
     try {
-      // Get default locale
-      Locale locale = Locale.getDefault();
-      // Set the default locale to pre-defined locale
-      Locale.setDefault(Locale.ENGLISH);
       
-      XmlRpcClient client = new XmlRpcClient();// ("http://www.upcdatabase.com/xmlrpc");
+      XmlRpcClient client = new XmlRpcClient();
       
       XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
         config.setServerURL(new URL("http://www.upcdatabase.com/xmlrpc"));
       client.setConfig(config);
       
-final DateFormat format = new SimpleDateFormat("yyyy-MM-dd?HH:mm:ss");
-TypeFactory typeFactory = getCustomDateTypeFactory(client, format);
-client.setTypeFactory(typeFactory);
+    final DateFormat format = new SimpleDateFormat("yyyy-MM-dd?HH:mm:ss");
+    TypeFactory typeFactory = getCustomDateTypeFactory(client, format);
+    client.setTypeFactory(typeFactory);
 
       Map<String, String> params = new Hashtable<String, String>();
       params.put("rpc_key", UPC_DATABASE_RPC_KEY);
       params.put("ean", codeFormat);
      Vector paramsV = new Vector();
-//     paramsV.addElement(UPC_DATABASE_RPC_KEY);
-//     paramsV.addElement(code);
-   paramsV.addElement(params);
-       //return (Map) client.execute(new XmlRpcRequest("lookup", paramsV));
-      return (Map) client. execute("lookup", paramsV);
+      paramsV.addElement(params);
+      return (Map) client.execute("lookup", paramsV);
     } catch (Exception nl) {
       nl.printStackTrace();
     } 
@@ -139,15 +130,15 @@ client.setTypeFactory(typeFactory);
              public TypeParser getParser(XmlRpcStreamConfig pConfig, NamespaceContextImpl pContext, String pURI, String pLocalName) {
                  if (DateSerializer.DATE_TAG.equals(pLocalName)) {
                      return new DateParser(pFormat){
-                    	 @Override
-                    	 protected void setResult(String result){
-                    		 try {
-								super.setResult("10");
-							} catch (SAXException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-                    	 }
+                       @Override
+                       protected void setResult(String result){
+                         try {
+                super.setResult("10");
+              } catch (SAXException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+              }
+                       }
                      };
                  } else {
                      return super.getParser(pConfig, pContext, pURI, pLocalName);
