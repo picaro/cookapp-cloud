@@ -38,7 +38,12 @@
 <artifactId>xmlrpc-client</artifactId>
 <version>3.0</version>
     </dependency>
-	
+  
+    <dependency>
+    <groupId>xmlrpc</groupId>
+    <artifactId>xmlrpc-common</artifactId>
+    <version>3.0</version>
+</dependency>
             
             
   </dependencies>
