@@ -74,7 +74,7 @@ public class BarcodeController {
     Map result = searchUPCdatabase("upc", code);
 
     System.out.println(result);
-    if (result != null && result.get("error") == null) {
+    if (result != null && !result.get("status").equals("fail")) {
       String resultSize = result.get("size").toString();
       String resultDesc = result.get("description").toString();
     //itemsFound.add(new Item(resultDesc, itemProductData, itemDataFormat));
