@@ -1,5 +1,10 @@
 package com.op.cookcloud.controller;
 
+//import org.apache.xmlrpc.XmlRpcClientLite;
+//import org.apache.xmlrpc.XmlRpcClientRequest;
+//import org.apache.xmlrpc.XmlRpcRequest;
+import org.apache.xmlrpc.client.XmlRpcClient;
+import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
-import redstone.xmlrpc.XmlRpcClient;
 
+//import redstone.xmlrpc.XmlRpcClient;
+//import redstone.xmlrpc.XmlRpcClient;
+
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Vector;
 
@@ -44,7 +53,7 @@ public class BarcodeController {
     
     //If not ok - look in barcodes DB return Product name 
     
-    HashMap result = searchUPCdatabase("ean", code);
+    Map result = searchUPCdatabase("upc", code);
 
 		if (result != null) {
 		//	String resultSize = result.get("size").toString();
@@ -72,17 +81,28 @@ public class BarcodeController {
 	public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
  
  	@SuppressWarnings("unchecked")
-	private static HashMap searchUPCdatabase(String code, String codeFormat) {
+	private static Map searchUPCdatabase(String code, String codeFormat) {
 		try {
-			XmlRpcClient client = new XmlRpcClient("http://www.upcdatabase.com/xmlrpc",false);
-			Map<String, String> params = new HashMap<String, String>();
+			// Get default locale
+			Locale locale = Locale.getDefault();
+			// Set the default locale to pre-defined locale
+			Locale.setDefault(Locale.ENGLISH);
+			
+			XmlRpcClient client = new XmlRpcClient();// ("http://www.upcdatabase.com/xmlrpc");
+			
+			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+		    config.setServerURL(new URL("http://www.upcdatabase.com/xmlrpc"));
+			client.setConfig(config);
+			
+			Map<String, String> params = new Hashtable<String, String>();
 			params.put("rpc_key", UPC_DATABASE_RPC_KEY);
-			params.put(codeFormat, code);
+			params.put("ean", codeFormat);
      Vector paramsV = new Vector();
-     paramsV.addElement(UPC_DATABASE_RPC_KEY);
-     paramsV.addElement(code);
-			return (HashMap) client.invoke("lookup", new Object[]{params});
-			//return (HashMap) client.call("test", params);
+//     paramsV.addElement(UPC_DATABASE_RPC_KEY);
+//     paramsV.addElement(code);
+   paramsV.addElement(params);
+   		//return (Map) client.execute(new XmlRpcRequest("lookup", paramsV));
+			return (Map) client. execute("lookup", paramsV);
 		} catch (Exception nl) {
 			nl.printStackTrace();
 		} 
