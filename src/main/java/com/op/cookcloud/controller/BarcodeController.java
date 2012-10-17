@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 
-//import redstone.xmlrpc.XmlRpcClient;
-//import redstone.xmlrpc.XmlRpcClient;
+import org.apache.xmlrpc.common.TypeFactory;
+import org.apache.xmlrpc.parser.DateParser;
+import org.apache.xmlrpc.parser.TypeParser;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -25,7 +26,8 @@ import java.util.Map;
 import java.util.Vector;
 
 import com.op.cookcloud.model.Product;
-//import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+
+//import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 //import javax.xml.transform.Source;
 //import javax.xml.transform.stream.StreamSource;
 
@@ -34,17 +36,18 @@ import com.op.cookcloud.model.Product;
 @RequestMapping("/barcode")
 public class BarcodeController {
 
-//	private Jaxb2Marshaller jaxb2Mashaller;
-	
-//	public void setJaxb2Mashaller(Jaxb2Marshaller jaxb2Mashaller) {
-//		this.jaxb2Mashaller = jaxb2Mashaller;
-//	}
+//  private Jaxb2Marshaller jaxb2Mashaller;
+  
+//  public void setJaxb2Mashaller(Jaxb2Marshaller jaxb2Mashaller) {
+//    this.jaxb2Mashaller = jaxb2Mashaller;
+//  }
 
 
-	@RequestMapping(value="/{code}", method = RequestMethod.GET,headers="Accept=application/xml, application/json")
-	public @ResponseBody Product getMovie(@PathVariable String code, ModelMap model) throws NotFoundException {
+  @RequestMapping(value="/{code}", method = RequestMethod.GET,headers="Accept=application/xml, application/json")
+  public @ResponseBody Product getMovie(@PathVariable String code, ModelMap model) throws NotFoundException {
       Product product = new Product();
-      if (code.equals("1")){
+  
+    if (code.equals("1")){
         product.setName("234");
         return product;
       }
@@ -55,62 +58,89 @@ public class BarcodeController {
     
     Map result = searchUPCdatabase("upc", code);
 
-		if (result != null) {
-		//	String resultSize = result.get("size").toString();
-		//	String resultDesc = result.get("description").toString();
-		//itemsFound.add(new Item(resultDesc, itemProductData, itemDataFormat));
+    if (result != null) {
+    //  String resultSize = result.get("size").toString();
+    //  String resultDesc = result.get("description").toString();
+    //itemsFound.add(new Item(resultDesc, itemProductData, itemDataFormat));
        product.setName("123");
         return product;
  
-		}
+    }
     
     //If not found - return error
     if (1 == 1) 
         throw new NotFoundException("Id not found in the request");
     //Source source = new StreamSource(new StringReader(body));
-		//Employee e = (Employee) jaxb2Mashaller.unmarshal(source);
+    //Employee e = (Employee) jaxb2Mashaller.unmarshal(source);
 
     
-		return  product;
+    return  product;
 
-	}
+  }
  
- 	public static final String NAME_SEARCH = "Name Search";
-	public static final String BARCODE_SEARCH = "Barcode Search";
-	public static final String PRODUCTID_SEARCH = "ProductId Search";
-	public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
+   public static final String NAME_SEARCH = "Name Search";
+  public static final String BARCODE_SEARCH = "Barcode Search";
+  public static final String PRODUCTID_SEARCH = "ProductId Search";
+  public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
  
- 	@SuppressWarnings("unchecked")
-	private static Map searchUPCdatabase(String code, String codeFormat) {
-		try {
-			// Get default locale
-			Locale locale = Locale.getDefault();
-			// Set the default locale to pre-defined locale
-			Locale.setDefault(Locale.ENGLISH);
-			
-			XmlRpcClient client = new XmlRpcClient();// ("http://www.upcdatabase.com/xmlrpc");
-			
-			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-		    config.setServerURL(new URL("http://www.upcdatabase.com/xmlrpc"));
-			client.setConfig(config);
-			
-			Map<String, String> params = new Hashtable<String, String>();
-			params.put("rpc_key", UPC_DATABASE_RPC_KEY);
-			params.put("ean", codeFormat);
+   @SuppressWarnings("unchecked")
+  private static Map searchUPCdatabase(String code, String codeFormat) {
+    try {
+      // Get default locale
+      Locale locale = Locale.getDefault();
+      // Set the default locale to pre-defined locale
+      Locale.setDefault(Locale.ENGLISH);
+      
+      XmlRpcClient client = new XmlRpcClient();// ("http://www.upcdatabase.com/xmlrpc");
+      
+      XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+        config.setServerURL(new URL("http://www.upcdatabase.com/xmlrpc"));
+      client.setConfig(config);
+      
+final DateFormat format = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ss");
+TypeFactory typeFactory = getCustomDateTypeFactory(client, format);
+client.setTypeFactory(typeFactory);
+
+      Map<String, String> params = new Hashtable<String, String>();
+      params.put("rpc_key", UPC_DATABASE_RPC_KEY);
+      params.put("ean", codeFormat);
      Vector paramsV = new Vector();
 //     paramsV.addElement(UPC_DATABASE_RPC_KEY);
 //     paramsV.addElement(code);
    paramsV.addElement(params);
-   		//return (Map) client.execute(new XmlRpcRequest("lookup", paramsV));
-			return (Map) client. execute("lookup", paramsV);
-		} catch (Exception nl) {
-			nl.printStackTrace();
-		} 
-		return null;
-	}
+       //return (Map) client.execute(new XmlRpcRequest("lookup", paramsV));
+      return (Map) client. execute("lookup", paramsV);
+    } catch (Exception nl) {
+      nl.printStackTrace();
+    } 
+    return null;
+  }
  
  
+ private TypeFactory getCustomDateTypeFactory(XmlRpcController pController, final Format pFormat) {
+         return new TypeFactoryImpl(pController){
+             private TypeSerializer dateSerializer = new DateSerializer(pFormat);
  
+             public TypeParser getParser(XmlRpcStreamConfig pConfig, NamespaceContextImpl pContext, String pURI, String pLocalName) {
+                 if (DateSerializer.DATE_TAG.equals(pLocalName)) {
+                     return new DateParser(pFormat);
+                 } else {
+                     return super.getParser(pConfig, pContext, pURI, pLocalName);
+                 }
+             }
+ 
+             public TypeSerializer getSerializer(XmlRpcStreamConfig pConfig, Object pObject) throws SAXException {
+                 if (pObject instanceof Date) {
+                     return dateSerializer;
+                 } else {
+                     return super.getSerializer(pConfig, pObject);
+                 }
+             }
+             
+         };
+     } 
+
+
  @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Id Not Found")
   public class NotFoundException extends Exception {
 
@@ -118,5 +148,5 @@ public class BarcodeController {
         super(msg);
     }
   }
-	
+  
 }
