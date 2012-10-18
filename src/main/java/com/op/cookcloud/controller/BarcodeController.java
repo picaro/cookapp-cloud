@@ -72,18 +72,15 @@ public class BarcodeController {
 
 		// If not ok - look in barcodes DB return Product name
 
-		Map result = null;//searchUPCdatabase("upc", code);
+		Map result = searchUPCdatabase("upc", code);
 
 		System.out.println(result);
 		if (result != null && !result.get("status").equals("fail")) {
 			String resultSize = result.get("size").toString();
 			String resultDesc = result.get("description").toString();
-			// itemsFound.add(new Item(resultDesc, itemProductData,
-			// itemDataFormat));
-			// product.setName("123");
-			// product.setDescription(resultDesc );
-			// return product;
-
+			product.setName(resultDesc.substring(0,8));
+			product.setDescription(resultDesc );
+			return product;
 		}
 
 		// If not found - return error
