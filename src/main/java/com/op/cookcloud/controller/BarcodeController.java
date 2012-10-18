@@ -46,123 +46,123 @@ import com.op.cookcloud.model.Product;
 //import javax.xml.transform.Source;
 //import javax.xml.transform.stream.StreamSource;
 
-
 @Controller
 @RequestMapping("/barcode")
 public class BarcodeController {
 
-//  private Jaxb2Marshaller jaxb2Mashaller;
-  
-//  public void setJaxb2Mashaller(Jaxb2Marshaller jaxb2Mashaller) {
-//    this.jaxb2Mashaller = jaxb2Mashaller;
-//  }
+	//private Jaxb2Marshaller jaxb2Mashaller;
+	public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
+
+	// public void setJaxb2Mashaller(Jaxb2Marshaller jaxb2Mashaller) {
+	// this.jaxb2Mashaller = jaxb2Mashaller;
+	// }
+
+	@RequestMapping(value = "/{code}", method = RequestMethod.GET, headers = "Accept=application/xml, application/json")
+	public @ResponseBody
+	Product getProductByCode(@PathVariable String code, ModelMap model)
+			throws NotFoundException {
+		Product product = new Product();
+
+		if (code.equals("1")) {
+			product.setName("234");
+			return product;
+		}
+		// Try to find product by code from MondoDB
+		// If ok - return Product with seconds
+
+		// If not ok - look in barcodes DB return Product name
+
+		Map result = null;//searchUPCdatabase("upc", code);
+
+		System.out.println(result);
+		if (result != null && !result.get("status").equals("fail")) {
+			String resultSize = result.get("size").toString();
+			String resultDesc = result.get("description").toString();
+			// itemsFound.add(new Item(resultDesc, itemProductData,
+			// itemDataFormat));
+			// product.setName("123");
+			// product.setDescription(resultDesc );
+			// return product;
+
+		}
+
+		// If not found - return error
+		throw new NotFoundException("Id not found in the request");
+		// Source source = new StreamSource(new StringReader(body));
+		// Employee e = (Employee) jaxb2Mashaller.unmarshal(source);
+
+	}
 
 
-  @RequestMapping(value="/{code}", method = RequestMethod.GET,headers="Accept=application/xml, application/json")
-  public @ResponseBody Product getMovie(@PathVariable String code, ModelMap model) throws NotFoundException {
-      Product product = new Product();
-  
-    if (code.equals("1")){
-        product.setName("234");
-        return product;
-      }
-    //Try to find product by code from MondoDB    
-    //If ok - return Product with seconds
-    
-    //If not ok - look in barcodes DB return Product name 
-    
-    Map result = searchUPCdatabase("upc", code);
+	@SuppressWarnings("unchecked")
+	private static Map searchUPCdatabase(String code, String codeFormat) {
+		try {
 
-    System.out.println(result);
-    if (result != null && !result.get("status").equals("fail")) {
-      String resultSize = result.get("size").toString();
-      String resultDesc = result.get("description").toString();
-    //itemsFound.add(new Item(resultDesc, itemProductData, itemDataFormat));
-//    product.setName("123");
-//      product.setDescription(resultDesc );
-//return product;
- 
-    }
-    
-    //If not found - return error
-    throw new NotFoundException("Id not found in the request");
-    //Source source = new StreamSource(new StringReader(body));
-    //Employee e = (Employee) jaxb2Mashaller.unmarshal(source);
+			XmlRpcClient client = new XmlRpcClient();
 
-  }
- 
-   public static final String NAME_SEARCH = "Name Search";
-  public static final String BARCODE_SEARCH = "Barcode Search";
-  public static final String PRODUCTID_SEARCH = "ProductId Search";
-  public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
- 
-   @SuppressWarnings("unchecked")
-  private static Map searchUPCdatabase(String code, String codeFormat) {
-    try {
-      
-      XmlRpcClient client = new XmlRpcClient();
-      
-      XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-        config.setServerURL(new URL("http://www.upcdatabase.com/xmlrpc"));
-      client.setConfig(config);
-      
-    final DateFormat format = new SimpleDateFormat("yyyy-MM-dd?HH:mm:ss");
-    TypeFactory typeFactory = getCustomDateTypeFactory(client, format);
-    client.setTypeFactory(typeFactory);
+			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+			config.setServerURL(new URL("http://www.upcdatabase.com/xmlrpc"));
+			client.setConfig(config);
 
-      Map<String, String> params = new Hashtable<String, String>();
-      params.put("rpc_key", UPC_DATABASE_RPC_KEY);
-      params.put("ean", codeFormat);
-     Vector paramsV = new Vector();
-      paramsV.addElement(params);
-      return (Map) client.execute("lookup", paramsV);
-    } catch (Exception nl) {
-      nl.printStackTrace();
-    } 
-    return null;
-  }
- 
- 
- private static TypeFactory getCustomDateTypeFactory(XmlRpcController pController, final Format pFormat) {
-         return new TypeFactoryImpl(pController){
-             private TypeSerializer dateSerializer = new DateSerializer(pFormat);
- 
-             public TypeParser getParser(XmlRpcStreamConfig pConfig, NamespaceContextImpl pContext, String pURI, String pLocalName) {
-                 if (DateSerializer.DATE_TAG.equals(pLocalName)) {
-                     return new DateParser(pFormat){
-                       @Override
-                       protected void setResult(String result){
-                         try {
-                super.setResult("10");
-              } catch (SAXException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-              }
-                       }
-                     };
-                 } else {
-                     return super.getParser(pConfig, pContext, pURI, pLocalName);
-                 }
-             }
- 
-             public TypeSerializer getSerializer(XmlRpcStreamConfig pConfig, Object pObject) throws SAXException {
-                 if (pObject instanceof Date) {
-                     return dateSerializer;
-                 } else {
-                     return super.getSerializer(pConfig, pObject);
-                 }
-             }
-             
-         };
-     } 
+			final DateFormat format = new SimpleDateFormat(
+					"yyyy-MM-dd?HH:mm:ss");
+			TypeFactory typeFactory = getCustomDateTypeFactory(client, format);
+			client.setTypeFactory(typeFactory);
 
+			Map<String, String> params = new Hashtable<String, String>();
+			params.put("rpc_key", UPC_DATABASE_RPC_KEY);
+			params.put("ean", codeFormat);
+			Vector paramsV = new Vector();
+			paramsV.addElement(params);
+			return (Map) client.execute("lookup", paramsV);
+		} catch (Exception nl) {
+			nl.printStackTrace();
+		}
+		return null;
+	}
 
- @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Id Not Found")
-  public class NotFoundException extends Exception {
+	private static TypeFactory getCustomDateTypeFactory(
+			XmlRpcController pController, final Format pFormat) {
+		return new TypeFactoryImpl(pController) {
+			private TypeSerializer dateSerializer = new DateSerializer(pFormat);
 
-    public NotFoundException(String msg) {
-        super(msg);
-    }
-  }
-  
+			public TypeParser getParser(XmlRpcStreamConfig pConfig,
+					NamespaceContextImpl pContext, String pURI,
+					String pLocalName) {
+				if (DateSerializer.DATE_TAG.equals(pLocalName)) {
+					return new DateParser(pFormat) {
+						@Override
+						protected void setResult(String result) {
+							try {
+								super.setResult("10");
+							} catch (SAXException e) {
+								// e.printStackTrace();
+							}
+						}
+					};
+				} else {
+					return super.getParser(pConfig, pContext, pURI, pLocalName);
+				}
+			}
+
+			public TypeSerializer getSerializer(XmlRpcStreamConfig pConfig,
+					Object pObject) throws SAXException {
+				if (pObject instanceof Date) {
+					return dateSerializer;
+				} else {
+					return super.getSerializer(pConfig, pObject);
+				}
+			}
+
+		};
+	}
+
+	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Id Not Found")
+	public class NotFoundException extends Exception {
+
+		public NotFoundException(String msg) {
+			super(msg);
+		}
+	}
+
 }
