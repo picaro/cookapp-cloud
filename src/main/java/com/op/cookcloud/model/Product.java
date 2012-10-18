@@ -14,12 +14,23 @@ public class Product
     private String country;
     
     private int countryId;
-    
-    private String imgURL;
+
+    private int cookSeconds;
+
+	private String imgURL;
 
     //private String error;
 
-    /**
+    public int getCookSeconds() {
+		return cookSeconds;
+	}
+
+	public void setCookSeconds(int cookSeconds) {
+		this.cookSeconds = cookSeconds;
+	}
+
+
+	/**
      * @return the barcode
      */
     public String getBarcode() {

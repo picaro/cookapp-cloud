@@ -76,10 +76,16 @@ public class BarcodeController {
 
 		System.out.println(result);
 		if (result != null && !result.get("status").equals("fail")) {
-			String resultSize = result.get("size").toString();
-			String resultDesc = result.get("description").toString();
-			product.setName(resultDesc.substring(0,8));
-			product.setDescription(resultDesc );
+			//String resultSize = result.get("size").toString();
+			String resultDesc = (String)result.get("description");
+			String name = "";
+			if (resultDesc != null) {
+				resultDesc.substring(0,resultDesc.indexOf(' '));
+				if (name.length() <= 4) name = resultDesc.substring(0,8);
+				product.setName(name);
+				product.setDescription(resultDesc );
+			}
+			product.setCookSeconds(60);
 			return product;
 		}
 
