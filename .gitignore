@@ -8,3 +8,8 @@
 # generated files
 bin/
 target/
+/*.iml
+
+/*.ipr
+
+/*.iws
