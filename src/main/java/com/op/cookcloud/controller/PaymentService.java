@@ -63,7 +63,7 @@ public class PaymentService {
         }
 
 
-        return Response.status(200).entity(product).build();
+        return Response.status(200).entity(product.getName()).build();
 
     }
 
