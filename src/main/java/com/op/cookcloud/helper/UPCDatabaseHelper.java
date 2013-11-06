@@ -24,12 +24,14 @@ import java.util.Map;
 import java.util.Vector;
 
 /**
- * Copyright  2013 EngagePoint. All rights reserved.
  * User: alexander.pastukhov
  * Date: 11/6/13
  * Time: 11:48 AM
  */
 public class UPCDatabaseHelper {
+
+    public static final String RPC_KEY = "rpc_key";
+    public static final String EAN = "ean";
 
     @SuppressWarnings("unchecked")
     public static Map searchUPCdatabase(String code, String codeFormat) {
@@ -38,7 +40,7 @@ public class UPCDatabaseHelper {
             XmlRpcClient client = new XmlRpcClient();
 
             XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-            config.setServerURL(new URL("http://www.upcdatabase.com/xmlrpc"));
+            config.setServerURL(new URL(AppConstants.HTTP_WWW_UPCDATABASE));
             client.setConfig(config);
 
             final DateFormat format = new SimpleDateFormat(
@@ -47,8 +49,8 @@ public class UPCDatabaseHelper {
             client.setTypeFactory(typeFactory);
 
             Map<String, String> params = new Hashtable<String, String>();
-            params.put("rpc_key", AppConstants.UPC_DATABASE_RPC_KEY);
-            params.put("ean", codeFormat);
+            params.put(RPC_KEY, AppConstants.UPC_DATABASE_RPC_KEY);
+            params.put(EAN, codeFormat);
             Vector paramsV = new Vector();
             paramsV.addElement(params);
             return (Map) client.execute("lookup", paramsV);
@@ -71,9 +73,9 @@ public class UPCDatabaseHelper {
                         @Override
                         protected void setResult(String result) {
                             try {
-                                super.setResult("10");
+                                super.setResult("10");    //???
                             } catch (SAXException e) {
-                                // e.printStackTrace();
+                                e.printStackTrace();
                             }
                         }
                     };

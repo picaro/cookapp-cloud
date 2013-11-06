@@ -4,9 +4,7 @@ import com.op.cookcloud.helper.UPCDatabaseHelper;
 import com.op.cookcloud.model.Product;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Map;
 
@@ -18,7 +16,7 @@ public class RestController {
 
     @GET
     @Path("{code}")
-    public Response savePayment(@PathParam("code") String code) {
+    public Product getProductByCode(@PathParam("code") String code) {
 
         // String result = "" + code;//transactionBo.save();
         Product product = new Product();
@@ -40,9 +38,20 @@ public class RestController {
         }
 
 
-        return Response.status(200).entity(product).build();
+        return product;//Response.status(200).entity(product).build();
 
     }
 
+    @POST
+    @Path("{code}")
+    public void addComment(@PathParam("code") String code) {
+
+    }
+
+    @POST
+    @Path("{code}")
+    public void addPrice(@PathParam("code") String code) {
+
+    }
 
 }
