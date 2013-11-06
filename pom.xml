@@ -140,9 +140,21 @@
 		<finalName>CookCloud</finalName>
 		<plugins>
             <plugin>
+                <groupId>com.jelastic</groupId>
+                <artifactId>jelastic-maven-plugin</artifactId>
+                <version>1.7-SNAPSHOT</version>
+                <configuration>
+                    <email>${jelastic.username}</email>
+                    <password>${jelastic.password}</password>
+                    <context></context>
+                    <environment>cookcloud.jelastic.neohost.net</environment>
+                    <comment>build 1</comment>
+                    <api_hoster>app.jelastic.neohost.net</api_hoster>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.enunciate</groupId>
                 <artifactId>maven-enunciate-plugin</artifactId>
-
                 <configuration>
                     <configFile>enunciate.xml</configFile>
                     <exports>
