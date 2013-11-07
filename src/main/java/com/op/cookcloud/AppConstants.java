@@ -11,4 +11,5 @@ public class AppConstants {
 
 
     public static final String HTTP_WWW_UPCDATABASE = "http://www.upcdatabase.com/xmlrpc";
+    public static final String DBNAME = "cookclouddb";
 }

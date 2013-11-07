@@ -75,7 +75,7 @@ public class UPCDatabaseHelper {
                             try {
                                 super.setResult("10");    //???
                             } catch (SAXException e) {
-                                e.printStackTrace();
+                               // e.printStackTrace();
                             }
                         }
                     };
