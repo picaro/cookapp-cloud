@@ -2,9 +2,11 @@ package com.op.cookcloud.controller;
 
 import com.op.cookcloud.helper.UPCDatabaseHelper;
 import com.op.cookcloud.model.Product;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Map;
 
@@ -14,9 +16,13 @@ import java.util.Map;
 @Path("/barcode")
 public class RestController {
 
+    private static final Logger LOG = Logger.getLogger(RestController.class);
+
     @GET
+    @Produces({MediaType.APPLICATION_XML})
     @Path("{code}")
-    public Product getProductByCode(@PathParam("code") String code) {
+    public Response getProductByCode(@PathParam("code") String code) {
+        LOG.info("getProductByCode:" + code);
 
         // String result = "" + code;//transactionBo.save();
         Product product = new Product();
@@ -38,7 +44,8 @@ public class RestController {
         }
 
 
-        return product;//Response.status(200).entity(product).build();
+        LOG.info("product:" + product.getName());
+        return Response.status(200).entity(product).build();
 
     }
 
@@ -47,11 +54,11 @@ public class RestController {
     public void addComment(@PathParam("code") String code) {
 
     }
-
-    @POST
-    @Path("{code}")
-    public void addPrice(@PathParam("code") String code) {
-
-    }
+//
+//    @POST
+//    @Path("{code}")
+//    public void addPrice(@PathParam("code") String code) {
+//
+//    }
 
 }

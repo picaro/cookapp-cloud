@@ -2,6 +2,9 @@ package com.op.cookcloud.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 @Document(collection = "products")
 public class Product
 {

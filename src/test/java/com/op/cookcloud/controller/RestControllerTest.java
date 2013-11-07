@@ -15,12 +15,12 @@ public class RestControllerTest {
 
     //1 test GetProduct / With saving
 
-   // @Ignore
+    @Ignore
     @Test
     public void getProductTest(){
           RestController restController = new RestController();
-          Product product = restController.getProductByCode("0000040102078");    //TODO check in Bsf
-          assertTrue(product.getName().equals("snickers"));
+          //Product product = restController.getProductByCode("0000040102078");    //TODO check in Bsf
+          //assertTrue(product.getName().equals("snickers"));
     }
 
     //
