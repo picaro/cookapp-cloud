@@ -15,7 +15,7 @@ public class RestControllerTest {
 
     //1 test GetProduct / With saving
 
-    @Ignore
+   // @Ignore
     @Test
     public void getProductTest(){
           RestController restController = new RestController();
