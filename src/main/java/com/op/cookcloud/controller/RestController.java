@@ -2,7 +2,9 @@ package com.op.cookcloud.controller;
 
 import com.op.cookcloud.helper.UPCDatabaseHelper;
 import com.op.cookcloud.model.Product;
+import com.sun.jersey.spi.inject.Inject;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -18,8 +20,11 @@ public class RestController {
 
     private static final Logger LOG = Logger.getLogger(RestController.class);
 
+    @Autowired
+    private org.codehaus.jackson.map.ObjectMapper mapper;
+
     @GET
-    @Produces({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     @Path("{code}")
     public Response getProductByCode(@PathParam("code") String code) {
         LOG.info("getProductByCode:" + code);
