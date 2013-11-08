@@ -1,9 +1,12 @@
 package com.op.cookcloud.helper;
 
 import com.op.cookcloud.AppConstants;
+import org.apache.commons.httpclient.HostConfiguration;
+import org.apache.commons.httpclient.HttpClient;
 import org.apache.ws.commons.util.NamespaceContextImpl;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
+import org.apache.xmlrpc.client.XmlRpcCommonsTransportFactory;
 import org.apache.xmlrpc.common.TypeFactory;
 import org.apache.xmlrpc.common.TypeFactoryImpl;
 import org.apache.xmlrpc.common.XmlRpcController;
@@ -45,12 +48,23 @@ public class UPCDatabaseHelper {
 
             final DateFormat format = new SimpleDateFormat(
                     "yyyy-MM-dd?HH:mm:ss");
+
+            XmlRpcCommonsTransportFactory transportFactory
+                    = new XmlRpcCommonsTransportFactory( client );
+            HttpClient httpClient = new HttpClient();
+            HostConfiguration hostConfiguration = httpClient.getHostConfiguration();
+            hostConfiguration.setProxy( "proxy2.cht", 3128 );
+            hostConfiguration.setHost( AppConstants.HTTP_WWW_UPCDATABASE );
+            transportFactory.setHttpClient( httpClient );
+            client.setTransportFactory( transportFactory );
+
+
             TypeFactory typeFactory = getCustomDateTypeFactory(client, format);
             client.setTypeFactory(typeFactory);
 
             Map<String, String> params = new Hashtable<String, String>();
             params.put(RPC_KEY, AppConstants.UPC_DATABASE_RPC_KEY);
-            params.put(EAN, codeFormat);
+            params.put(code, codeFormat);
             Vector paramsV = new Vector();
             paramsV.addElement(params);
             return (Map) client.execute("lookup", paramsV);

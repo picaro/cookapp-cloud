@@ -12,4 +12,5 @@ public class AppConstants {
 
     public static final String HTTP_WWW_UPCDATABASE = "http://www.upcdatabase.com/xmlrpc";
     public static final String DBNAME = "cookclouddb";
+    public static final String DATE_TIME_PATTERN = "yyyy/MM/dd HH:mm:ss";
 }

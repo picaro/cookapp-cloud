@@ -19,7 +19,7 @@ public class MongoDBHelperTest {
     @Test
     public void checkAddDelProduct(){
         Product product = new Product();
-        product.setBarcode("11111");
+        product.setEan("11111");
         product.setName("proname");
         int countStart = mongoDBHelper.count(product);
         mongoDBHelper.saveProduct(product);

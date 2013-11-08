@@ -13,19 +13,41 @@ public class Product
     
     private String name;
     
-    private String barcode;
-    
+    private String ean;
+
+    private String upc;
+
     private String description;
     
     private String country;
-    
+
+    private String size;
+
     private int countryId;
 
     private int cookSeconds;
 
 	private String imgURL;
 
-    //private String error;
+    private String countryCode;
+
+    private String addDate;
+
+    public String getAddDate() {
+        return addDate;
+    }
+
+    public void setAddDate(String addDate) {
+        this.addDate = addDate;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
 
     public int getCookSeconds() {
 		return cookSeconds;
@@ -35,19 +57,34 @@ public class Product
 		this.cookSeconds = cookSeconds;
 	}
 
+    public String getUpc() {
+        return upc;
+    }
 
-	/**
-     * @return the barcode
-     */
-    public String getBarcode() {
-        return barcode;
+    public void setUpc(String upc) {
+        this.upc = upc;
     }
 
     /**
-     * @param barcode the barcode to set
+     * @return the ean
      */
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
+    public String getEan() {
+        return ean;
+    }
+
+    /**
+     * @param ean the ean to set
+     */
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 
     /**

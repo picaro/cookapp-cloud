@@ -4,6 +4,8 @@ import com.op.cookcloud.model.Product;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import javax.ws.rs.core.Response;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -15,12 +17,13 @@ public class RestControllerTest {
 
     //1 test GetProduct / With saving
 
-    @Ignore
+    //Ignore
     @Test
     public void getProductTest(){
           RestController restController = new RestController();
-          //Product product = restController.getProductByCode("0000040102078");    //TODO check in Bsf
-          //assertTrue(product.getName().equals("snickers"));
+        Response response= restController.getProductByCode("0000040102078");    //TODO check in Bsf
+        Product product = (Product)response.getEntity();
+          assertTrue(product.getName().equals("snickers"));
     }
 
     //

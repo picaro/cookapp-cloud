@@ -3,6 +3,7 @@ package com.op.cookcloud.helper;
 import com.mongodb.*;
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.model.Product;
+import org.springframework.stereotype.Service;
 
 import java.net.UnknownHostException;
 
@@ -13,6 +14,7 @@ import java.net.UnknownHostException;
  * Time: 1:02
  * To change this template use File | Settings | File Templates.
  */
+@Service
 public class MongoDBHelper {
 
     public void saveProduct(Product product){
@@ -21,7 +23,7 @@ public class MongoDBHelper {
 
         BasicDBObject document = new BasicDBObject();
         document.put("name", product.getName());
-        document.put("barcode", product.getBarcode());
+        document.put("barcode", product.getEan());
         document.put("description", product.getDescription());
 
         mgProduct.insert(document);
@@ -38,7 +40,7 @@ public class MongoDBHelper {
         DBObject dbObject = cursor.next();
         Product product = new Product();
         product.setName((String)dbObject.get("name"));
-        product.setBarcode(code);
+        product.setEan(code);
         return product;
     }
 
@@ -57,7 +59,7 @@ public class MongoDBHelper {
         DB db = getDB();
         DBCollection mgProduct = db.getCollection("product");
         BasicDBObject searchQuery = new BasicDBObject();
-        searchQuery.put("barcode", product.getBarcode());
+        searchQuery.put("barcode", product.getEan());
         DBCursor cursor = mgProduct.find(searchQuery);
         return cursor.count();  //To change body of created methods use File | Settings | File Templates.
     }
@@ -66,7 +68,7 @@ public class MongoDBHelper {
         DB db = getDB();
         DBCollection mgProduct = db.getCollection("product");
         BasicDBObject searchQuery = new BasicDBObject();
-        searchQuery.put("barcode", product.getBarcode());
+        searchQuery.put("barcode", product.getEan());
         mgProduct.findAndRemove(searchQuery);
     }
 }
