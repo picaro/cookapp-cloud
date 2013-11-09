@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.sound.sampled.AudioFormat;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -33,7 +34,8 @@ public class RestController {
     private EANdirectoryRuHelper eaNdirectoryRuHelper;
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON + "; charset=UTF-8"})
+    //@Produces({"text/html; charset=UTF-8"})
     @Path("{code}")
     public Response getProductByCode(@PathParam("code") String code) {
         LOG.info("getProductByCode:" + code);
@@ -52,8 +54,9 @@ public class RestController {
 
 
         LOG.info("product:" + product.getName());
-        Response.
-        return Response.status(200).entity(product).build();
+        Response response = Response.status(200).entity(product).build();
+        //response.setCharacterEncoding("UTF-8");
+        return response;
 
     }
 
