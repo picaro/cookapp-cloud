@@ -48,18 +48,19 @@ public class RestController {
         //3 if no - get from UPC
         if (product == null) product = upcDatabaseHelper.lookUpProduct(code);//ean
         if (product == null) product = eaNdirectoryRuHelper.lookUpProduct(code);
-      //  mongoDBHelper.saveProduct(product);
+        //mongoDBHelper.saveProduct(product,"");
 
 
         LOG.info("product:" + product.getName());
+        Response.
         return Response.status(200).entity(product).build();
 
     }
 
     @POST
     @Path("{code}")
-    public void addComment(@PathParam("code") String code) {
-
+    public void addComment(@PathParam("code") String code, String comment) {
+        LOG.info("addComment:" + code);
     }
 
 //

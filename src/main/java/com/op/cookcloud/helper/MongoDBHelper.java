@@ -26,6 +26,8 @@ public class MongoDBHelper {
     public static final String PRODUCT_TABLE = "product";
     private Gson gson = new Gson();
 
+    private static DB db;
+
     public void saveProduct(Product product) {
         DB db = getDB();
         DBCollection mgProduct = db.getCollection(PRODUCT_TABLE);
@@ -64,17 +66,21 @@ public class MongoDBHelper {
         product.setCommentList(
                 (List) gson.fromJson((String) dbObject.get(AppConstants.COMMENTS), listType)
         );
+        cursor.close();
         return product;
     }
 
     private DB getDB() {
+        if (db == null){
         MongoClient mongo = null;
         try {
             mongo = new MongoClient("localhost", 27017);
         } catch (UnknownHostException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        return mongo.getDB(AppConstants.DBNAME);
+        db = mongo.getDB(AppConstants.DBNAME);
+        }
+        return db;
     }
 
 
@@ -84,7 +90,9 @@ public class MongoDBHelper {
         BasicDBObject searchQuery = new BasicDBObject();
         searchQuery.put(AppConstants.EAN, product.getEan());
         DBCursor cursor = mgProduct.find(searchQuery);
-        return cursor.count();  //To change body of created methods use File | Settings | File Templates.
+        int count = cursor.count();
+        cursor.close();
+        return count;  //To change body of created methods use File | Settings | File Templates.
     }
 
     public void delProduct(Product product,String lang) {
