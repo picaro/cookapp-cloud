@@ -10,15 +10,15 @@ import com.mongodb.MongoClient;
  * Spring MongoDB configuration file
  * 
  */
-@Configuration
+//Configuration
 public class SpringMongoConfig{
 
-	public @Bean
-	MongoTemplate mongoTemplate() throws Exception {
-		
-		MongoTemplate mongoTemplate = new MongoTemplate(new MongoClient("127.0.0.1"),"yourdb");
-		return mongoTemplate;
-		
-	}
+//	public @Bean
+//	MongoTemplate mongoTemplate() throws Exception {
+//
+//		MongoTemplate mongoTemplate = new MongoTemplate(new MongoClient("127.0.0.1"),"yourdb");
+//		return mongoTemplate;
+//
+//	}
 		
 }

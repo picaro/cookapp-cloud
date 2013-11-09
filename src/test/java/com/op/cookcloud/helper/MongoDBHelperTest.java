@@ -3,6 +3,7 @@ package com.op.cookcloud.helper;
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ public class MongoDBHelperTest {
         assertEquals(product2.getCommentList().size() , 1);
     }
 
+    @Ignore
     @Test
     public void updateProduct(){
         Product product = new Product();

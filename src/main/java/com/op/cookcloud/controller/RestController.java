@@ -1,6 +1,7 @@
 package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
+import com.op.cookcloud.helper.EANdirectoryRuHelper;
 import com.op.cookcloud.helper.MongoDBHelper;
 import com.op.cookcloud.helper.UPCDatabaseHelper;
 import com.op.cookcloud.model.Product;
@@ -25,6 +26,11 @@ public class RestController {
     @Autowired
     private MongoDBHelper mongoDBHelper;
 
+    @Autowired
+    private UPCDatabaseHelper upcDatabaseHelper;
+
+    @Autowired
+    private EANdirectoryRuHelper eaNdirectoryRuHelper;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -33,14 +39,15 @@ public class RestController {
         LOG.info("getProductByCode:" + code);
 
         // String result = "" + code;//transactionBo.save();
-        Product product = new Product();
+        Product product = null;
 
         //1 check in our database
         Product mProduct = mongoDBHelper.getProductByEAN(code,AppConstants.EN);
         if (mProduct != null) return Response.status(200).entity(mProduct).build();
 
         //3 if no - get from UPC
-        product = UPCDatabaseHelper.lookUpProduct(AppConstants.UPC, code);//ean
+        if (product == null) product = upcDatabaseHelper.lookUpProduct(code);//ean
+        if (product == null) product = eaNdirectoryRuHelper.lookUpProduct(code);
       //  mongoDBHelper.saveProduct(product);
 
 

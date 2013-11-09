@@ -1,5 +1,7 @@
 package com.op.cookcloud.helper;
 
+import com.op.cookcloud.model.Product;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alex3
@@ -8,4 +10,8 @@ package com.op.cookcloud.helper;
  * To change this template use File | Settings | File Templates.
  */
 public interface BarcodeSearcher {
-}
+    public Product lookUpProductByEAN(String code);
+    public Product lookUpProductByUPC(String code);
+    public Product lookUpProduct(String code);
+
+    }

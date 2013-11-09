@@ -2,8 +2,6 @@ package com.op.cookcloud.helper;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.model.Product;
-import org.apache.commons.httpclient.HostConfiguration;
-import org.apache.commons.httpclient.HttpClient;
 import org.apache.ws.commons.util.NamespaceContextImpl;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
@@ -16,6 +14,7 @@ import org.apache.xmlrpc.parser.DateParser;
 import org.apache.xmlrpc.parser.TypeParser;
 import org.apache.xmlrpc.serializer.DateSerializer;
 import org.apache.xmlrpc.serializer.TypeSerializer;
+import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 import java.net.URL;
@@ -29,13 +28,28 @@ import java.util.*;
  * Date: 11/6/13
  * Time: 11:48 AM
  */
+@Service
 public class UPCDatabaseHelper implements BarcodeSearcher {
 
     public static final String RPC_KEY = "rpc_key";
-    public static final String EAN = "ean";
+
+    public Product lookUpProductByEAN(String code) {
+        return lookUpProduct(code, AppConstants.EAN);
+    }
+
+    public Product lookUpProductByUPC(String code) {
+        return lookUpProduct(code, AppConstants.UPC);
+    }
+
+    public Product lookUpProduct(String code) {
+        String type = AppConstants.UPC;
+        if (code.length() == 13) type = AppConstants.EAN;
+        return lookUpProduct(code, type);
+    }
+
 
     @SuppressWarnings("unchecked")
-    public static Product lookUpProduct(String code, String codeFormat) {
+    private static Product lookUpProduct(String code, String codeFormat) {
         try {
 
             XmlRpcClient client = new XmlRpcClient();
@@ -44,8 +58,6 @@ public class UPCDatabaseHelper implements BarcodeSearcher {
             config.setServerURL(new URL(AppConstants.HTTP_WWW_UPCDATABASE));
             client.setConfig(config);
 
-            final DateFormat format = new SimpleDateFormat(
-                    "yyyy-MM-dd?HH:mm:ss");
 
 //            XmlRpcCommonsTransportFactory transportFactory
 //                    = new XmlRpcCommonsTransportFactory( client );
@@ -57,12 +69,14 @@ public class UPCDatabaseHelper implements BarcodeSearcher {
 //            client.setTransportFactory( transportFactory );
 
 
+            final DateFormat format = new SimpleDateFormat(
+                    "yyyy-MM-dd?HH:mm:ss");
             TypeFactory typeFactory = getCustomDateTypeFactory(client, format);
             client.setTypeFactory(typeFactory);
 
             Map<String, String> params = new Hashtable<String, String>();
             params.put(RPC_KEY, AppConstants.UPC_DATABASE_RPC_KEY);
-            params.put(code, codeFormat);
+            params.put(codeFormat,code);
             Vector paramsV = new Vector();
             paramsV.addElement(params);
 
@@ -73,11 +87,11 @@ public class UPCDatabaseHelper implements BarcodeSearcher {
                     Product product = new Product();
                     product.setDescription((String) result.get(AppConstants.DESCRIPTION));
                     product.setName((String) result.get(AppConstants.DESCRIPTION));
-                    product.setSize((String) result.get("size"));
+                    product.setSize((String) result.get(AppConstants.SIZE));
                     product.setEan((String) result.get(AppConstants.EAN));
                     product.setUpc((String) result.get(AppConstants.UPC));
                     product.setCountry((String) result.get(AppConstants.COUNTRY));
-                    product.setCountryCode((String) result.get("issuerCountryCode"));
+                    product.setCountryCode((String) result.get(AppConstants.ISSUER_COUNTRY_CODE));
                     DateFormat dateFormat = new SimpleDateFormat(AppConstants.DATE_TIME_PATTERN);
                     Calendar cal = Calendar.getInstance();
                     product.setAddDate(dateFormat.format(cal.getTime()));
@@ -107,7 +121,7 @@ public class UPCDatabaseHelper implements BarcodeSearcher {
                             try {
                                 super.setResult("10");    //???
                             } catch (SAXException e) {
-                               // e.printStackTrace();
+                                // e.printStackTrace();
                             }
                         }
                     };
