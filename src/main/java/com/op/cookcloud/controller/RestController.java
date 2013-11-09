@@ -4,10 +4,12 @@ import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.helper.EANdirectoryRuHelper;
 import com.op.cookcloud.helper.MongoDBHelper;
 import com.op.cookcloud.helper.UPCDatabaseHelper;
+import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.sound.sampled.AudioFormat;
 import javax.ws.rs.*;
@@ -50,20 +52,22 @@ public class RestController {
         //3 if no - get from UPC
         if (product == null) product = upcDatabaseHelper.lookUpProduct(code);//ean
         if (product == null) product = eaNdirectoryRuHelper.lookUpProduct(code);
-        //mongoDBHelper.saveProduct(product,"");
+        mongoDBHelper.saveProduct(product);
 
 
-        LOG.info("product:" + product.getName());
         Response response = Response.status(200).entity(product).build();
-        //response.setCharacterEncoding("UTF-8");
         return response;
 
     }
 
     @POST
     @Path("{code}")
-    public void addComment(@PathParam("code") String code, String comment) {
-        LOG.info("addComment:" + code);
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addComment(@PathParam("code") String code,Comment comment) {
+
+        //mongoDBHelper.updateProductEAN(code, comment);
+
+        LOG.info("addComment:" + comment.getComment());
     }
 
 //
