@@ -1,6 +1,7 @@
 package com.op.cookcloud.helper;
 
 import com.op.cookcloud.AppConstants;
+import com.op.cookcloud.model.Product;
 import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.ws.commons.util.NamespaceContextImpl;
@@ -21,23 +22,20 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * User: alexander.pastukhov
  * Date: 11/6/13
  * Time: 11:48 AM
  */
-public class UPCDatabaseHelper {
+public class UPCDatabaseHelper implements BarcodeSearcher {
 
     public static final String RPC_KEY = "rpc_key";
     public static final String EAN = "ean";
 
     @SuppressWarnings("unchecked")
-    public static Map searchUPCdatabase(String code, String codeFormat) {
+    public static Product lookUpProduct(String code, String codeFormat) {
         try {
 
             XmlRpcClient client = new XmlRpcClient();
@@ -49,14 +47,14 @@ public class UPCDatabaseHelper {
             final DateFormat format = new SimpleDateFormat(
                     "yyyy-MM-dd?HH:mm:ss");
 
-            XmlRpcCommonsTransportFactory transportFactory
-                    = new XmlRpcCommonsTransportFactory( client );
-            HttpClient httpClient = new HttpClient();
-            HostConfiguration hostConfiguration = httpClient.getHostConfiguration();
-            hostConfiguration.setProxy( "proxy2.cht", 3128 );
-            hostConfiguration.setHost( AppConstants.HTTP_WWW_UPCDATABASE );
-            transportFactory.setHttpClient( httpClient );
-            client.setTransportFactory( transportFactory );
+//            XmlRpcCommonsTransportFactory transportFactory
+//                    = new XmlRpcCommonsTransportFactory( client );
+//            HttpClient httpClient = new HttpClient();
+//            HostConfiguration hostConfiguration = httpClient.getHostConfiguration();
+//            hostConfiguration.setProxy( "proxy2.cht", 3128 );
+//            hostConfiguration.setHost( AppConstants.HTTP_WWW_UPCDATABASE );
+//            transportFactory.setHttpClient( httpClient );
+//            client.setTransportFactory( transportFactory );
 
 
             TypeFactory typeFactory = getCustomDateTypeFactory(client, format);
@@ -67,7 +65,27 @@ public class UPCDatabaseHelper {
             params.put(code, codeFormat);
             Vector paramsV = new Vector();
             paramsV.addElement(params);
-            return (Map) client.execute("lookup", paramsV);
+
+            Map result = (Map) client.execute("lookup", paramsV);
+
+            if (result != null && !result.get("status").equals("fail")) {
+                if (((Boolean) result.get("found"))) {
+                    Product product = new Product();
+                    product.setDescription((String) result.get(AppConstants.DESCRIPTION));
+                    product.setName((String) result.get(AppConstants.DESCRIPTION));
+                    product.setSize((String) result.get("size"));
+                    product.setEan((String) result.get(AppConstants.EAN));
+                    product.setUpc((String) result.get(AppConstants.UPC));
+                    product.setCountry((String) result.get(AppConstants.COUNTRY));
+                    product.setCountryCode((String) result.get("issuerCountryCode"));
+                    DateFormat dateFormat = new SimpleDateFormat(AppConstants.DATE_TIME_PATTERN);
+                    Calendar cal = Calendar.getInstance();
+                    product.setAddDate(dateFormat.format(cal.getTime()));
+                    product.setLang(AppConstants.EN);
+                    return product;
+                }
+            }
+
         } catch (Exception nl) {
             nl.printStackTrace();
         }

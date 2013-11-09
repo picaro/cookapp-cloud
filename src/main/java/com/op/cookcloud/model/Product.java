@@ -1,12 +1,15 @@
 package com.op.cookcloud.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+import java.util.List;
 
 @XmlRootElement
 @Document(collection = "products")
-public class Product
+public class Product implements Serializable
 {
 
     private int id;
@@ -32,6 +35,26 @@ public class Product
     private String countryCode;
 
     private String addDate;
+
+    private String lang;
+
+    private List<Comment> commentList;
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
 
     public String getAddDate() {
         return addDate;
