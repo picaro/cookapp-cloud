@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class MongoDBHelperTest {
 
-    public static final String EAN = "111119";
+    public static final String EAN = "111121";
     MongoDBHelper mongoDBHelper = new MongoDBHelper();
 
     @Test
@@ -39,7 +39,7 @@ public class MongoDBHelperTest {
         System.out.println("saved prod:" + pro.getName());
 
 
-        mongoDBHelper.delProduct(product, AppConstants.EN);
+        mongoDBHelper.delProduct(product);
         countEnd = mongoDBHelper.count(product);
         assertTrue(countStart == countEnd);
     }
@@ -61,7 +61,7 @@ public class MongoDBHelperTest {
         assertEquals(product2.getCommentList().size() , 1);
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void updateProduct(){
         Product product = new Product();
@@ -70,10 +70,19 @@ public class MongoDBHelperTest {
         mongoDBHelper.saveProduct(product);
 
         Product product2 = mongoDBHelper.getProductByEAN(EAN, AppConstants.EN);
+        //mongoDBHelper.delProduct(product,"EN");
         product2.setName("eeee");
-        mongoDBHelper.updateProductEAN(EAN, product2);
+
+
+        Comment comment = new Comment();
+        comment.setComment("aaa");
+        product2.getCommentList().add(comment);
+        //mongoDBHelper.saveProduct(product2);
+        mongoDBHelper.updateProduct(product2);
 
         Product product3 = mongoDBHelper.getProductByEAN(EAN, AppConstants.EN);
         assertEquals("eeee",product3.getName());
+        assertEquals("aaa",product3.getCommentList().get(0).getComment());
+        mongoDBHelper.delProduct(product3);
     }
 }

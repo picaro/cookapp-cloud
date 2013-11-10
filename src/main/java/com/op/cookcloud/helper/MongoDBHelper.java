@@ -32,6 +32,8 @@ public class MongoDBHelper {
         DB db = getDB();
         DBCollection mgProduct = db.getCollection(PRODUCT_TABLE);
         BasicDBObject prodDoc = getBasicDBObject(product);
+
+
         mgProduct.insert(prodDoc);
     }
 
@@ -95,7 +97,7 @@ public class MongoDBHelper {
         return count;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public void delProduct(Product product,String lang) {
+    public void delProduct(Product product) {
         DB db = getDB();
         DBCollection mgProduct = db.getCollection(PRODUCT_TABLE);
         BasicDBObject searchQuery = new BasicDBObject();
@@ -115,14 +117,15 @@ public class MongoDBHelper {
         mgProduct.update(change, bproduct);
     }
 
-    public void updateProductEAN(String code,Product cProduct) {
-        DB db = getDB();
-        Product product = getProductByEAN(code, cProduct.getLang());
-        DBCollection mgProduct = db.getCollection(PRODUCT_TABLE);
-        BasicDBObject change = new BasicDBObject();
-        change.append(AppConstants.NAME,"eeee");
-        BasicDBObject bproduct = getBasicDBObject(product);
-        BasicDBObject bproduct2 = new BasicDBObject("$set", bproduct);
-        mgProduct.update(change, bproduct2);
+    public void addCommentByEAN(String ean , Comment comment) {
+        Product product = getProductByEAN(ean,"EN");
+        delProduct(product);
+        product.getCommentList().add(comment);
+        saveProduct(product);
+    }
+
+    public void updateProduct(Product cProduct) {
+        delProduct(cProduct);
+        saveProduct(cProduct);
     }
 }

@@ -65,7 +65,7 @@ public class RestController {
     @Consumes(MediaType.APPLICATION_JSON)
     public void addComment(@PathParam("code") String code,Comment comment) {
 
-        //mongoDBHelper.updateProductEAN(code, comment);
+        mongoDBHelper.addCommentByEAN(code, comment);
 
         LOG.info("addComment:" + comment.getComment());
     }

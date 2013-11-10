@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement
@@ -49,6 +50,8 @@ public class Product implements Serializable
     }
 
     public List<Comment> getCommentList() {
+        if (commentList == null) commentList = new ArrayList();
+
         return commentList;
     }
 
