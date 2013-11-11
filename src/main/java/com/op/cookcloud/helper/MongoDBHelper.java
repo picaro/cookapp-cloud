@@ -60,6 +60,7 @@ public class MongoDBHelper {
         DBObject dbObject = cursor.next();
         Product product = new Product();
         product.setName((String) dbObject.get(AppConstants.NAME));
+        product.setLang((String) dbObject.get("lang"));
         product.setEan(code);
         product.setUpc((String) dbObject.get(AppConstants.UPC));
 

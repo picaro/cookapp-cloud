@@ -2,6 +2,7 @@ package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.helper.EANdirectoryRuHelper;
+import com.op.cookcloud.helper.FacturalHelper;
 import com.op.cookcloud.helper.MongoDBHelper;
 import com.op.cookcloud.helper.UPCDatabaseHelper;
 import com.op.cookcloud.model.Comment;
@@ -33,6 +34,9 @@ public class RestController {
     private UPCDatabaseHelper upcDatabaseHelper;
 
     @Autowired
+    private FacturalHelper facturalHelper;
+
+    @Autowired
     private EANdirectoryRuHelper eaNdirectoryRuHelper;
 
     @GET
@@ -50,9 +54,10 @@ public class RestController {
         if (mProduct != null) return Response.status(200).entity(mProduct).build();
 
         //3 if no - get from UPC
+        if (product == null) product = facturalHelper.lookUpProduct(code);//ean
         if (product == null) product = upcDatabaseHelper.lookUpProduct(code);//ean
         if (product == null) product = eaNdirectoryRuHelper.lookUpProduct(code);
-        mongoDBHelper.saveProduct(product);
+        if (product != null) mongoDBHelper.saveProduct(product);
 
 
         Response response = Response.status(200).entity(product).build();
