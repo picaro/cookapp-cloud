@@ -6,6 +6,7 @@ import com.op.cookcloud.model.Product;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,5 +85,15 @@ public class MongoDBHelperTest {
         assertEquals("eeee",product3.getName());
         assertEquals("aaa",product3.getCommentList().get(0).getComment());
         mongoDBHelper.delProduct(product3);
+    }
+
+
+    @Test
+    public void checkSettings() throws IOException {
+        mongoDBHelper.isUADBSaved();
+        //mongoDBHelper.setUADBSaved();
+        //mongoDBHelper.isUADBSaved();
+
+        //assertEquals(product2.getCommentList().size() , 1);
     }
 }

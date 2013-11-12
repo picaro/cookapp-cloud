@@ -6,6 +6,8 @@ import com.mongodb.*;
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
+import com.op.cookcloud.model.Settings;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
@@ -22,6 +24,8 @@ import java.util.List;
  */
 @Service
 public class MongoDBHelper {
+
+    private static final Logger LOG = Logger.getLogger(MongoDBHelper.class);
 
     public static final String PRODUCT_TABLE = "product";
     private Gson gson = new Gson();
@@ -129,4 +133,28 @@ public class MongoDBHelper {
         delProduct(cProduct);
         saveProduct(cProduct);
     }
+
+    public Boolean isUADBSaved() {
+        DB db = getDB();
+        DBCollection settings = db.getCollection("settings");
+        BasicDBObject searchQuery = new BasicDBObject();
+        DBCursor cursor = settings.find(searchQuery);
+        LOG.info("isUADBSaved");
+    //    if (cursor != null)
+        if (cursor.size() == 0) {
+            return false;
+        }  else {
+            Object retObj = cursor.next().get("isuadbsaved");
+            if (retObj instanceof Boolean){
+                return (Boolean)retObj;
+            } else return false;
+        }
+    }
+
+    public void setUADBSaved() {
+        DB db = getDB();
+        DBCollection mgProduct = db.getCollection("settings");
+        BasicDBObject prodDoc = new BasicDBObject();
+        prodDoc.put("isuadbsaved",true);
+        mgProduct.insert(prodDoc);    }
 }

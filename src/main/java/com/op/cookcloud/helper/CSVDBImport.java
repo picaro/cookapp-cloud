@@ -2,10 +2,7 @@ package com.op.cookcloud.helper;
 
 import com.op.cookcloud.model.Product;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,17 +14,18 @@ import java.io.IOException;
 public class CSVDBImport {
 
 
-    public static void main(String[] arg) throws IOException {
+    public void importDB() throws IOException {
         MongoDBHelper mongoDBHelper = new MongoDBHelper();
 
-        String csvFile = "d:\\Projects\\Github\\cookapp-cloud\\db\\uapricesdb_utf.csv";
+
+        InputStream csvFile = this.getClass().getResourceAsStream("/uapricesdb_utf.csv");
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ";";
 
         try {
 
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(new InputStreamReader(csvFile));
             br.readLine();
             while ((line = br.readLine()) != null) {
 

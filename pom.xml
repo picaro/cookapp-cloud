@@ -166,12 +166,6 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 			<version>4.11</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>hamcrest-core</artifactId>
-                    <groupId>org.hamcrest</groupId>
-                </exclusion>
-            </exclusions>
 		</dependency>
 
 
