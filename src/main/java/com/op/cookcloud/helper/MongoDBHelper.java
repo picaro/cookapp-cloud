@@ -81,11 +81,14 @@ public class MongoDBHelper {
         if (db == null){
         MongoClient mongo = null;
         try {
-            mongo = new MongoClient("localhost", 27017);
+            mongo = new MongoClient(AppConstants.MONGO_URL);
+
+
         } catch (UnknownHostException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         db = mongo.getDB(AppConstants.DBNAME);
+        boolean auth = db.authenticate(AppConstants.MONGO_LOGIN, AppConstants.MONGO_PASSWORD.toCharArray());
         }
         return db;
     }
@@ -123,7 +126,7 @@ public class MongoDBHelper {
     }
 
     public void addCommentByEAN(String ean , Comment comment) {
-        Product product = getProductByEAN(ean,"EN");
+        Product product = getProductByEAN(ean, AppConstants.EN);
         delProduct(product);
         product.getCommentList().add(comment);
         saveProduct(product);

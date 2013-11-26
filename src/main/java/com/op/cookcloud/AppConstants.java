@@ -1,5 +1,8 @@
 package com.op.cookcloud;
 
+import java.io.IOException;
+import java.util.Properties;
+
 /**
  * User: alexander.pastukhov
  * Date: 11/6/13
@@ -8,6 +11,9 @@ package com.op.cookcloud;
 public class AppConstants {
 
     public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
+
+    private static final Properties properties = new Properties();
+    private static transient boolean isparamsDone = false;
 
     public static final String EN = "EN";
 
@@ -24,4 +30,26 @@ public class AppConstants {
     public static final String COMMENTS = "comments";
     public static final String SIZE = "size";
     public static final String ISSUER_COUNTRY_CODE = "issuerCountryCode";
+
+    public static String MONGO_LOGIN;
+    public static String MONGO_PASSWORD;
+    public static String MONGO_URL;
+
+    public AppConstants() throws IOException {
+
+        if (!isparamsDone) {
+            synchronized (this) {
+                initParams();
+                isparamsDone = true;
+            }
+        }
+
+    }
+
+    private void initParams() throws IOException {
+        properties.load(this.getClass().getResourceAsStream("/config.properties"));
+        MONGO_LOGIN = properties.getProperty("MONGO_LOGIN");
+        MONGO_PASSWORD = properties.getProperty("MONGO_PASSWORD");
+        MONGO_URL = properties.getProperty("MONGO_URL");
+    }
 }

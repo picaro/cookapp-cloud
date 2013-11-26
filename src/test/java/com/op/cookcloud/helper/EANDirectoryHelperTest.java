@@ -5,6 +5,7 @@ import com.op.cookcloud.controller.RestController;
 import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
