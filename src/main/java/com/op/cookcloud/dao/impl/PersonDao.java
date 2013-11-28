@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PersonDaoImpl extends AbstractDaoImpl<Person, String> implements PersonDao {
+public class PersonDao extends AbstractDaoImpl<Person, String> {
 
-    protected PersonDaoImpl() {
+    protected PersonDao() {
         super(Person.class);
     }
 
