@@ -1,13 +1,15 @@
 package com.op.cookcloud.controller.crud;
 
+import javax.ws.rs.core.Response;
+
 /**
  * User: alexander.pastukhov
  * Date: 11/28/13
  * Time: 7:42 PM
  */
-public interface CRUDController<E> {
+public interface CRUDController<E,T> {
 
-    E read();
+    Response read();
 
     void update(E e);
 

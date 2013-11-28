@@ -45,7 +45,7 @@ public class RestController {
     private PersonDao personDao;
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON + "; charset=UTF-8"})
+    @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     @Path("{code}")
     public Response getProductByCode(@PathParam("code") String code) {
         LOG.info("getProductByCode:" + code);

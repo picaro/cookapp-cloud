@@ -26,7 +26,7 @@ public class PersonController implements CRUDController{
 
 
     @Override
-    public Object read() {
+    public Response read() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

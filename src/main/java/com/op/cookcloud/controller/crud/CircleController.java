@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
 
 
 @Service("circleService")
@@ -16,7 +17,7 @@ public class CircleController implements CRUDController{
 
 
     @Override
-    public Object read() {
+    public Response read() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
