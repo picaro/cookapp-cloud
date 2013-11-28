@@ -1,50 +1,33 @@
 package com.op.cookcloud.model.base;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "circle")
-public class Circle{
+public class Circle {
 
     @Id
     @GeneratedValue
+    @Getter
+    @Setter
     private Long id;
 
+    @Getter
+    @Setter
     private String name;
-	
+
+    @Getter
+    @Setter
     private String note;
 
-	public void setNote(String note)
-	{
-		this.note = note;
-	}
+    @Getter
+    @Setter
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "circle")
+    private List<ShopList> shopLists;
 
-	public String getNote()
-	{
-		return note;
-	}
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-
-	public String getName()
-	{
-		return name;
-	}
-   
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    
 }

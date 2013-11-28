@@ -1,7 +1,7 @@
 package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
-import com.op.cookcloud.dao.PersonDao;
+import com.op.cookcloud.dao.impl.PersonDao;
 import com.op.cookcloud.helper.*;
 import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
