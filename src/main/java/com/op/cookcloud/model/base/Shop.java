@@ -11,6 +11,6 @@ import javax.persistence.*;
 public @Data class Shop extends EntityWithId  {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shoplistid", nullable = false)
+    @JoinColumn(name = "shoplist", nullable = false)
     private ShopList shoplist;
 }
