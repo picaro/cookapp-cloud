@@ -3,6 +3,7 @@ package com.op.cookcloud.model.base;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "product")
 public @Data class Product extends EntityWithId  {
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shoplistid", nullable = false)
     private ShopList shoplist;
