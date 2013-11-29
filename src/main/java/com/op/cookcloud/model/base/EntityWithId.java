@@ -11,7 +11,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 public class EntityWithId {
 
     @Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	@JsonIgnore

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,6 +17,16 @@ public @Data class Person extends EntityWithId {
     private String lastName;
 
     private String email;
+
+    private String password;
+
+    private String phone;
+
+    private String gender;
+
+    private Date date_registration;
+
+    private Date dob;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
     private List<ShopList> shopLists;

@@ -5,11 +5,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "shoplist")
 public @Data class ShopList extends EntityWithId  {
+
+    private String note;
+
+    private Date date_created;
+
+    private Date date_kill;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "circleid", nullable = false)
@@ -18,8 +25,6 @@ public @Data class ShopList extends EntityWithId  {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", nullable = false)
     private Person person;
-
-    private String note;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplist")
     private List<Product> productList;
