@@ -1,20 +1,26 @@
 package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
+import com.op.cookcloud.dao.impl.PersonDao;
 import com.op.cookcloud.helper.*;
 import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
+import com.op.cookcloud.model.base.Person;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.List;
 
 
-@Component
+@Service("userService")
+@Transactional(readOnly = true)
 @Path("/barcode")
 public class RestController {
 
@@ -35,8 +41,11 @@ public class RestController {
     @Autowired
     private EANdirectoryRuHelper eaNdirectoryRuHelper;
 
+    @Autowired
+    private PersonDao personDao;
+
     @GET
-    @Produces({MediaType.APPLICATION_JSON + "; charset=UTF-8"})
+    @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     @Path("{code}")
     public Response getProductByCode(@PathParam("code") String code) {
         LOG.info("getProductByCode:" + code);
@@ -45,6 +54,8 @@ public class RestController {
         Product product = null;
 
         //1 check in our database
+        List persons = personDao.findUsers("Александр");
+
         Product mProduct = mongoDBHelper.getProductByEAN(code, AppConstants.EN);
         if (mProduct != null) return Response.status(200).entity(mProduct).build();
 

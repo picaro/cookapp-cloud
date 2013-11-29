@@ -1,49 +1,40 @@
 package com.op.cookcloud.model.base;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "person")
 public class Person {
 
     @Id
     @GeneratedValue
+    @Getter
+    @Setter
     private Long id;
 
+    @Getter
+    @Setter
     private String firstName;
+
+    @Getter
+    @Setter
     private String lastName;
+
+    @Getter
+    @Setter
     private String email;
 
-    public Long getId() {
-        return id;
-    }
+    @Getter
+    @Setter
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    private List<ShopList> shopLists;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    @Getter
+    @Setter
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    private List<UserSettings> settingsList;
 }

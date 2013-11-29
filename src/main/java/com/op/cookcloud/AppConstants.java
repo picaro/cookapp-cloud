@@ -13,6 +13,7 @@ public class AppConstants {
     public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
 
     private static final Properties properties = new Properties();
+    public static final String CHARSET_UTF_8 = "; charset=UTF-8";
     private static transient boolean isparamsDone = false;
 
     public static final String EN = "EN";
