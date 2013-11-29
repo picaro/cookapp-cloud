@@ -28,13 +28,16 @@ import static org.junit.Assert.assertTrue;
  * Time: 1:42
  * To change this template use File | Settings | File Templates.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {
+        "classpath:/applicationContext-test.xml"})
 public class EANDirectoryHelperTest {
 
     ApplicationContext ac;
     @Before
     public void setUp()
     {
-        ac = new FileSystemXmlApplicationContext("classpath:/applicationContext-test.xml");
+     //   ac = new FileSystemXmlApplicationContext("classpath:/applicationContext-test.xml");
     }
 
     EANdirectoryRuHelper ruHelper;
