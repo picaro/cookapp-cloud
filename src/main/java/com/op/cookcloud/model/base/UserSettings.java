@@ -1,5 +1,6 @@
 package com.op.cookcloud.model.base;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,16 +8,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "usersettings")
-public class UserSettings {
+public @Data class UserSettings  extends EntityWithId {
 
-    @Id
-    @GeneratedValue
-    @Getter
-    @Setter
-    private Long id;
-
-    @Getter
-    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", nullable = false)
     private Person person;

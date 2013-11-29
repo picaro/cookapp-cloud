@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response;
  * Date: 11/28/13
  * Time: 7:42 PM
  */
-public interface CRUDController<E,T> {
+public interface CRUDController<E> {
 
     Response read();
 

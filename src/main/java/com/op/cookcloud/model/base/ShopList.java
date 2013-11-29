@@ -9,16 +9,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "shoplist")
-public @Data class ShopList {
-
-    @Id
-    @GeneratedValue
-    private Long id;
+public @Data class ShopList extends EntityWithId  {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "circleid", nullable = false)
     private Circle circle;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", nullable = false)
@@ -29,9 +24,6 @@ public @Data class ShopList {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplist")
     private List<Product> productList;
 
-
-    @Getter
-    @Setter
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplist")
     private List<Shop> shops;
 

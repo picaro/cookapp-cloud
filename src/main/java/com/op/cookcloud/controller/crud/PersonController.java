@@ -5,6 +5,7 @@ import com.op.cookcloud.dao.impl.PersonDao;
 import com.op.cookcloud.helper.*;
 import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
+import com.op.cookcloud.model.base.Person;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import java.util.List;
 @Service("personService")
 @Transactional(readOnly = true)
 @Path("/person")
-public class PersonController implements CRUDController{
+public class PersonController implements CRUDController<Person>{
 
     private static final Logger LOG = Logger.getLogger(PersonController.class);
 
@@ -31,12 +32,12 @@ public class PersonController implements CRUDController{
     }
 
     @Override
-    public void update(Object o) {
+    public void update(Person o) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public void create(Object o) {
+    public void create(Person o) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

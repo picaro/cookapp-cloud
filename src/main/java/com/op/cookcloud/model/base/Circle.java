@@ -1,5 +1,6 @@
 package com.op.cookcloud.model.base;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,24 +9,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "circle")
-public class Circle {
+public @Data class Circle extends EntityWithId  {
 
-    @Id
-    @GeneratedValue
-    @Getter
-    @Setter
-    private Long id;
-
-    @Getter
-    @Setter
     private String name;
 
-    @Getter
-    @Setter
     private String note;
 
-    @Getter
-    @Setter
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "circle")
     private List<ShopList> shopLists;
 
