@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Ноя 28 2013 г., 13:53
+-- Время создания: Ноя 29 2013 г., 06:57
 -- Версия сервера: 5.5.32
 -- Версия PHP: 5.4.13
 
@@ -80,7 +80,16 @@ CREATE TABLE IF NOT EXISTS `product` (
   `note` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `shoplistid` (`shoplistid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Дамп данных таблицы `product`
+--
+
+INSERT INTO `product` (`id`, `name`, `shoplistid`, `note`) VALUES
+(1, 'лезвия', 1, NULL),
+(2, 'пленка упак.', 1, NULL),
+(3, 'зубн полоск.', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -95,7 +104,14 @@ CREATE TABLE IF NOT EXISTS `shop` (
   `shoplist` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `shoplist` (`shoplist`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Дамп данных таблицы `shop`
+--
+
+INSERT INTO `shop` (`id`, `name`, `coordinates`, `shoplist`) VALUES
+(1, 'кишеня голосеевская', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -110,7 +126,6 @@ CREATE TABLE IF NOT EXISTS `shoplist` (
   `date_kill` datetime NOT NULL,
   `note` text,
   `userid` int(11) NOT NULL,
-  `products` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `circleid` (`circleid`),
   KEY `userid` (`userid`)
@@ -120,8 +135,8 @@ CREATE TABLE IF NOT EXISTS `shoplist` (
 -- Дамп данных таблицы `shoplist`
 --
 
-INSERT INTO `shoplist` (`id`, `circleid`, `date_created`, `date_kill`, `note`, `userid`, `products`) VALUES
-(1, 1, '2013-11-25 00:00:00', '2013-11-30 00:00:00', 'список 1', 1, '{}');
+INSERT INTO `shoplist` (`id`, `circleid`, `date_created`, `date_kill`, `note`, `userid`) VALUES
+(1, 1, '2013-11-25 00:00:00', '2013-11-30 00:00:00', 'список 1', 1);
 
 -- --------------------------------------------------------
 
@@ -172,15 +187,15 @@ ALTER TABLE `product`
 -- Ограничения внешнего ключа таблицы `shoplist`
 --
 ALTER TABLE `shoplist`
-  ADD CONSTRAINT `shoplist_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `person` (`id`),
-  ADD CONSTRAINT `shoplist_ibfk_1` FOREIGN KEY (`circleid`) REFERENCES `circle` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `shoplist_ibfk_1` FOREIGN KEY (`circleid`) REFERENCES `circle` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `shoplist_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `person` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `user2circle`
 --
 ALTER TABLE `user2circle`
-  ADD CONSTRAINT `user2circle_ibfk_2` FOREIGN KEY (`circleid`) REFERENCES `circle` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user2circle_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `person` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user2circle_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `person` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user2circle_ibfk_2` FOREIGN KEY (`circleid`) REFERENCES `circle` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `usersettings`
