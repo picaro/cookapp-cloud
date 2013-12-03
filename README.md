@@ -15,3 +15,17 @@ login root passw 123456
 setup env vars. ENUNCIATE_HOME
 4 download mongodb.
 start mongodb
+
+change config.xml inside maven dir -
+add 
+
+<profile>
+            <id>jelastic</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jelastic.username>[insert your Jelastic username]</jelastic.username>
+                <jelastic.password>[insert your Jelastic password]</jelastic.password>
+            </properties>
+</profile>
