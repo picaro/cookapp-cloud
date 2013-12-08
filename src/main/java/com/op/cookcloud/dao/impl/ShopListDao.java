@@ -14,11 +14,11 @@ public class ShopListDao extends AbstractDaoImpl<ShopList, Integer> {
         super(ShopList.class);
     }
 
-    public void saveUser(ShopList user) {
-        saveOrUpdate(user);
+    public void save(ShopList pojo) {
+        saveOrUpdate(pojo);
     }
 
-    public List<ShopList> findUsers(String userName) {
-        return findByCriteria(Restrictions.like("firstName", userName, MatchMode.START));
+    public List<ShopList> find(String user) {
+        return findByCriteria(Restrictions.like("userid", user, MatchMode.EXACT));
     }
 }

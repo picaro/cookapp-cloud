@@ -47,17 +47,19 @@ public class ShopListController implements CRUDController<ShopList>{
 
     @Override
     public void update(ShopList o) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        shopListDao.save(o);
     }
 
     @Override
     public void create(ShopList o) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        shopListDao.save(o);
     }
 
     @Override
     public void delete(Integer id) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        ShopList shopList = new ShopList();
+        shopList.setId(id);
+        shopListDao.delete(shopList);
     }
 
 

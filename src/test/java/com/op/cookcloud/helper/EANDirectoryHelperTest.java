@@ -35,7 +35,7 @@ import static org.junit.Assert.assertTrue;
 public class EANDirectoryHelperTest {
 
     @Autowired
-    private EANdirectoryRuHelper ruHelper = new EANdirectoryRuHelper();
+    private EANdirectoryRuHelper ruHelper;
 
 
     @Before
