@@ -1,6 +1,7 @@
 package com.op.cookcloud;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -10,6 +11,7 @@ import java.util.Properties;
  * Date: 11/6/13
  * Time: 11:47 AM
  */
+@Service
 public class AppConstants {
 
     public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
@@ -59,7 +61,7 @@ public class AppConstants {
         MONGO_URL = properties.getProperty("MONGO_URL");
 
         LOG.debug("MONGO_LOGIN:" + MONGO_LOGIN);
-        LOG.debug("MONGO_PASSWORD:" + MONGO_PASSWORD);
+        LOG.error("MONGO_PASSWORD:" + MONGO_PASSWORD);
         LOG.debug("MONGO_URL:" + MONGO_URL);
     }
 }
