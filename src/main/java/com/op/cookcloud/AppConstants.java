@@ -1,5 +1,7 @@
 package com.op.cookcloud;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -11,6 +13,9 @@ import java.util.Properties;
 public class AppConstants {
 
     public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
+
+    private static final Logger LOG = Logger.getLogger(AppConstants.class);
+
 
     private static final Properties properties = new Properties();
     public static final String CHARSET_UTF_8 = "; charset=UTF-8";
@@ -52,5 +57,9 @@ public class AppConstants {
         MONGO_LOGIN = properties.getProperty("MONGO_LOGIN");
         MONGO_PASSWORD = properties.getProperty("MONGO_PASSWORD");
         MONGO_URL = properties.getProperty("MONGO_URL");
+
+        LOG.debug("MONGO_LOGIN:" + MONGO_LOGIN);
+        LOG.debug("MONGO_PASSWORD:" + MONGO_PASSWORD);
+        LOG.debug("MONGO_URL:" + MONGO_URL);
     }
 }

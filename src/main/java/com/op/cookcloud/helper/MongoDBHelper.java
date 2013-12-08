@@ -53,7 +53,7 @@ public class MongoDBHelper {
         return prodDoc;
     }
 
-    public Product getProductByEAN(String code,String lang) {
+    public Product getProductByEAN(String code, String lang) {
         DB db = getDB();
         DBCollection mgProduct = db.getCollection(PRODUCT_TABLE);
         BasicDBObject searchQuery = new BasicDBObject();
@@ -78,17 +78,18 @@ public class MongoDBHelper {
     }
 
     private DB getDB() {
-        if (db == null){
-        MongoClient mongo = null;
-        try {
-            mongo = new MongoClient(AppConstants.MONGO_URL);
+        if (db == null) {
+            MongoClient mongo = null;
+            try {
+                mongo = new MongoClient(AppConstants.MONGO_URL);
 
 
-        } catch (UnknownHostException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        db = mongo.getDB(AppConstants.DBNAME);
-        boolean auth = db.authenticate(AppConstants.MONGO_LOGIN, AppConstants.MONGO_PASSWORD.toCharArray());
+            } catch (UnknownHostException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+            db = mongo.getDB(AppConstants.DBNAME);
+            LOG.debug("db:" + db + " pass:" + AppConstants.MONGO_PASSWORD);
+            boolean auth = db.authenticate(AppConstants.MONGO_LOGIN, AppConstants.MONGO_PASSWORD.toCharArray());
         }
         return db;
     }
@@ -125,7 +126,7 @@ public class MongoDBHelper {
         mgProduct.update(change, bproduct);
     }
 
-    public void addCommentByEAN(String ean , Comment comment) {
+    public void addCommentByEAN(String ean, Comment comment) {
         Product product = getProductByEAN(ean, AppConstants.EN);
         delProduct(product);
         product.getCommentList().add(comment);
@@ -143,13 +144,13 @@ public class MongoDBHelper {
         BasicDBObject searchQuery = new BasicDBObject();
         DBCursor cursor = settings.find(searchQuery);
         LOG.info("isUADBSaved");
-    //    if (cursor != null)
+        //    if (cursor != null)
         if (cursor.size() == 0) {
             return false;
-        }  else {
+        } else {
             Object retObj = cursor.next().get("isuadbsaved");
-            if (retObj instanceof Boolean){
-                return (Boolean)retObj;
+            if (retObj instanceof Boolean) {
+                return (Boolean) retObj;
             } else return false;
         }
     }
@@ -158,6 +159,7 @@ public class MongoDBHelper {
         DB db = getDB();
         DBCollection mgProduct = db.getCollection("settings");
         BasicDBObject prodDoc = new BasicDBObject();
-        prodDoc.put("isuadbsaved",true);
-        mgProduct.insert(prodDoc);    }
+        prodDoc.put("isuadbsaved", true);
+        mgProduct.insert(prodDoc);
+    }
 }
