@@ -1,0 +1,1 @@
+create table DB_VERSION ( MAJOR integer, MINOR integer,	DB_UPDATE_TSP timestamp default CURRENT_TIMESTAMP);

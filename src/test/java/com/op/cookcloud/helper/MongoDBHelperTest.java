@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
  * Time: 1:42
  * To change this template use File | Settings | File Templates.
  */
+@Ignore(value = "manual run only")
 public class MongoDBHelperTest {
 
     public static final String EAN = "111121";

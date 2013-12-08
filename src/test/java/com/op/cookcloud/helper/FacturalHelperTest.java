@@ -19,9 +19,8 @@ public class FacturalHelperTest {
 
     @Test
     public void getProduct(){
-        //EANdirectoryRuHelper ruHelper = new EANdirectoryRuHelper();
         FacturalHelper facturalHelper = new FacturalHelper();
-        System.out.println("aaa");
+        System.out.println("FacturalHelperTest");
         Product product = facturalHelper.lookUpProduct("0073010013469");
         assertEquals("Tampons With Plastic Applicators Unscented Duo Pack Regular Super",product.getName());
     }

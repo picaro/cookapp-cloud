@@ -27,6 +27,7 @@ import static org.junit.Assert.assertTrue;
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = {"classpath:/applicationContext-test.xml"})
 
+@Ignore(value = "manual run")
 public class RestControllerTest {
 
     ApplicationContext ac;

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -30,27 +31,24 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:/applicationContext-test.xml","classpath:/hibernateContext.xml"})
+        "classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
 public class EANDirectoryHelperTest {
 
-    ApplicationContext ac;
+    @Autowired
+    private EANdirectoryRuHelper ruHelper = new EANdirectoryRuHelper();
+
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
 
-    EANdirectoryRuHelper ruHelper;
-
     @Test
-    public void getProduct(){
-        System.out.println("111");
-        //EANdirectoryRuHelper ruHelper = new EANdirectoryRuHelper();
-     //   ruHelper = (EANdirectoryRuHelper) ac.getBean("EANdirectoryRuHelper");
-
-//        System.out.println("aaa");
-//        Product product = ruHelper.lookUpProduct("5410306866760");
-//        assertEquals("ACTIFF Javel Ср-во д/кухни спрей 500мл",product.getDescription());
+    @Ignore
+    public void getProduct() {
+        System.out.println("getProduct");
+        Product product = ruHelper.lookUpProduct("5410306866760");
+        assertNotNull(product);
+        //assertEquals("ACTIFF Javel Ср-во д/кухни спрей 500мл", product.getDescription());
     }
 
 }
