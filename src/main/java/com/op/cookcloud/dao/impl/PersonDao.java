@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PersonDao extends AbstractDaoImpl<Person, String> {
+public class PersonDao extends AbstractDaoImpl<Person, Integer> {
 
     protected PersonDao() {
         super(Person.class);

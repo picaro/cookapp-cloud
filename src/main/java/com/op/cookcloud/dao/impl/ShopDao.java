@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ShopDao extends AbstractDaoImpl<Shop, String> {
+public class ShopDao extends AbstractDaoImpl<Shop, Integer> {
 
     protected ShopDao() {
         super(Shop.class);

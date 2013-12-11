@@ -2,17 +2,16 @@ package com.op.cookcloud.controller.crud;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ShopListDao;
+import com.op.cookcloud.model.base.Shop;
 import com.op.cookcloud.model.base.ShopList;
 import com.sun.jersey.api.core.InjectParam;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -20,47 +19,45 @@ import javax.ws.rs.core.Response;
 @Service("shopListService")
 @Transactional(readOnly = true)
 @Path("/shoplist")
-public class ShopListController implements CRUDController<ShopList>{
+public class ShopListController{
 
     private static final Logger LOG = Logger.getLogger(ShopListController.class);
 
-
-    @InjectParam
+    @Autowired
     private ShopListDao shopListDao;
 
-    public ShopListDao getShopListDao() {
-        return shopListDao;
-    }
-
-    public void setShopListDao(ShopListDao shopListDao) {
-        this.shopListDao = shopListDao;
-    }
-
-    @Override
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
-    public Response read() {
-        ShopList shopList = shopListDao.findById(new Integer(1));
-        Response response = Response.status(200).entity(shopList).build();
-        return response;
+    @Path("{id}")
+    public ShopList read(@PathParam("id") Integer id) {
+        ShopList shopList = shopListDao.findById(id);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("ShopList found, id: " + id);
+        }
+        return shopList;
     }
 
-    @Override
-    public void update(ShopList o) {
-        shopListDao.save(o);
+    @PUT
+    public void update(@ModelAttribute ShopList shopList) {
+        shopListDao.saveOrUpdate(shopList);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("ShopList updated" + shopList);
+        }
     }
 
-    @Override
-    public void create(ShopList o) {
-        shopListDao.save(o);
+    @POST
+    @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
+    public void create(@ModelAttribute ShopList shopList) {
+        shopListDao.saveOrUpdate(shopList);
+        LOG.debug("ShopList created: " + shopList);
     }
 
-    @Override
-    public void delete(Integer id) {
-        ShopList shopList = new ShopList();
-        shopList.setId(id);
-        shopListDao.delete(shopList);
+    @DELETE
+    @Path("{id}")
+    public void delete(@PathParam("id") Integer id) {
+        ShopList shop = shopListDao.findById(id);
+        shopListDao.delete(shop);
+        LOG.debug("ShopList deleted:" + shop);
     }
-
 
 }

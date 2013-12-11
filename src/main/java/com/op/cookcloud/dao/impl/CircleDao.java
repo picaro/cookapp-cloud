@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CircleDao extends AbstractDaoImpl<Circle, String> {
+public class CircleDao extends AbstractDaoImpl<Circle, Integer> {
 
     protected CircleDao() {
         super(Circle.class);

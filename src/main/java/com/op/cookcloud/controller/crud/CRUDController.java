@@ -1,6 +1,5 @@
 package com.op.cookcloud.controller.crud;
 
-import javax.ws.rs.core.Response;
 
 /**
  * User: alexander.pastukhov
@@ -9,9 +8,9 @@ import javax.ws.rs.core.Response;
  */
 public interface CRUDController<E> {
 
-    Response read();
+    E read(Integer e);
 
-    void update(E e);
+    void update(Integer e);
 
     void create(E e);
 
