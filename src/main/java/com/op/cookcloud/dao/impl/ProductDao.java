@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ProductDao extends AbstractDaoImpl<Product, String> {
+public class ProductDao extends AbstractDaoImpl<Product, Integer> {
 
     protected ProductDao() {
         super(Product.class);
