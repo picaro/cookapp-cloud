@@ -20,12 +20,19 @@ change config.xml inside maven dir -
 add 
 
 <profile>
-            <id>jelastic</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <jelastic.username>[insert your Jelastic username]</jelastic.username>
-                <jelastic.password>[insert your Jelastic password]</jelastic.password>
+                <jelastic.username>picaro.vs@gmail.com</jelastic.username>
+                <jelastic.password>123456</jelastic.password>
+                <mongo.url>localhost</mongo.url>
+                <mongo.login>admin</mongo.login>
+                <mongo.password>123456</mongo.password>
+                <db.url>localhost:3128/cookclouddb</db.url>
+                <db.login>root</db.login>
+                <db.password>123456</db.password>
             </properties>
-</profile>
+ 
+ 
+    </profile>
