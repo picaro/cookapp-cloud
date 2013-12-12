@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 @Service("circleService")
 @Transactional(readOnly = true)
 @Path("/circle")
-public class CircleController {
+public class CircleController implements CRUDController<Circle>{
 
     private static final Logger LOG = Logger.getLogger(CircleController.class);
 

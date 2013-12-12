@@ -2,6 +2,7 @@ package com.op.cookcloud.controller.crud;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ShopListDao;
+import com.op.cookcloud.model.base.Circle;
 import com.op.cookcloud.model.base.Shop;
 import com.op.cookcloud.model.base.ShopList;
 import com.sun.jersey.api.core.InjectParam;
@@ -19,7 +20,7 @@ import javax.ws.rs.core.Response;
 @Service("shopListService")
 @Transactional(readOnly = true)
 @Path("/shoplist")
-public class ShopListController{
+public class ShopListController implements CRUDController<ShopList>{
 
     private static final Logger LOG = Logger.getLogger(ShopListController.class);
 

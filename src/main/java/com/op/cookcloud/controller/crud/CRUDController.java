@@ -10,7 +10,7 @@ public interface CRUDController<E> {
 
     E read(Integer e);
 
-    void update(Integer e);
+    void update(E e);
 
     void create(E e);
 

@@ -2,6 +2,7 @@ package com.op.cookcloud.controller.crud;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.PersonDao;
+import com.op.cookcloud.model.base.Circle;
 import com.op.cookcloud.model.base.Person;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 @Service("personService")
 @Transactional(readOnly = true)
 @Path("/person")
-public class PersonController {
+public class PersonController implements CRUDController<Person>{
 
     private static final Logger LOG = Logger.getLogger(PersonController.class);
 

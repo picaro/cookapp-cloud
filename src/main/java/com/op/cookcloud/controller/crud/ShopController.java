@@ -2,6 +2,7 @@ package com.op.cookcloud.controller.crud;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ShopDao;
+import com.op.cookcloud.model.base.Circle;
 import com.op.cookcloud.model.base.Shop;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 @Service("shopService")
 @Transactional(readOnly = true)
 @Path("/shop")
-public class ShopController {
+public class ShopController implements CRUDController<Shop>{
 
     private static final Logger LOG = Logger.getLogger(ShopController.class);
 
