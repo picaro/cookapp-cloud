@@ -1,4 +1,4 @@
-package com.op.cookcloud.controller.crud;
+package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.PersonDao;
@@ -16,9 +16,10 @@ import javax.ws.rs.core.MediaType;
 @Service("personService")
 @Transactional(readOnly = true)
 @Path("/person")
-public class PersonController implements CRUDController<Person> {
+public class PersonController {
 
     private static final Logger LOG = Logger.getLogger(PersonController.class);
+
 
     @Autowired
     private PersonDao personDao;

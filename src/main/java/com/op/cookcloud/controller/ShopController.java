@@ -1,4 +1,4 @@
-package com.op.cookcloud.controller.crud;
+package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ShopDao;
@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 @Service("shopService")
 @Transactional(readOnly = true)
 @Path("/shop")
-public class ShopController implements CRUDController<Shop> {
+public class ShopController {
 
     private static final Logger LOG = Logger.getLogger(ShopController.class);
 

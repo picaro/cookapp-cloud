@@ -1,4 +1,4 @@
-package com.op.cookcloud.controller.crud;
+package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ProductDao;
@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 @Service("productService")
 @Transactional(readOnly = true)
 @Path("/product")
-public class ProductController implements CRUDController<Product> {
+public class ProductController {
 
     private static final Logger LOG = Logger.getLogger(ProductController.class);
     @Autowired

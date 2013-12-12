@@ -1,4 +1,4 @@
-package com.op.cookcloud.controller.crud;
+package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.CircleDao;
@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 @Service("circleService")
 @Transactional(readOnly = true)
 @Path("/circle")
-public class CircleController implements CRUDController<Circle> {
+public class CircleController {
 
     private static final Logger LOG = Logger.getLogger(CircleController.class);
 
