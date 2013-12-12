@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "circle")
@@ -15,8 +17,8 @@ public @Data class Circle extends EntityWithId  {
 
     private String note;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "circle")
-    private List<ShopList> shopLists;
+    @ManyToMany(mappedBy="circles")
+    private Set<ShopList> shopLists = new HashSet<ShopList>();
 
 
 }

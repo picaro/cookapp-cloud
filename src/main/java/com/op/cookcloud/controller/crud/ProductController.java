@@ -2,8 +2,6 @@ package com.op.cookcloud.controller.crud;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ProductDao;
-import com.op.cookcloud.model.base.Circle;
-import com.op.cookcloud.model.base.Person;
 import com.op.cookcloud.model.base.Product;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 
 @Service("productService")
 @Transactional(readOnly = true)
 @Path("/product")
-public class ProductController implements CRUDController<Product>{
+public class ProductController implements CRUDController<Product> {
 
     private static final Logger LOG = Logger.getLogger(ProductController.class);
     @Autowired

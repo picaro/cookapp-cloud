@@ -125,7 +125,7 @@ public class Executor {
 	}
 
 	private void executeUpdateScriptAndUpdateDBVersion(final Version version, final String sql, Statement stmt) throws SQLException {
-		if (isDatabaseSupportMultilineStatements(driverClassName)) {
+		if (1==2 && isDatabaseSupportMultilineStatements(driverClassName)) {
 			stmt.execute(sql);
 		} else {
 			logger.info("Database driver " + driverClassName + " doesn't support multi SQL statements");
