@@ -399,7 +399,7 @@
                 </dependencies>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <phase>deploy</phase>
                     </execution>
                 </executions>
             </plugin>
