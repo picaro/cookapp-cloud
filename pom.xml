@@ -385,7 +385,7 @@
                 <configuration>
                     <email>${jelastic.username}</email>
                     <password>${jelastic.password}</password>
-                    <context></context>
+                    <context>/</context>
                     <environment>cookcloud</environment>
                     <api_hoster>jelastic.neohost.com</api_hoster>
                 </configuration>
