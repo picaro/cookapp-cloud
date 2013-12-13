@@ -1,8 +1,6 @@
 package com.op.cookcloud.model.base;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -13,7 +11,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "shoplist")
-public @Data class ShopList extends EntityWithId  {
+public
+@Data
+class ShopList extends EntityWithId {
 
     private String note;
 
@@ -25,9 +25,9 @@ public @Data class ShopList extends EntityWithId  {
 
     @JsonIgnore
     @ManyToMany(cascade = {CascadeType.REFRESH})
-    @JoinTable(name="slist2circle",
-            joinColumns={@JoinColumn(name="shoplistid")},
-            inverseJoinColumns={@JoinColumn(name="circleid")})
+    @JoinTable(name = "slist2circle",
+            joinColumns = {@JoinColumn(name = "shoplistid")},
+            inverseJoinColumns = {@JoinColumn(name = "circleid")})
     private Set<Circle> circles = new HashSet<Circle>();
 
     @JsonIgnore

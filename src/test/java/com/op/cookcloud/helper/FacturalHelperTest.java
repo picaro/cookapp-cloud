@@ -2,6 +2,7 @@ package com.op.cookcloud.helper;
 
 import com.op.cookcloud.model.Product;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -17,6 +18,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class FacturalHelperTest {
 
+    @Ignore
     @Test
     public void getProduct(){
         FacturalHelper facturalHelper = new FacturalHelper();
