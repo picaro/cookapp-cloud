@@ -392,7 +392,6 @@
                 <executions>
                     <execution>
                         <id>install2</id>
-                        <goals><goal>deploy</goal></goals>
                     </execution>
                 </executions>
             </plugin>
