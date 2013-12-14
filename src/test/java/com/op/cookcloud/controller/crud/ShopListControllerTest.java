@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import static junit.framework.Assert.assertTrue;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alex3
@@ -34,11 +36,12 @@ public class ShopListControllerTest extends AbstractTransactionalJUnit4SpringCon
     public void testRead() throws Exception {
 //        ShopList shopList = new ShopList();
 //        shopList.setNote("aaa");
-//        shopList.setNote("aaa");
 //        shopListDao.save(shopList);
 //
+//        assertTrue(shopListDao.findAll().size() > 0);
+//
 //        ShopList shopListNew = shopListDao.findById(1);
-        //shopListDao.r delete(1);
+//        shopListDao.delete(shopListNew);
     }
 
     @Test

@@ -11,6 +11,8 @@ import java.util.SortedMap;
 
 import javax.sql.DataSource;
 
+import com.op.cookcloud.exceptions.ServerException;
+import com.op.cookcloud.model.base.Version;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,7 @@ public class Executor {
 			}
 		} else {
 
+			throw new ServerException("You must have at least one db update script");
 	    }
 	}
 
@@ -98,9 +101,9 @@ public class Executor {
 			});
 
 		} catch (IOException e) {
-            e.printStackTrace();
+            			throw new ServerException("Can't read db update script " + updateScriptFile.getAbsolutePath(), e);
 		} catch (DataAccessException dae) {
-            dae.printStackTrace();
+             throw new ServerException("Can't process db update script " + updateScriptFile.getAbsolutePath(), dae);
 		}
 	}
 

@@ -350,7 +350,6 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
                         <goals>
                             <goal>clean</goal><!-- works if uncommented -->
                             <goal>check</goal>

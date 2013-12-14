@@ -1,9 +1,14 @@
-package com.op.cookcloud.helper.dbupdater;
+package com.op.cookcloud.model.base;
 
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "db_version")
 public @Data
-class Version implements Comparable<Version> {
+class Version extends EntityWithId implements Comparable<Version> {
 
     private static final int BEFORE = -1;
     private static final int EQUAL = 0;

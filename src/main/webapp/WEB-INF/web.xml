@@ -98,7 +98,6 @@
 	<jsp-config>
 		<taglib>
 			<taglib-uri>http://www.springframework.org/security/tags</taglib-uri>
-			<taglib-location>/WEB-INF/security.tld</taglib-location>
 		</taglib>
 	</jsp-config>
 

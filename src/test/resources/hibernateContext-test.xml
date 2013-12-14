@@ -33,6 +33,16 @@
 
         </property>
     </bean>
+	
+	<bean id="dbUpdater" class="com.op.cookcloud.helper.dbupdater.DbUpdater"  />
+
+    <bean id="dbUpdaterExecutor" class="com.op.cookcloud.helper.dbupdater.Executor">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="dbUpdaterScriptReader" class="com.op.cookcloud.helper.dbupdater.ScriptReader"/>
+
+
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
