@@ -3,6 +3,7 @@ package com.op.cookcloud.model.base;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,9 +29,11 @@ public @Data class Person extends EntityWithId {
 
     private Date dob;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
     private List<ShopList> shopLists;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
     private List<UserSettings> settingsList;
 }

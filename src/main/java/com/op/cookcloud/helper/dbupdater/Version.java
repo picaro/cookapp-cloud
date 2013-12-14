@@ -1,6 +1,9 @@
 package com.op.cookcloud.helper.dbupdater;
 
-public class Version implements Comparable<Version> {
+import lombok.Data;
+
+public @Data
+class Version implements Comparable<Version> {
 
     private static final int BEFORE = -1;
     private static final int EQUAL = 0;
@@ -23,21 +26,6 @@ public class Version implements Comparable<Version> {
         setMinor(minor);
     }
 
-    public Integer getMajor() {
-        return major;
-    }
-
-    public void setMajor(Integer major) {
-        this.major = major;
-    }
-
-    public Integer getMinor() {
-        return minor;
-    }
-
-    public void setMinor(Integer minor) {
-        this.minor = minor;
-    }
 
     @Override
     public int compareTo(Version version) {
@@ -60,10 +48,7 @@ public class Version implements Comparable<Version> {
         return compareTo(otherVersion) < 0;
     }
 
-    @Override
-    public String toString() {
-        return "Ver [maj=" + major + ", min=" + minor + "]";
-    }
+
 
 
 }
