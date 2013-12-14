@@ -1,6 +1,7 @@
-package com.op.cookcloud.controller.crud;
+package com.op.cookcloud.dao;
 
 import com.op.cookcloud.dao.impl.ShopListDao;
+import com.op.cookcloud.model.base.Person;
 import com.op.cookcloud.model.base.ShopList;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -21,27 +22,23 @@ import static junit.framework.Assert.assertTrue;
  * Time: 21:46
  * To change this template use File | Settings | File Templates.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-        "classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
-@TransactionConfiguration
-@Transactional
-public class ShopListControllerTest extends AbstractTransactionalJUnit4SpringContextTests {
 
-    @Autowired
-    private ShopListDao shopListDao;
+public class ShopListDaoTest extends BaseDaoTest{
+
 
 
     @Test
     public void testRead() throws Exception {
-//        ShopList shopList = new ShopList();
-//        shopList.setNote("aaa");
-//        shopListDao.save(shopList);
-//
-//        assertTrue(shopListDao.findAll().size() > 0);
-//
-//        ShopList shopListNew = shopListDao.findById(1);
-//        shopListDao.delete(shopListNew);
+        Person person = createPerson();
+        ShopList shopList = new ShopList();
+        shopList.setNote("aaa");
+        shopList.setPerson(person);
+        shopListDao.save(shopList);
+
+        assertTrue(shopListDao.findAll().size() > 0);
+
+        ShopList shopListNew = shopListDao.findById(1);
+        shopListDao.delete(shopListNew);
     }
 
     @Test
