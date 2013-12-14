@@ -18,7 +18,7 @@ public class ShopListDao extends AbstractDaoImpl<ShopList, Integer> {
         saveOrUpdate(pojo);
     }
 
-    public List<ShopList> find(String user) {
-        return findByCriteria(Restrictions.like("userid", user, MatchMode.EXACT));
+    public List<ShopList> findByNote(String note) {
+        return findByCriteria(Restrictions.like("note", note, MatchMode.EXACT));
     }
 }

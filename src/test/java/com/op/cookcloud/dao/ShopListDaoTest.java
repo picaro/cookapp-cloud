@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -28,31 +30,22 @@ public class ShopListDaoTest extends BaseDaoTest{
 
 
     @Test
-    public void testRead() throws Exception {
-        Person person = createPerson();
-        ShopList shopList = new ShopList();
-        shopList.setNote("aaa");
-        shopList.setPerson(person);
-        shopListDao.save(shopList);
-
+    public void testCreateDelete() throws Exception {
+        ShopList shopList = createShopList();
         assertTrue(shopListDao.findAll().size() > 0);
-
-        ShopList shopListNew = shopListDao.findById(1);
+        ShopList shopListNew = shopListDao.findById(shopList.getId());
         shopListDao.delete(shopListNew);
+        assertTrue(shopListDao.findAll().size() > 0);
     }
+
+
 
     @Test
     public void testUpdate() throws Exception {
+        createShopList();
+        List shopListL = shopListDao.findByNote("aaa");
+        assertTrue(shopListL.size() > 0);
 
     }
 
-    @Test
-    public void testCreate() throws Exception {
-
-    }
-
-    @Test
-    public void testDelete() throws Exception {
-
-    }
 }
