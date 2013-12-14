@@ -1,8 +1,10 @@
 package com.op.cookcloud.dao;
 
 import com.op.cookcloud.dao.impl.PersonDao;
+import com.op.cookcloud.dao.impl.ShopDao;
 import com.op.cookcloud.dao.impl.ShopListDao;
 import com.op.cookcloud.model.base.Person;
+import com.op.cookcloud.model.base.Shop;
 import com.op.cookcloud.model.base.ShopList;
 import org.apache.log4j.Logger;
 import org.junit.runner.RunWith;
@@ -32,6 +34,9 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
     protected ShopListDao shopListDao;
 
     @Autowired
+    protected ShopDao shopDao;
+
+    @Autowired
     protected PersonDao personDao;
 
     public Person createPerson(){
@@ -51,5 +56,13 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
         shopList.setPerson(person);
         shopListDao.save(shopList);
         return shopList;
+    }
+
+    public Shop createShop() {
+        Shop shop = new Shop();
+
+        shop.setName("aaa");
+        shopDao.save(shop);
+        return shop;
     }
 }

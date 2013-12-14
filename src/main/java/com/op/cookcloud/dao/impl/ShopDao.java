@@ -14,11 +14,9 @@ public class ShopDao extends AbstractDaoImpl<Shop, Integer> {
         super(Shop.class);
     }
 
-    public void saveUser(Shop user) {
-        saveOrUpdate(user);
+    public void save(Shop shop) {
+        saveOrUpdate(shop);
     }
 
-    public List<Shop> findUsers(String userName) {
-        return findByCriteria(Restrictions.like("firstName", userName, MatchMode.START));
-    }
+
 }

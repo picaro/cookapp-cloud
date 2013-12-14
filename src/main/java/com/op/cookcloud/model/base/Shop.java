@@ -18,6 +18,6 @@ public @Data class Shop extends EntityWithId  {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shoplist", nullable = false)
+    @JoinColumn(name = "shoplist", nullable = true)
     private ShopList shoplist;
 }
