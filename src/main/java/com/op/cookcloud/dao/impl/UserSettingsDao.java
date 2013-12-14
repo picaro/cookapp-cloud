@@ -1,24 +1,17 @@
 package com.op.cookcloud.dao.impl;
 
-import com.op.cookcloud.model.base.Person;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
+import com.op.cookcloud.model.base.UserSettings;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public class UserSettingsDao extends AbstractDaoImpl<Person, String> {
+public class UserSettingsDao extends AbstractDaoImpl<UserSettings, Integer> {
 
     protected UserSettingsDao() {
-        super(Person.class);
+        super(UserSettings.class);
     }
 
-    public void saveUser(Person user) {
-        saveOrUpdate(user);
+    public void save(UserSettings userSettings) {
+        saveOrUpdate(userSettings);
     }
 
-    public List<Person> findUsers(String userName) {
-        return findByCriteria(Restrictions.like("firstName", userName, MatchMode.START));
-    }
 }
