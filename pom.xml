@@ -398,7 +398,8 @@
                     <password>${jelastic.password}</password>
                     <context>/</context>
                     <environment>cookcloud</environment>
-                    <api_hoster>jelastic.neohost.com</api_hoster>
+                    <comment>fill</comment>
+                    <api_hoster>app.jelastic.neohost.net</api_hoster>
                 </configuration>
             </plugin>
 
