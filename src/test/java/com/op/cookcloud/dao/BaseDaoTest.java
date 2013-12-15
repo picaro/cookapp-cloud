@@ -61,7 +61,7 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
     public ShopList createShopList() {
         Person person = createPerson();
         ShopList shopList = new ShopList();
-        shopList.setNote("aaa");
+        shopList.setNote("test");
         shopList.setPerson(person);
         shopListDao.save(shopList);
         return shopList;

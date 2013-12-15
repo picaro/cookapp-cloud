@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -18,6 +19,16 @@ import static junit.framework.Assert.assertTrue;
 public class ShopListDaoTest extends BaseDaoTest{
 
 
+    public void testRead() {
+        ShopList shopList = createShopList();
+        List<ShopList> testShopList = shopListDao.findByNote("test");
+        assertNotNull(testShopList);
+        assertTrue(testShopList.size() > 0);
+        ShopList newShop = testShopList.get(0);
+        assertNotNull(newShop);
+        shopListDao.delete(shopList);
+
+    }
 
     @Test
     public void testCreateDelete() throws Exception {
@@ -29,12 +40,15 @@ public class ShopListDaoTest extends BaseDaoTest{
     }
 
 
-
     @Test
     public void testUpdate() throws Exception {
-        createShopList();
-        List shopListL = shopListDao.findByNote("aaa");
-        assertTrue(shopListL.size() > 0);
+        ShopList shopList = createShopList();
+        List<ShopList> testShopList = shopListDao.findByNote("test");
+        assertTrue(testShopList.size() > 0);
+        ShopList newShop = testShopList.get(0);
+        assertNotNull(newShop);
+        shopListDao.saveOrUpdate(newShop);
+        shopListDao.delete(shopList);
 
     }
 
