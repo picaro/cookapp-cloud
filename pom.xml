@@ -351,7 +351,7 @@
                 <version>2.4</version>
                 <configuration>
                     <check>
-                        <haltOnFailure>true</haltOnFailure><!-- optional -->
+                        <haltOnFailure>false</haltOnFailure><!-- optional -->
                         <!-- Per-class thresholds -->
                         <!-- Project-wide thresholds -->
                         <totalLineRate>8</totalLineRate>
