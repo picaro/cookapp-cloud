@@ -69,7 +69,7 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
 
     public Shop createShop() {
         Shop shop = new Shop();
-        shop.setName("aaa");
+        shop.setName("testShop");
         shopDao.save(shop);
         return shop;
     }
