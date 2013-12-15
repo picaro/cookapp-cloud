@@ -5,6 +5,7 @@ import com.op.cookcloud.dao.impl.ProductDao;
 import com.op.cookcloud.dao.impl.ShopDao;
 import com.op.cookcloud.dao.impl.ShopListDao;
 import com.op.cookcloud.model.base.Person;
+import com.op.cookcloud.model.base.Product;
 import com.op.cookcloud.model.base.Shop;
 import com.op.cookcloud.model.base.ShopList;
 import org.apache.log4j.Logger;
@@ -65,9 +66,19 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
 
     public Shop createShop() {
         Shop shop = new Shop();
-
         shop.setName("aaa");
         shopDao.save(shop);
         return shop;
     }
+
+    public Product createProduct() {
+        Product product = new Product();
+        product.setName("лезвия");
+        product.setId(1);
+        product.setShoplist(createShopList());
+        productDao.saveOrUpdate(product);
+        return product;
+    }
+
+
 }
