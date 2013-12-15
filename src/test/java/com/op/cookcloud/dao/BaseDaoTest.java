@@ -1,6 +1,7 @@
 package com.op.cookcloud.dao;
 
 import com.op.cookcloud.dao.impl.PersonDao;
+import com.op.cookcloud.dao.impl.ProductDao;
 import com.op.cookcloud.dao.impl.ShopDao;
 import com.op.cookcloud.dao.impl.ShopListDao;
 import com.op.cookcloud.model.base.Person;
@@ -22,8 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Time: 22:27
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-        "classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
+@ContextConfiguration(locations = {"classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
 @TransactionConfiguration
 @Transactional
 public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
@@ -34,6 +34,9 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
     protected ShopListDao shopListDao;
 
     @Autowired
+    protected ProductDao productDao;
+
+    @Autowired
     protected ShopDao shopDao;
 
     @Autowired
@@ -42,8 +45,10 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
     public Person createPerson(){
         LOG.debug("createPerson");
         Person person = new Person();
-        person.setFirstName("aaa");
-        person.setLastName("aaa");
+        person.setFirstName("Alex");
+        person.setLastName("Ivanov");
+        person.setEmail("TestEmail@gmail.com");
+        person.setGender("M");
         personDao.saveUser(person);
         LOG.debug(person.getId());
         return person;
