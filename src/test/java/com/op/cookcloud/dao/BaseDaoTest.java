@@ -1,10 +1,7 @@
 package com.op.cookcloud.dao;
 
 import com.op.cookcloud.dao.impl.*;
-import com.op.cookcloud.model.base.Person;
-import com.op.cookcloud.model.base.Product;
-import com.op.cookcloud.model.base.Shop;
-import com.op.cookcloud.model.base.ShopList;
+import com.op.cookcloud.model.base.*;
 import org.apache.log4j.Logger;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +43,7 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
     @Autowired
     protected PersonDao personDao;
 
-    public Person createPerson(){
+    public Person createPerson() {
         LOG.debug("createPerson");
         Person person = new Person();
         person.setFirstName("Alex");
@@ -79,8 +76,17 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
         product.setName("лезвия");
         product.setId(1);
         product.setShoplist(createShopList());
-        productDao.saveOrUpdate(product);
+        productDao.save(product);
         return product;
+    }
+
+    public Circle createCircle() {
+        Circle circle = new Circle();
+        circle.setName("семья");
+        circle.setNote("любим готовить");
+        circle.setId(1);
+        circleDao.save(circle);
+        return circle;
     }
 
 

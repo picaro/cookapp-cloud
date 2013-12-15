@@ -14,8 +14,8 @@ public class ProductDao extends AbstractDaoImpl<Product, Integer> {
         super(Product.class);
     }
 
-    public void saveUser(Product user) {
-        saveOrUpdate(user);
+    public void save(Product product) {
+        saveOrUpdate(product);
     }
 
     public List<Product> findUsers(String userName) {

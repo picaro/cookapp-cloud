@@ -1,12 +1,10 @@
 package com.op.cookcloud.dao;
 
-import com.op.cookcloud.dao.impl.CircleDao;
-import com.op.cookcloud.dao.impl.UserSettingsDao;
 import com.op.cookcloud.model.base.Circle;
-import com.op.cookcloud.model.base.UserSettings;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.mongodb.util.MyAsserts.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -17,17 +15,38 @@ import static junit.framework.Assert.assertTrue;
  * To change this template use File | Settings | File Templates.
  */
 
-public class CircleDaoTest extends BaseDaoTest{
+public class CircleDaoTest extends BaseDaoTest {
 
+    @Test
+    public void testRead() {
+        Circle circle = createCircle();
+        Circle testCircle = circleDao.findById(1);
+        assertNotNull(testCircle);
+        assertEquals(1, testCircle.getId());
+        assertEquals("семья", testCircle.getName());
+        assertEquals("любим готовить", testCircle.getNote());
+        circleDao.delete(circle);
+    }
+
+    @Test
+    public void testUpdate() {
+        Circle circle = createCircle();
+        circle.setName("тестовая семья");
+        circleDao.saveOrUpdate(circle);
+        Circle testCircle = circleDao.findById(1);
+        assertNotNull(testCircle);
+        assertEquals("тестовая семья", testCircle.getName());
+        circleDao.delete(circle);
+
+    }
 
     @Test
     public void testCreateDelete() throws Exception {
         Circle userSettings = new Circle();
-        //userSettings. setPerson(createPerson());
         circleDao.save(userSettings);
-
         assertTrue(circleDao.findAll().size() == 1);
         Circle settingsNew = circleDao.findById(userSettings.getId());
+        assertNotNull(settingsNew);
         circleDao.delete(settingsNew);
         assertTrue(circleDao.findAll().size() == 0);
     }
