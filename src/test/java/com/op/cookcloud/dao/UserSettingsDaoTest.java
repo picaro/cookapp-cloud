@@ -19,9 +19,6 @@ import static junit.framework.Assert.assertTrue;
 
 public class UserSettingsDaoTest extends BaseDaoTest{
 
-    @Autowired
-    protected UserSettingsDao userSettingsDao;
-
     @Test
     public void testCreateDelete() throws Exception {
         UserSettings userSettings = new UserSettings();
