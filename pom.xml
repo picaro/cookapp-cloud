@@ -11,26 +11,26 @@
 
     <repositories>
         <repository>
-            <id>maven-us.nuxeo.org</id>
-            <name>Nuexo</name>
-            <url>https://maven-us.nuxeo.org/nexus/content/groups/public/</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <id>spring-releases</id>
-            <name>Spring Maven RELEASE Repository</name>
-            <url>http://repo.springsource.org/libs-release-s3</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
             <id>maven2-repository.java.net</id>
             <name>Java.net Repository for Maven</name>
             <url>http://download.java.net/maven/2/</url>
             <layout>default</layout>
         </repository>
+        <repository>
+            <id>maven-us.nuxeo.org</id>
+            <name>Nuexo</name>
+            <url>https://maven-us.nuxeo.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
+        </repository>
     </repositories>
 
     <pluginRepositories>
+        <pluginRepository>
+            <id>maven2-repository.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/2/</url>
+            <layout>default</layout>
+        </pluginRepository>
         <pluginRepository>
             <id>sonatype-oss-public</id>
             <url>https://oss.sonatype.org/content/groups/public</url>
@@ -351,11 +351,11 @@
                 <version>2.4</version>
                 <configuration>
                     <check>
-                        <haltOnFailure>false</haltOnFailure><!-- optional -->
+                        <haltOnFailure>true</haltOnFailure><!-- optional -->
                         <!-- Per-class thresholds -->
                         <!-- Project-wide thresholds -->
-                        <totalLineRate>8</totalLineRate>
-                        <totalBranchRate>0</totalBranchRate>
+                        <totalLineRate>25</totalLineRate>
+                        <totalBranchRate>5</totalBranchRate>
                     </check>
                 </configuration>
                 <executions>
