@@ -1,6 +1,7 @@
 package com.op.cookcloud.controller;
 
 import com.op.cookcloud.dao.BaseDaoTest;
+import com.op.cookcloud.model.base.Person;
 import com.op.cookcloud.model.base.Product;
 import org.apache.log4j.Logger;
 import org.junit.Before;
@@ -39,8 +40,9 @@ public class ProductControllerTest extends BaseDaoTest{
 
     @Test
     public void getProductsTest(){
-        Product product1 = productController.read(1);
-        assertEquals(product1.getName(), "aaa");
+        List<Product> productL = productDao.findAll();
+        Product product1 = productController.read(productL.get(0).getId());
+       assertEquals(product1.getName(), "aaa");
         LOG.debug(product1.getId());
     }
 
