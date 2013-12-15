@@ -18,7 +18,7 @@ import static junit.framework.Assert.assertTrue;
 
 public class ShopListDaoTest extends BaseDaoTest{
 
-
+     @Test
     public void testRead() {
         ShopList shopList = createShopList();
         List<ShopList> testShopList = shopListDao.findByNote("test");
