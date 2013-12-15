@@ -19,8 +19,6 @@ import static junit.framework.Assert.assertTrue;
 
 public class CircleDaoTest extends BaseDaoTest{
 
-    @Autowired
-    protected CircleDao circleDao;
 
     @Test
     public void testCreateDelete() throws Exception {

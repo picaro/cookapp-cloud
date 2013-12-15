@@ -1,9 +1,6 @@
 package com.op.cookcloud.dao;
 
-import com.op.cookcloud.dao.impl.PersonDao;
-import com.op.cookcloud.dao.impl.ProductDao;
-import com.op.cookcloud.dao.impl.ShopDao;
-import com.op.cookcloud.dao.impl.ShopListDao;
+import com.op.cookcloud.dao.impl.*;
 import com.op.cookcloud.model.base.Person;
 import com.op.cookcloud.model.base.Product;
 import com.op.cookcloud.model.base.Shop;
@@ -36,6 +33,12 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
 
     @Autowired
     protected ProductDao productDao;
+
+    @Autowired
+    protected CircleDao circleDao;
+
+    @Autowired
+    protected UserSettingsDao userSettingsDao;
 
     @Autowired
     protected ShopDao shopDao;
