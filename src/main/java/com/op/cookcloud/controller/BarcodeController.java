@@ -20,9 +20,9 @@ import javax.ws.rs.core.Response;
 @Service("userService")
 @Transactional(readOnly = true)
 @Path("/barcode")
-public class RestController {
+public class BarcodeController {
 
-    private static final Logger LOG = Logger.getLogger(RestController.class);
+    private static final Logger LOG = Logger.getLogger(BarcodeController.class);
 
     @Autowired
     private org.codehaus.jackson.map.ObjectMapper mapper;

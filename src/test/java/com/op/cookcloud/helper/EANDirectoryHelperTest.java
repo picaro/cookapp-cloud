@@ -1,22 +1,13 @@
 package com.op.cookcloud.helper;
 
-import com.op.cookcloud.AppConstants;
-import com.op.cookcloud.controller.RestController;
-import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -43,12 +34,12 @@ public class EANDirectoryHelperTest {
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void getProduct() {
         System.out.println("getProduct");
         Product product = ruHelper.lookUpProduct("5410306866760");
         assertNotNull(product);
-        //assertEquals("ACTIFF Javel Ср-во д/кухни спрей 500мл", product.getDescription());
+        assertEquals("ACTIFF Javel Ср-во д/кухни спрей 500мл", product.getDescription());
     }
 
 }

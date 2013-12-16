@@ -34,7 +34,7 @@ public class CircleControllerTest extends BaseDaoTest{
         List<Circle> circleL = circleDao.findAll();
         assertEquals(circleL.size(),1);
 
-        Circle circle1 = circleL.get(0);
+        Circle circle1 = circleController.read(circleL.get(0).getId());
         assertEquals(circle1.getName(), "aaa");
         LOG.debug(circle1.getId());
     }

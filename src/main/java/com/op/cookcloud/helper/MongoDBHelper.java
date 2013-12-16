@@ -6,7 +6,6 @@ import com.mongodb.*;
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
-import com.op.cookcloud.model.Settings;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
