@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 
 @Service("personService")
@@ -23,6 +24,14 @@ public class PersonController {
 
     @Autowired
     private PersonDao personDao;
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
+    @Path("/")
+    public List<Person> readAll() {
+        List<Person> personList = personDao.findAll();
+        return personList;
+    }
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})

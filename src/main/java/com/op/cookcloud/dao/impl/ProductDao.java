@@ -18,7 +18,4 @@ public class ProductDao extends AbstractDaoImpl<Product, Integer> {
         saveOrUpdate(product);
     }
 
-    public List<Product> findUsers(String userName) {
-        return findByCriteria(Restrictions.like("firstName", userName, MatchMode.START));
-    }
 }

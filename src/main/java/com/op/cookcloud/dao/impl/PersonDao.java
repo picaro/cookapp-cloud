@@ -21,7 +21,4 @@ public class PersonDao extends AbstractDaoImpl<Person, Integer> {
         saveOrUpdate(user);
     }
 
-    public List<Person> findUsers(String userName) {
-        return findByCriteria(Restrictions.like("firstName", userName, MatchMode.START));
-    }
 }

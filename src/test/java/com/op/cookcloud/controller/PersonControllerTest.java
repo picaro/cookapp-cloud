@@ -45,6 +45,15 @@ public class PersonControllerTest extends BaseDaoTest{
     }
 
     @Test
+    public void getAllPersonsTest(){
+        List<Person> personL = personController.readAll();
+
+        Person person1 = personL.get(0);
+        assertEquals(person1.getFirstName(), "aaa");
+        LOG.debug(person1.getId());
+    }
+
+    @Test
     public void deletePersonsTest(){
         List<Person> personL = personDao.findAll();
         assertEquals(personL.size(),1);
