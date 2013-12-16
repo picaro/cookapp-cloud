@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @Service("personService")
-@Transactional(readOnly = true)
+@Transactional
 @Path("/person")
 public class PersonController {
 

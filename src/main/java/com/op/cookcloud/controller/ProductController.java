@@ -2,6 +2,7 @@ package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ProductDao;
+import com.op.cookcloud.model.base.Person;
 import com.op.cookcloud.model.base.Product;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +12,26 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 
 @Service("productService")
-@Transactional(readOnly = true)
+@Transactional
 @Path("/product")
 public class ProductController {
 
     private static final Logger LOG = Logger.getLogger(ProductController.class);
     @Autowired
     private ProductDao productDao;
+
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
+    @Path("/")
+    public List<Product> readAll() {
+        List<Product> productList = productDao.findAll();
+        return productList;
+    }
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})

@@ -3,6 +3,7 @@ package com.op.cookcloud.controller;
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.CircleDao;
 import com.op.cookcloud.model.base.Circle;
+import com.op.cookcloud.model.base.ShopList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 
 @Service("circleService")
-@Transactional(readOnly = true)
+@Transactional
 @Path("/circle")
 public class CircleController {
 
@@ -22,6 +24,14 @@ public class CircleController {
 
     @Autowired
     private CircleDao circleDao;
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
+    @Path("/")
+    public List<Circle> readAll() {
+        List<Circle> circleList = circleDao.findAll();
+        return circleList;
+    }
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})

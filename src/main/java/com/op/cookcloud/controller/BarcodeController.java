@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 
 
 @Service("userService")
-@Transactional(readOnly = true)
+@Transactional
 @Path("/barcode")
 public class BarcodeController {
 

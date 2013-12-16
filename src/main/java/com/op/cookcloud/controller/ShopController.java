@@ -2,6 +2,7 @@ package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ShopDao;
+import com.op.cookcloud.model.base.Product;
 import com.op.cookcloud.model.base.Shop;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 
 @Service("shopService")
-@Transactional(readOnly = true)
+@Transactional
 @Path("/shop")
 public class ShopController {
 
@@ -22,6 +24,14 @@ public class ShopController {
 
     @Autowired
     private ShopDao shopDao;
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
+    @Path("/")
+    public List<Shop> readAll() {
+        List<Shop> shopList = shopDao.findAll();
+        return shopList;
+    }
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
