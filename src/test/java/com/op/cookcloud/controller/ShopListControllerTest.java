@@ -42,7 +42,7 @@ public class ShopListControllerTest extends BaseDaoTest{
         List<ShopList> shopListL = shopListDao.findAll();
         assertEquals(shopListL.size(),1);
 
-        ShopList shopList1 = shopListL.get(0);
+        ShopList shopList1 = shopListController.read(shopListL.get(0).getId());
         assertEquals(shopList1.getNote(), "aaa");
         LOG.debug(shopList1.getId());
     }
