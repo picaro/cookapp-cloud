@@ -34,7 +34,7 @@ public class EANDirectoryHelperTest {
     }
 
     @Test
-    //@Ignore
+    @Ignore
     public void getProduct() {
         System.out.println("getProduct");
         Product product = ruHelper.lookUpProduct("5410306866760");
