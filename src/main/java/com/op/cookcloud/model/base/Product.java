@@ -15,6 +15,8 @@ public @Data class Product extends EntityWithId  {
 
     private String name;
 
+    private Integer shoplistid;
+
     @Transient
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
