@@ -11,13 +11,13 @@ import javax.persistence.*;
 @Table(name = "shop")
 public @Data class Shop extends EntityWithId  {
 
-
     private String name;
 
     private String coordinates;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shoplist", nullable = true)
-    private ShopList shoplist;
+    @JoinColumn(name = "person", nullable = false)
+    private Person person;
+
 }

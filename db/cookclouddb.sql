@@ -121,13 +121,11 @@ INSERT INTO `shop` (`id`, `name`, `coordinates`, `shoplist`) VALUES
 
 CREATE TABLE IF NOT EXISTS `shoplist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `circleid` int(11) NOT NULL,
   `date_created` datetime NOT NULL,
   `date_kill` datetime NOT NULL,
   `note` text,
   `userid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `circleid` (`circleid`),
   KEY `userid` (`userid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
