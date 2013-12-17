@@ -26,4 +26,8 @@ public @Data class Circle extends EntityWithId  {
     @ManyToMany(mappedBy="circles")
     private Set<Person> persons = new HashSet<Person>();
 
+    @Override
+    public String toString(){
+        return name;
+    }
 }

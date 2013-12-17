@@ -42,5 +42,9 @@ class ShopList extends EntityWithId {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplist")
     private List<Shop> shops;
 
+    @Override
+    public String toString(){
+        return note;
+    }
 
 }

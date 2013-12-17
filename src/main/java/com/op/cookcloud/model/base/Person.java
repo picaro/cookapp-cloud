@@ -40,9 +40,14 @@ public @Data class Person extends EntityWithId {
     private List<UserSettings> settingsList;
 
     @JsonIgnore
-    @ManyToMany(cascade = {CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY,  cascade = {CascadeType.REFRESH})
     @JoinTable(name = "user2circle",
             joinColumns = {@JoinColumn(name = "userid")},
             inverseJoinColumns = {@JoinColumn(name = "circleid")})
     private Set<Circle> circles = new HashSet<Circle>();
+
+    @Override
+    public String toString(){
+                 return firstName;
+    }
 }

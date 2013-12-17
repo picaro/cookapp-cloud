@@ -20,4 +20,9 @@ public @Data class Shop extends EntityWithId  {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shoplist", nullable = true)
     private ShopList shoplist;
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }

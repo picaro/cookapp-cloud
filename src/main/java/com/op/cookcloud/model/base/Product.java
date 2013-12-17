@@ -11,13 +11,17 @@ import javax.persistence.*;
 @Table(name = "product")
 public @Data class Product extends EntityWithId  {
 
+    private String note;
+
+    private String name;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shoplistid", nullable = false)
     private ShopList shoplist;
 
-   private String note;
-
-    private String name;
-
+    @Override
+    public String toString(){
+        return note;
+    }
 }
