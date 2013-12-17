@@ -39,8 +39,12 @@ class ShopList extends EntityWithId {
     private List<Product> productList;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplist")
-    private List<Shop> shops;
+    @ManyToMany(cascade = {CascadeType.REFRESH})
+    @JoinTable(name = "shoplist2shop",
+            joinColumns = {@JoinColumn(name = "shoplistid")},
+            inverseJoinColumns = {@JoinColumn(name = "shopid")})
+    private Set<Shop> shops = new HashSet<Shop>();
+
 
     @Override
     public String toString(){
