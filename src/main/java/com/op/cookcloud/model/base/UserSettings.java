@@ -11,7 +11,7 @@ import javax.persistence.*;
 public @Data class UserSettings  extends EntityWithId {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userid", nullable = false)
+    @JoinColumn(name = "userid", nullable = true)
     private Person person;
 
 

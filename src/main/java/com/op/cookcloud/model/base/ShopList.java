@@ -32,7 +32,7 @@ class ShopList extends EntityWithId {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userid", nullable = false)
+    @JoinColumn(name = "userid", nullable = true)
     private Person person;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplist")
