@@ -7,7 +7,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "person")
@@ -36,4 +38,16 @@ public @Data class Person extends EntityWithId {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
     private List<UserSettings> settingsList;
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY,  cascade = {CascadeType.REFRESH})
+    @JoinTable(name = "user2circle",
+            joinColumns = {@JoinColumn(name = "userid")},
+            inverseJoinColumns = {@JoinColumn(name = "circleid")})
+    private Set<Circle> circles = new HashSet<Circle>();
+
+    @Override
+    public String toString(){
+                 return firstName;
+    }
 }

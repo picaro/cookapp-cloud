@@ -20,4 +20,9 @@ public @Data class Shop extends EntityWithId  {
     @JoinColumn(name = "person", nullable = false)
     private Person person;
 
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }
