@@ -17,12 +17,16 @@ public @Data class Shop extends EntityWithId  {
 
     private String coordinates;
 
+    private Integer userid;
+
     @JsonIgnore
+    @Transient
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person", nullable = true)
     private Person person;
 
     @JsonIgnore
+    @Transient
     @ManyToMany(mappedBy="shops")
     private Set<ShopList> shopLists = new HashSet<ShopList>();
 

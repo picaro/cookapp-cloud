@@ -31,14 +31,17 @@ public @Data class Person extends EntityWithId {
 
     private Date dob;
 
+    @Transient
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
     private List<ShopList> shopLists;
 
+    @Transient
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
     private List<UserSettings> settingsList;
 
+    @Transient
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,  cascade = {CascadeType.REFRESH})
     @JoinTable(name = "user2circle",

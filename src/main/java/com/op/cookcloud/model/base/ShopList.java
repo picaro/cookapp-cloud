@@ -23,6 +23,7 @@ class ShopList extends EntityWithId {
 
     private String coordinates;
 
+    @Transient
     @JsonIgnore
     @ManyToMany(cascade = {CascadeType.REFRESH})
     @JoinTable(name = "slist2circle",
@@ -30,14 +31,17 @@ class ShopList extends EntityWithId {
             inverseJoinColumns = {@JoinColumn(name = "circleid")})
     private Set<Circle> circles = new HashSet<Circle>();
 
+    @Transient
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", nullable = true)
     private Person person;
 
+    @Transient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplist")
     private List<Product> productList;
 
+    @Transient
     @JsonIgnore
     @ManyToMany(cascade = {CascadeType.REFRESH})
     @JoinTable(name = "shoplist2shop",

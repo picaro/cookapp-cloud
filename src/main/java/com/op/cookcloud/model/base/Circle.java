@@ -18,10 +18,12 @@ public @Data class Circle extends EntityWithId  {
 
     private String note;
 
+    @Transient
     @JsonIgnore
     @ManyToMany(mappedBy="circles")
     private Set<ShopList> shopLists = new HashSet<ShopList>();
 
+    @Transient
     @JsonIgnore
     @ManyToMany(mappedBy="circles")
     private Set<Person> persons = new HashSet<Person>();
