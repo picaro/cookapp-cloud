@@ -133,8 +133,8 @@ CREATE TABLE IF NOT EXISTS `shoplist` (
 -- Дамп данных таблицы `shoplist`
 --
 
-INSERT INTO `shoplist` (`id`, `circleid`, `date_created`, `date_kill`, `note`, `userid`) VALUES
-(1, 1, '2013-11-25 00:00:00', '2013-11-30 00:00:00', 'список 1', 1);
+INSERT INTO `shoplist` (`id`,  `date_created`, `date_kill`, `note`, `userid`) VALUES
+(1, '2013-11-25 00:00:00', '2013-11-30 00:00:00', 'список 1', 1);
 
 -- --------------------------------------------------------
 
@@ -185,7 +185,6 @@ ALTER TABLE `product`
 -- Ограничения внешнего ключа таблицы `shoplist`
 --
 ALTER TABLE `shoplist`
-  ADD CONSTRAINT `shoplist_ibfk_1` FOREIGN KEY (`circleid`) REFERENCES `circle` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `shoplist_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `person` (`id`);
 
 --

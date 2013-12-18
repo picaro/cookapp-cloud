@@ -29,8 +29,8 @@ public class ShopController {
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     @Path("/")
     public List<Shop> readAll() {
-        List<Shop> shopList = shopDao.findAll();
-        return shopList;
+        List<Shop> shops = shopDao.findAll();
+        return shops;
     }
 
     @GET
