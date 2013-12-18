@@ -17,10 +17,10 @@ public @Data class Product extends EntityWithId  {
 
     private Integer shoplistid;
 
-    @Transient
+    //Transient
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shoplistid", nullable = false)
+    @JoinColumn(name = "shoplistid", updatable = false, insertable = false, nullable = false)
     private ShopList shoplist;
 
     @Override

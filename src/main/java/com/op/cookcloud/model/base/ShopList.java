@@ -39,7 +39,7 @@ class ShopList extends EntityWithId {
     @JoinColumn(name = "userid", nullable = true)
     private Person person;
 
-    @Transient
+    //Transient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoplist")
     private List<Product> productList;
 
