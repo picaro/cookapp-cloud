@@ -18,6 +18,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class FacturalHelperTest {
 
+    @Ignore
     @Test
     public void getProduct(){
         FacturalHelper facturalHelper = new FacturalHelper();
