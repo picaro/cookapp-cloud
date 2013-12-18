@@ -15,8 +15,8 @@ login root passw 123456
 setup env vars. ENUNCIATE_HOME
 4 download mongodb.
 start mongodb
-
-change config.xml inside maven dir -
+5 Download and install Maven http://maven.apache.org/download.cgi
+change settings.xml inside maven dir -
 add 
 
 <profile>
