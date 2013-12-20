@@ -23,8 +23,6 @@ class ShopList extends EntityWithId {
 
     private String coordinates;
 
-    private Integer circleid;
-
     @Transient
     @JsonIgnore
     @ManyToMany(cascade = {CascadeType.REFRESH})
