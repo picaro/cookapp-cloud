@@ -13,12 +13,16 @@
 		<intercept-url pattern="/welcome*" access="ROLE_USER" />
 	</http>
 
-	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="root" password="123456" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
-	</authentication-manager>
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query=
+                                       "select email as username, password, enabled from person where email = ?"
+                               authorities-by-username-query=
+                                       "select p.email as username, ur.role_name as authority from person p, user_role ur where p.id = ur.user_id and p.email = ?"
+            />
+            <password-encoder hash="md5"/>
+        </authentication-provider>
+    </authentication-manager>
 
 </beans:beans>
