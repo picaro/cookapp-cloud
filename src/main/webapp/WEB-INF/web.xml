@@ -9,18 +9,6 @@
         <param-value>classpath:applicationContext.xml, classpath:hibernateContext.xml</param-value>
    </context-param>
 
-    <filter>
-        <filter-name>sitemesh</filter-name>
-        <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
-    </filter>
-
-    <!-- Filter Mappings -->
-    <filter-mapping>
-        <filter-name>sitemesh</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
 
     <!-- Default Page Support -->
     <welcome-file-list>
