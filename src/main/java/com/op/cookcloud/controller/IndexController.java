@@ -19,14 +19,14 @@ public class IndexController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
-        return new ModelAndView("index", "signupForm", new SignupForm());
+        return new ModelAndView("login", "signupForm", new SignupForm());
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(Model model, SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
-            return "index";
+            return "login";
         }
 
         return "show";
