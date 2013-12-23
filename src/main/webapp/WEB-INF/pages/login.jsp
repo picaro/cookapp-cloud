@@ -41,6 +41,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">Sign out</a></li>
                         <li><a href="#">Registration</a></li>
+                        <li><a  href="admin">Admin</a></li>
                     </ul>
                 </li>
             </ul>
