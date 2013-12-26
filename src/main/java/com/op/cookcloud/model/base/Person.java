@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -26,6 +27,9 @@ public @Data class Person extends EntityWithId {
     private String phone;
 
     private String gender;
+
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean crossed;
 
     private Date date_registration;
 

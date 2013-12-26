@@ -14,12 +14,10 @@ public class EntityWithId {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@JsonIgnore
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@JsonIgnore
 	public int getId() {
 		return id;
 	}
