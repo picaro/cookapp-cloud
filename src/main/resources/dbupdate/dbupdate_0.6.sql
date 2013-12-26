@@ -1,0 +1,2 @@
+ALTER TABLE person DROP COLUMN crossed;
+ALTER TABLE product ADD COLUMN crossed TINYINT(1) DEFAULT 0;

@@ -28,12 +28,12 @@ public @Data class Person extends EntityWithId {
 
     private String gender;
 
-    @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean crossed;
-
     private Date date_registration;
 
     private Date dob;
+
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean enabled;
 
     @Transient
     @JsonIgnore

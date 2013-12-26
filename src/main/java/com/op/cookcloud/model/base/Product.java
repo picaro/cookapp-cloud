@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -16,6 +17,9 @@ public @Data class Product extends EntityWithId  {
     private String name;
 
     private Integer shoplistid;
+
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean crossed;
 
     //Transient
     @JsonIgnore
