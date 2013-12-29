@@ -29,61 +29,38 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">ABOUT US</a></li>
-                <li><a href="#">CONTACT US</a></li>
-            </ul>
-
             <form class="navbar-form navbar-right" role="search">
-                <a href="#"  class="btn btn-primary">Sign up</a>
-                <a href="/login"  class="btn btn-success">Sign in</a>
+                <a href="#" class="btn btn-primary">Sign up</a>
+                <a href="/login" class="btn btn-success">Sign in</a>
             </form>
         </div>
 
     </div>
 </nav>
 
-
-<div class="container">
-
+<div class="well signInPanel">
     <div class="row">
-        <div class="panel panel-default loginImage">
-            <form class="form-horizontal" role="form" style="margin: 56px 0 0 140px;">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-
-                    <div class="col-sm-4">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-
-                    <div class="col-sm-4">
-                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-4">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Remember me
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Sign in</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <form role="form" class="login_form">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control " id="exampleInputEmail1" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Check me out
+                </label>
+            </div>
+            <button type="submit" class="btn btn-success col-md-5">Sign In</button>
+            <a href="#" class="btn btn-Link col-md-5">(forgot password)</a>
+        </form>
     </div>
 </div>
 
 <script>
-    $('.dropdown-toggle').dropdown()
 </script>
 </body>
 </html>
