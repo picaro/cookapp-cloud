@@ -9,8 +9,6 @@
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/bootstrap/3.0.2/css/bootstrap.min.css" media="all"/>
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/dropdown.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse" role="navigation">
@@ -35,7 +33,6 @@
             </ul>
 
             <form class="navbar-form navbar-right" role="search">
-                <a href="#"  class="btn btn-primary">Sign up</a>
                 <a href="/login"  class="btn btn-success">Sign in</a>
             </form>
         </div>
@@ -43,47 +40,18 @@
     </div>
 </nav>
 
-
 <div class="container">
-
-    <div class="row">
-        <div class="panel panel-default loginImage">
-            <form class="form-horizontal" role="form" style="margin: 56px 0 0 140px;">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-
-                    <div class="col-sm-4">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-
-                    <div class="col-sm-4">
-                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-4">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Remember me
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Sign in</button>
-                    </div>
-                </div>
-            </form>
+    <div class="jumbotron logo_background">
+        <div class="container">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    $('.dropdown-toggle').dropdown()
 </script>
 </body>
 </html>

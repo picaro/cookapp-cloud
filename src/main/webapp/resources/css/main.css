@@ -2,3 +2,9 @@
     height: 300px;
     background-color: #e2dbdb
 }
+
+.logo_background {
+    background: url("../img/food.jpg") repeat-y !important;
+    height: 420px;
+}
+
