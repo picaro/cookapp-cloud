@@ -8,9 +8,6 @@
     <link rel="stylesheet" type="text/css" href=${pageContext.request.contextPath}/resources/css/main.css>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/bootstrap/3.0.2/css/bootstrap.min.css" media="all"/>
-    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/dropdown.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse" role="navigation">
@@ -24,14 +21,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">HOME</a>
+            <a class="navbar-brand" href="/">HOME</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-right" role="search">
-                <a href="#" class="btn btn-primary">Sign up</a>
-                <a href="/login" class="btn btn-success">Sign in</a>
+                <a href="${pageContext.request.contextPath}/newUser" class="btn btn-primary">Sign up</a>
+                <a href="${pageContext.request.contextPath}/login" class="btn btn-success">Sign in</a>
             </form>
         </div>
 
@@ -51,7 +48,7 @@
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox"> Check me out
+                    <input type="checkbox"> Remember me
                 </label>
             </div>
             <button type="submit" class="btn btn-success col-md-5">Sign In</button>
