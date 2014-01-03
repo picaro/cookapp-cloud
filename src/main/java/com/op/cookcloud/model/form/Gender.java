@@ -10,20 +10,20 @@ import java.util.List;
  * Time: 20:50
  * To change this template use File | Settings | File Templates.
  */
-public enum PersonGender {
+public enum Gender {
 
     MALE("M"),
     FEMALE("F");
 
     private String value;
 
-    private PersonGender(String value) {
+    private Gender(String value) {
         this.value = value;
     }
 
     public static List<String> getValues() {
         List<String> result = new ArrayList<String>();
-        for (PersonGender value : PersonGender.values()) {
+        for (Gender value : Gender.values()) {
             result.add(value.value);
         }
         return result;

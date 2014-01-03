@@ -1,12 +1,15 @@
 package com.op.cookcloud.model.base;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -14,23 +17,26 @@ import java.util.Set;
 
 @Entity
 @Table(name = "person")
-public @Data class Person extends EntityWithId {
+public
+@Data
+class Person extends EntityWithId {
 
+    @NotEmpty
     private String firstName;
-
+    @NotEmpty
     private String lastName;
-
+    @NotEmpty
+    @Email
     private String email;
-
+    @NotEmpty
     private String password;
-
+    @NotEmpty
     private String phone;
-
+    @NotNull
     private String gender;
+    private Date dob;
 
     private Date date_registration;
-
-    private Date dob;
 
     public String getFirstName() {
         return firstName;
@@ -103,14 +109,14 @@ public @Data class Person extends EntityWithId {
 
     @Transient
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY,  cascade = {CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
     @JoinTable(name = "user2circle",
             joinColumns = {@JoinColumn(name = "userid")},
             inverseJoinColumns = {@JoinColumn(name = "circleid")})
     private Set<Circle> circles = new HashSet<Circle>();
 
     @Override
-    public String toString(){
-                 return firstName;
+    public String toString() {
+        return firstName;
     }
 }

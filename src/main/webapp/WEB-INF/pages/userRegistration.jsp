@@ -39,29 +39,36 @@
             <div class="well">
                 <form:form method="POST" modelAttribute="person">
                     <div class="form-group">
+                        <form:errors path="firstName" cssClass="error"/>
                         <form:input class="form-control" placeholder="First name" path="firstName"/>
-                        <form:errors cssClass="error" path="firstName"/>
+
                     </div>
                     <div class="form-group">
+                        <form:errors path="lastName" cssClass="error"/>
                         <form:input class="form-control" placeholder="Last name" path="lastName"/>
                     </div>
                     <div class="form-group">
-                        <form:input path="dob" type="text"  autocomplete="true"  class="datepicker form-control" placeholder="Birthday day"/>
+                        <form:input path="dob" type="text" class="datepicker form-control" placeholder="Birthday day"/>
                     </div>
                     <div class="form-group">
+                        <form:errors path="email" cssClass="error"/>
                         <form:input type="email" class="form-control" id="email" placeholder="Email" path="email"/>
                     </div>
                     <div class="form-group">
+                        <form:errors path="phone" cssClass="error"/>
                         <form:input type="text" class="form-control" id="phone" placeholder="Phone" path="phone"/>
                     </div>
+
                     <div class="form-group">
+                        <form:errors path="gender" cssClass="error"/>
                         <form:select path="gender" class="form-control">
-                            <form:option value="NONE" label=""/>
+                            <form:option value="NONE" label="-- Select Gender --"/>
                             <form:options items="${gender}"/>
                         </form:select>
                     </div>
 
                     <div class="form-group">
+                        <form:errors path="password" cssClass="error"/>
                         <form:input type="password" class="form-control" id="password" placeholder="Password"
                                     path="password"/>
                     </div>
@@ -75,7 +82,7 @@
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/3.0.2/js/bootstrap.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.js"type="text/javascript" ></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script>
     $('.datepicker').datepicker();
 </script>
