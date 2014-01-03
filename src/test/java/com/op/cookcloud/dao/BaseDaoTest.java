@@ -50,6 +50,8 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
         person.setLastName("Ivanov");
         person.setEmail("TestEmail@gmail.com");
         person.setGender("M");
+        person.setPhone("123456789");
+        person.setPassword("123456");
         personDao.saveUser(person);
         LOG.debug(person.getId());
         return person;
