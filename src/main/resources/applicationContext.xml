@@ -15,4 +15,9 @@
     <bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper"/>
     <import resource="security-context.xml"/>
     <mvc:annotation-driven />
+
+    <bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+        <property name="authenticationEntryPoint" ref="restAuthenticationEntryPoint" />
+    </bean>
+
 </beans>
