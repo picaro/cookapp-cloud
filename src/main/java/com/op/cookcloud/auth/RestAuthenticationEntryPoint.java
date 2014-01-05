@@ -25,6 +25,6 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          HttpServletResponse response,
                          AuthenticationException e) throws IOException, ServletException {
 
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, AppConstants.UNAUTHORIZED);
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "AppConstants.UNAUTHORIZED");
     }
 }

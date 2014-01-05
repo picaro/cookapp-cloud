@@ -35,13 +35,13 @@ public class AuthController {
             throws JSONException, IOException {
 
         JSONObject result = new JSONObject();
-        if (SUCCESS.equalsIgnoreCase(auth)) {
+        if ("SUCCESS".equalsIgnoreCase(auth)) {
             String sessionId = request.getSession().getId();
-            result.put(SESSION_ID, sessionId);
-            result.put(MESSAGE, "Successfully logged in");
-        } else if (FAILURE.equalsIgnoreCase(auth)) {
-            result.put(ERROR_CODE, HttpServletResponse.SC_UNAUTHORIZED);
-            result.put(MESSAGE, AUTHENTICATION_FAILURE);
+            result.put("SESSION_ID", sessionId);
+            result.put("MESSAGE", "Successfully logged in");
+        } else if ("FAILURE".equalsIgnoreCase(auth)) {
+            result.put("ERROR_CODE", HttpServletResponse.SC_UNAUTHORIZED);
+            result.put("MESSAGE", "AUTHENTICATION_FAILURE");
         } else {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Wrong url");
         }
@@ -54,7 +54,7 @@ public class AuthController {
     @Path("/logout")
     public @ResponseBody JSONObject logout() throws JSONException {
         JSONObject result = new JSONObject();
-        result.put(MESSAGE, "Successfully logged out");
+        result.put("MESSAGE", "Successfully logged out");
         return result;
     }
 }

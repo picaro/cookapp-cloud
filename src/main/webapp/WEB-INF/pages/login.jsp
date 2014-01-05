@@ -37,11 +37,11 @@
 
 <div class="well signInPanel">
     <div class="row">
-        <form role="form" class="login_form" >
+        <form role="form" method="POST" class="login_form" >
             <div class="form-group">
                 <form:errors path="email" cssClass="error"/>
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control " id="exampleInputEmail1" placeholder="Enter email" path="email"/>
+                <input type="email" class="form-control " id="exampleInputEmail1" placeholder="Enter email" path="name"/>
             </div>
             <div class="form-group">
                 <form:errors path="password" cssClass="error"/>

@@ -11,7 +11,8 @@
 
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
         <intercept-url pattern="/welcome*" access="ROLE_USER" />
-        <intercept-url pattern="/*" access="isAuthenticated()" />
+        <intercept-url pattern="/rest/*" access="isAuthenticated()" />
+        <intercept-url pattern="/site/*" access="isAuthenticated()" />
 
         <form-login default-target-url="/auth/login?auth=success"
                     authentication-failure-url="/auth/login?auth=failure"
