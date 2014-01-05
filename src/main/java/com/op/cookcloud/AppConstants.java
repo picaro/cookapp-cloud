@@ -39,6 +39,20 @@ public class AppConstants {
     public static final String SIZE = "size";
     public static final String ISSUER_COUNTRY_CODE = "issuerCountryCode";
 
+    public static final String UNAUTHORIZED = "Unauthorized";
+    
+    public static final String AUTHENTICATION_FAILURE = "Authentication Failure";
+
+    public static final String SUCCESS = "success";
+    
+    public static final String FAILURE = "failure";
+    
+    public static final String SESSION_ID = "sessionId";
+    
+    public static final String ERROR_CODE = "errorCode";
+
+    public static final String MESSAGE = "message";
+
     public static String MONGO_LOGIN;
     public static String MONGO_PASSWORD;
     public static String MONGO_URL;
