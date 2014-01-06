@@ -15,3 +15,5 @@ target/
 /*.iws
 
 /atlassian-ide-plugin.xml
+
+/.idea
