@@ -9,17 +9,20 @@
 
 <global-method-security pre-post-annotations="enabled" />
 
-    <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
+    <http use-expressions="true">
         <intercept-url pattern="/welcome*" access="ROLE_USER" />
         <intercept-url pattern="/rest/*" access="isAuthenticated()" />
         <intercept-url pattern="/site/*" access="isAuthenticated()" />
 
-        <form-login default-target-url="/auth/login?auth=success"
-                    authentication-failure-url="/auth/login?auth=failure"
+        <form-login login-processing-url="/auth/login"
+                    default-target-url="/rest/auth/success"
+                    authentication-failure-url="/rest/auth/failure"
                     username-parameter="name"
-                    password-parameter="password"/>
+                    password-parameter="password" />
 
-        <logout logout-success-url="/auth/logout" />
+        <logout invalidate-session="true"
+                delete-cookies="JSESSIONID, SPRING_SECURITY_REMEMBER_ME_COOKIE"
+                logout-success-url="/auth/logout" />
     </http>
 
     <authentication-manager>

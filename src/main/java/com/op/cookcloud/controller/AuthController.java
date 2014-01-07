@@ -3,17 +3,17 @@ package com.op.cookcloud.controller;
 import static com.op.cookcloud.AppConstants.*;
 
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author raspad
@@ -21,40 +21,41 @@ import java.io.IOException;
  */
 @Controller
 @Path("/auth")
-//@RequestMapping("/auth")
 public class AuthController {
 
     @Context private HttpServletRequest request;
 
-    @Context private HttpServletResponse response;
-
-    @POST
+    @GET
     @Produces({MediaType.APPLICATION_JSON + CHARSET_UTF_8})
-    @Path("/login")
-    public @ResponseBody JSONObject login(final @QueryParam(value="auth") String auth)
-            throws JSONException, IOException {
+    @Path("/success")
+    public Map<String, Object> loginSuccess() throws JSONException {
 
-        JSONObject result = new JSONObject();
-        if ("SUCCESS".equalsIgnoreCase(auth)) {
-            String sessionId = request.getSession().getId();
-            result.put("SESSION_ID", sessionId);
-            result.put("MESSAGE", "Successfully logged in");
-        } else if ("FAILURE".equalsIgnoreCase(auth)) {
-            result.put("ERROR_CODE", HttpServletResponse.SC_UNAUTHORIZED);
-            result.put("MESSAGE", "AUTHENTICATION_FAILURE");
-        } else {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Wrong url");
-        }
+        Map<String, Object> result = new HashMap<String, Object>();
+        String sessionId = request.getSession().getId();
+        result.put(SESSION_ID, sessionId);
+        result.put(MESSAGE, "Successfully logged in");
+        return result;
+    }
 
+    @GET
+    @Produces({MediaType.APPLICATION_JSON + CHARSET_UTF_8})
+    @Path("/failure")
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Map<String, Object> loginFailure() throws JSONException {
+
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put(ERROR_CODE, HttpServletResponse.SC_UNAUTHORIZED);
+        result.put(MESSAGE, "Authentication failure");
         return result;
     }
     
-    @POST
+    @GET
     @Produces({MediaType.APPLICATION_JSON + CHARSET_UTF_8})
     @Path("/logout")
-    public @ResponseBody JSONObject logout() throws JSONException {
-        JSONObject result = new JSONObject();
-        result.put("MESSAGE", "Successfully logged out");
+    public Map<String, Object> logout() throws JSONException {
+
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put(MESSAGE, "Successfully logged out");
         return result;
     }
 }

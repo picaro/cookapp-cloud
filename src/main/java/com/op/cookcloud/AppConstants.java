@@ -41,8 +41,6 @@ public class AppConstants {
 
     public static final String UNAUTHORIZED = "Unauthorized";
     
-    public static final String AUTHENTICATION_FAILURE = "Authentication Failure";
-
     public static final String SUCCESS = "success";
     
     public static final String FAILURE = "failure";
