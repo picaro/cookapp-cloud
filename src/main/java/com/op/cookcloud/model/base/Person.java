@@ -30,9 +30,7 @@ class Person extends EntityWithId {
     private String email;
     @NotEmpty
     private String password;
-    @NotEmpty
     private String phone;
-    @NotNull
     private String gender;
     private Date dob;
 

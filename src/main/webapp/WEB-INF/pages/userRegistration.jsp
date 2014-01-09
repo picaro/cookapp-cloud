@@ -55,12 +55,10 @@
                         <form:input type="email" class="form-control" id="email" placeholder="Email" path="email"/>
                     </div>
                     <div class="form-group">
-                        <form:errors path="phone" cssClass="error"/>
                         <form:input type="text" class="form-control" id="phone" placeholder="Phone" path="phone"/>
                     </div>
 
                     <div class="form-group">
-                        <form:errors path="gender" cssClass="error"/>
                         <form:select path="gender" class="form-control">
                             <form:option value="NONE" label="-- Select Gender --"/>
                             <form:options items="${gender}"/>
