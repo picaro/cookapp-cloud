@@ -10,9 +10,11 @@
     <link rel="stylesheet" type="text/css" href=${pageContext.request.contextPath}/resources/css/main.css>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/bootstrap/3.0.2/css/bootstrap.min.css" media="all"/>
-    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
     <script src="${pageContext.request.contextPath}/resources/js/dropdown.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/tab.js"></script>
+
 </head>
 <body>
 
@@ -59,37 +61,34 @@
 
 <div class="col-md-10" style="height:100px">
 
-    <nav class="navbar navbar-inverse" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Admin</a>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#persons" data-toggle="tab">Persons</a></li>
+        <li><a href="#shops" data-toggle="tab">Shops</a></li>
+        <li><a href="#shop" data-toggle="tab">Shop</a></li>
+        <li><a href="#products" data-toggle="tab">Products</a></li>
+        <li><a href="#circles" data-toggle="tab">Circles</a></li>
+    </ul>
+
+    <div class="tab-content" style="margin-top: 20px;">
+        <div class="tab-pane active" id="persons">
+            <jsp:include page="/admin/persons"/>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-">
-            <ul class="nav navbar-nav">
-                <li ><a href="#">Shops</a></li>
-                <li ><a href="#">Shop  list</a></li>
-                <li ><a href="#">Circles</a></li>
-                <li ><a href="#">Persons</a></li>
-                <li ><a href="#">Products</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
-
-
-    <div class="panel panel-default">
-        <div class="panel-body" style="height: 600px;">
-            Basic panel example
+        <div class="tab-pane" id="shops">
+            <jsp:include page="/admin/shops"/>
+        </div>
+        <div class="tab-pane" id="shop">
+            <jsp:include page="/admin/shop"/>
+        </div>
+        <div class="tab-pane" id="products">
+            <jsp:include page="/admin/products"/>
+        </div>
+        <div class="tab-pane" id="circles">
+            <jsp:include page="/admin/circles"/>
         </div>
     </div>
-</div>
 
+</div>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/3.0.2/js/bootstrap.js"></script>
 </body>
 </html>
