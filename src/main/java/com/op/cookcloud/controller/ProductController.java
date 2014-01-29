@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,7 +21,7 @@ import java.util.List;
 
 @Service("productService")
 @Transactional
-@Path("/product")
+@RequestMapping("/product")
 public class ProductController {
 
     private static final Logger LOG = Logger.getLogger(ProductController.class);
@@ -27,10 +31,10 @@ public class ProductController {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
-    @Path("/")
-    public List<Product> readAll() {
+    @RequestMapping(value = "/allProducts")
+    public ModelAndView readAll() {
         List<Product> productList = productDao.findAll();
-        return productList;
+        return new ModelAndView("products" , "productList" ,productList);
     }
 
     @GET
@@ -58,11 +62,13 @@ public class ProductController {
 
     @DELETE
     @Path("{id}")
-    public void delete(@PathParam("id") Integer id) {
+    @RequestMapping(value = "/delete")
+    public ModelAndView delete(@RequestParam(value = "id", required = true) Integer id) {
         Product product = productDao.findById(id);
         LOG.info("Deleting product " + product);
         productDao.delete(product);
         LOG.debug("Product deleted: " + product);
+        return new ModelAndView("admin");
     }
 
 

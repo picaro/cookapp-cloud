@@ -61,7 +61,7 @@
 
 <div class="col-md-10" style="height:100px">
 
-    <ul class="nav nav-tabs">
+<ul class="nav nav-tabs">
         <li class="active"><a href="#persons" data-toggle="tab">Persons</a></li>
         <li><a href="#shops" data-toggle="tab">Shops</a></li>
         <li><a href="#shop" data-toggle="tab">Shop</a></li>
@@ -70,20 +70,20 @@
     </ul>
 
     <div class="tab-content" style="margin-top: 20px;">
-        <div class="tab-pane active" id="persons">
-            <jsp:include page="/admin/persons"/>
+        <div class="tab-pane fade in active" id="persons">
+            <jsp:include page="/person/allPersons"/>
         </div>
-        <div class="tab-pane" id="shops">
-            <jsp:include page="/admin/shops"/>
+        <div class="tab-pane fade" id="shops">
+            <jsp:include page="/shopList/allShops"/>
         </div>
-        <div class="tab-pane" id="shop">
-            <jsp:include page="/admin/shop"/>
+        <div class="tab-pane fade" id="shop">
+            <jsp:include page="/shop/allShops"/>
         </div>
-        <div class="tab-pane" id="products">
-            <jsp:include page="/admin/products"/>
+        <div class="tab-pane fade" id="products">
+            <jsp:include page="/product/allProducts"/>
         </div>
-        <div class="tab-pane" id="circles">
-            <jsp:include page="/admin/circles"/>
+        <div class="tab-pane fade" id="circles">
+            <jsp:include page="/circle/allCircles"/>
         </div>
     </div>
 

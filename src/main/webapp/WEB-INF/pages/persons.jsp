@@ -27,7 +27,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="person" items="${persons}">
+            <c:forEach var="person" items="${personList}">
                 <tr>
                     <td><c:out value="${person.firstName}"/></td>
                     <td><c:out value="${person.lastName}"/></td>
@@ -38,7 +38,7 @@
                     <td><c:out value="${person.date_registration}"/></td>
                     <td>
                         <a href="#" class="btn btn-success">Edit</a>
-                        <a href="#" class="btn btn-danger">Remove</a>
+                        <a href="${pageContext.request.contextPath}/person/delete?id=${person.id}" class="btn btn-danger">Remove</a>
                     </td>
                 </tr>
             </c:forEach>

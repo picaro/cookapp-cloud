@@ -7,7 +7,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,7 +21,7 @@ import java.util.List;
 
 @Service("personService")
 @Transactional
-@Path("/person")
+@RequestMapping("/person")
 public class PersonController {
 
     private static final Logger LOG = Logger.getLogger(PersonController.class);
@@ -27,10 +32,10 @@ public class PersonController {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
-    @Path("/")
-    public List<Person> readAll() {
+    @RequestMapping(value = "/allPersons")
+    public ModelAndView readAll() {
         List<Person> personList = personDao.findAll();
-        return personList;
+        return new ModelAndView("persons", "personList",personList);
     }
 
     @GET
@@ -61,9 +66,12 @@ public class PersonController {
 
     @DELETE
     @Path("{id}")
-    public void delete(@PathParam("id") Integer id) {
+    @RequestMapping(value = "/delete")
+    public ModelAndView  delete(@RequestParam(value = "id", required = true) Integer id) {
         Person person = personDao.findById(id);
+        LOG.debug("Received request to delete person:" + person);
         personDao.delete(person);
         LOG.debug("Person deleted: " + person);
+        return new ModelAndView("admin");
     }
 }

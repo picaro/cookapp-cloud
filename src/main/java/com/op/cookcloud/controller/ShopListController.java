@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,6 +21,7 @@ import java.util.List;
 @Service("shopListService")
 @Transactional
 @Path("/shoplist")
+@RequestMapping("/shopList")
 public class ShopListController {
 
     private static final Logger LOG = Logger.getLogger(ShopListController.class);
@@ -27,10 +31,10 @@ public class ShopListController {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
-    @Path("/")
-    public List<ShopList> readAll() {
+    @RequestMapping( value = "/allShops")
+    public ModelAndView readAll() {
         List<ShopList> shopList = shopListDao.findAll();
-        return shopList;
+        return new ModelAndView("shops", "shopList", shopList);
     }
 
     @GET

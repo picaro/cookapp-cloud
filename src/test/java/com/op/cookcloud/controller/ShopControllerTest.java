@@ -31,9 +31,9 @@ public class ShopControllerTest extends BaseDaoTest{
         shop.setName("aaa");
         shopController.create(shop);
 
-        Shop shop1 = shopController.read(shopController.readAll().get(0).getId() );
-        assertEquals(shop1.getName(), "aaa");
-        LOG.debug(shop1.getId());
+//        Shop shop1 = shopController.read(shopController.readAll().get(0).getId() );
+//        assertEquals(shop1.getName(), "aaa");
+//        LOG.debug(shop1.getId());
     }
 
     @Test

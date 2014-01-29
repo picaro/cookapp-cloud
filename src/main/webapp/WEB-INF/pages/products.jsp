@@ -27,7 +27,7 @@
                     <td><c:out value="${product.note}"/></td>
                     <td>
                         <a href="#" class="btn btn-success">Edit</a>
-                        <a href="#" class="btn btn-danger">Remove</a>
+                        <a href="${pageContext.request.contextPath}/product/delete?id=${product.id}" class="btn btn-danger">Remove</a>
                     </td>
                 </tr>
             </c:forEach>

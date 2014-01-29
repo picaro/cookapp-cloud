@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,7 +19,7 @@ import java.util.List;
 
 @Service("circleService")
 @Transactional
-@Path("/circle")
+@RequestMapping("/circle")
 public class CircleController {
 
     private static final Logger LOG = Logger.getLogger(CircleController.class);
@@ -27,10 +29,10 @@ public class CircleController {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
-    @Path("/")
-    public List<Circle> readAll() {
+    @RequestMapping("/allCircles")
+    public ModelAndView readAll() {
         List<Circle> circleList = circleDao.findAll();
-        return circleList;
+        return new ModelAndView("circles","circleList", circleList);
     }
 
     @GET
