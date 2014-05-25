@@ -14,7 +14,7 @@ login root passw 123456
 3 download enunciate-1.26.2 - generation of docs for REST services
 setup env vars. ENUNCIATE_HOME
 4 download mongodb.
-start mongodb
+start mongodb  (example mongod -dpbath d:\Projects\github\mongof\)
 5 Download and install Maven http://maven.apache.org/download.cgi
 change settings.xml inside maven dir -
 add 

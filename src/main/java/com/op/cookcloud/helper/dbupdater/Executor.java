@@ -65,7 +65,7 @@ public class Executor {
 		try {
 			return readVersionFromDB();
 		} catch (DataAccessException exception) {
-			logger.warn("Can't retrive current db state from db", exception);
+			logger.warn("Can't retrive current db state from db: " + exception.getMessage());
 			result.setMajor(-1);
 			result.setMinor(0);
 		}
