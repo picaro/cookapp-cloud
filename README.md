@@ -29,8 +29,8 @@ add
                 <mongo.url>localhost</mongo.url>
                 <mongo.login>admin</mongo.login>
                 <mongo.password>123456</mongo.password>
-                <db.url>localhost:3128/cookclouddb</db.url>
-                <db.login>root</db.login>
+				<db.url>jdbc:mysql://db4free.net:3306/cookcloud</db.url>
+                <db.login>cookcloud</db.login>
                 <db.password>123456</db.password>
             </properties>
  

@@ -493,5 +493,9 @@
             <url>file:///tmp/fake.com/</url>
         </site>
     </distributionManagement>
+<profiles>
 
+
+
+</profiles>
 </project>
