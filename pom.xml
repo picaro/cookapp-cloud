@@ -332,7 +332,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12.4</version>
                 <configuration>
-                    <skipTests>false</skipTests>
+                    <skipTests>true</skipTests>
                 </configuration>
             </plugin>
 
@@ -349,14 +349,6 @@
                         <totalBranchRate>0</totalBranchRate>
                     </check>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>clean</goal><!-- works if uncommented -->
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
@@ -370,14 +362,6 @@
                     <generateProjectInfo>false</generateProjectInfo>
                     <generateSitemap>false</generateSitemap>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
 
@@ -402,23 +386,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-
-
-            <plugin>
-                <groupId>com.jelastic</groupId>
-                <artifactId>jelastic-maven-plugin</artifactId>
-                <version>1.7</version>
-                <configuration>
-                    <email>${jelastic.username}</email>
-                    <password>${jelastic.password}</password>
-                    <context>/</context>
-                    <environment>cookcloud</environment>
-                    <comment>fill</comment>
-                    <api_hoster>app.jelastic.neohost.net</api_hoster>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
             </plugin>
 
