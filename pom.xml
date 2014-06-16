@@ -376,15 +376,14 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <goals>
-                            <goal>assemble</goal>
-                        </goals>
+
                     </execution>
                 </executions>
             </plugin>
 
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -410,13 +409,13 @@
                 <version>2.4</version>
             </plugin>
 
-            <plugin>
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <configuration>
                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
                 </configuration>
-            </plugin>
+            </plugin-->
 
             <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
