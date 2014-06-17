@@ -26,7 +26,7 @@ add
             <properties>
                 <jelastic.username>picaro.vs@gmail.com</jelastic.username>
                 <jelastic.password>123456</jelastic.password>
-                <mongo.url>localhost</mongo.url>
+                <mongo.url>ds041248.mongolab.com:41248/mongofood</mongo.url>
                 <mongo.login>admin</mongo.login>
                 <mongo.password>123456</mongo.password>
 				<db.url>jdbc:mysql://db4free.net:3306/cookcloud</db.url>

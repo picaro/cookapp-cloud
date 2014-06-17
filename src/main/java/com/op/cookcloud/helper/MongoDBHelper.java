@@ -80,13 +80,13 @@ public class MongoDBHelper {
         if (db == null) {
             MongoClient mongo = null;
             try {
-                mongo = new MongoClient(AppConstants.MONGO_URL);
+                mongo = new MongoClient(AppConstants.MONGO_URL,41248);
 
 
             } catch (UnknownHostException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-            db = mongo.getDB(AppConstants.DBNAME);
+            db = mongo.getDB("mongofood");
             LOG.debug("db:" + db + " pass:" + AppConstants.MONGO_PASSWORD);
             boolean auth = db.authenticate(AppConstants.MONGO_LOGIN, AppConstants.MONGO_PASSWORD.toCharArray());
         }
