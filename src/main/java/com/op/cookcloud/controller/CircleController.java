@@ -4,6 +4,7 @@ import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.CircleDao;
 import com.op.cookcloud.model.base.Circle;
 import com.op.cookcloud.model.base.ShopList;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,8 @@ import java.util.List;
 @Service("circleService")
 @Transactional
 @RequestMapping("/circle")
+@Log4j
 public class CircleController {
-
-    private static final Logger LOG = Logger.getLogger(CircleController.class);
 
     @Autowired
     private CircleDao circleDao;
@@ -40,21 +40,21 @@ public class CircleController {
     @Path("{id}")
     public Circle read(@PathParam("id") Integer id) {
         Circle circle = circleDao.findById(id);
-        LOG.debug("Circle found, id: " + id);
+        log.debug("Circle found, id: " + id);
         return circle;
     }
 
     @PUT
     public void update(@ModelAttribute Circle circle) {
         circleDao.saveOrUpdate(circle);
-        LOG.debug("Circle updated: " + circle);
+        log.debug("Circle updated: " + circle);
     }
 
     @POST
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     public void create(@ModelAttribute Circle circle) {
         circleDao.saveOrUpdate(circle);
-        LOG.debug("Circle created: " + circle);
+        log.debug("Circle created: " + circle);
     }
 
     @DELETE
@@ -62,7 +62,7 @@ public class CircleController {
     public void delete(@PathParam("id") Integer id) {
         Circle circle = circleDao.findById(id);
         circleDao.delete(circle);
-        LOG.debug("Circle deleted: " + circle);
+        log.debug("Circle deleted: " + circle);
     }
 
 

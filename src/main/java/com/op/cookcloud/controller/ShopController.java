@@ -4,6 +4,7 @@ import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ShopDao;
 import com.op.cookcloud.model.base.Product;
 import com.op.cookcloud.model.base.Shop;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,8 @@ import java.util.List;
 @Service("shopService")
 @Transactional
 @RequestMapping("/shop")
+@Log4j
 public class ShopController {
-
-    private static final Logger LOG = Logger.getLogger(ShopController.class);
-
     @Autowired
     private ShopDao shopDao;
 
@@ -40,8 +39,8 @@ public class ShopController {
     @Path("{id}")
     public Shop read(@PathParam("id") Integer id) {
         Shop person = shopDao.findById(id);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Shop found, id: " + id);
+        if (log.isDebugEnabled()) {
+            log.debug("Shop found, id: " + id);
         }
         return person;
     }
@@ -49,8 +48,8 @@ public class ShopController {
     @PUT
     public void update(@ModelAttribute Shop shop) {
         shopDao.saveOrUpdate(shop);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Shop updated" + shop);
+        if (log.isDebugEnabled()) {
+            log.debug("Shop updated" + shop);
         }
     }
 
@@ -58,7 +57,7 @@ public class ShopController {
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     public void create(@ModelAttribute Shop shop) {
         shopDao.saveOrUpdate(shop);
-        LOG.debug("Person created: " + shop);
+        log.debug("Person created: " + shop);
     }
 
     @DELETE
@@ -66,7 +65,7 @@ public class ShopController {
     public void delete(@PathParam("id") Integer id) {
         Shop shop = shopDao.findById(id);
         shopDao.delete(shop);
-        LOG.debug("Product deleted:" + shop);
+        log.debug("Product deleted:" + shop);
     }
 
 

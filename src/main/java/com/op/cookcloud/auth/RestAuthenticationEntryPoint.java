@@ -1,6 +1,7 @@
 package com.op.cookcloud.auth;
 
 import com.op.cookcloud.AppConstants;
+import lombok.extern.log4j.Log4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.io.IOException;
  * @author raspad
  * @version 1.0 02.01.2013
  */
+@Log4j
 @Component(value="restAuthenticationEntryPoint")
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
@@ -24,7 +26,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest httpServletRequest,
                          HttpServletResponse response,
                          AuthenticationException e) throws IOException, ServletException {
-
+        log.info("restAuthEntry");
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, AppConstants.UNAUTHORIZED);
     }
 }

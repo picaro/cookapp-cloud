@@ -1,12 +1,10 @@
 package com.op.cookcloud.controller;
 
 import com.op.cookcloud.AppConstants;
-import com.op.cookcloud.helper.EANdirectoryRuHelper;
-import com.op.cookcloud.helper.FacturalHelper;
-import com.op.cookcloud.helper.MongoDBHelper;
-import com.op.cookcloud.helper.UPCDatabaseHelper;
+import com.op.cookcloud.helper.*;
 import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,14 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 
 
 @Service("userService")
 @Transactional
 @Path("/barcode")
+@Log4j
 public class BarcodeController {
-
-    private static final Logger LOG = Logger.getLogger(BarcodeController.class);
 
     @Autowired
     private org.codehaus.jackson.map.ObjectMapper mapper;
@@ -44,7 +42,7 @@ public class BarcodeController {
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     @Path("{code}")
     public Response getProductByCode(@PathParam("code") String code) {
-        LOG.info("getProductByCode:" + code);
+        log.info("getProductByCode:" + code);
 
         // String result = "" + code;//transactionBo.save();
         Product product = null;
@@ -73,26 +71,26 @@ public class BarcodeController {
 
         mongoDBHelper.addCommentByEAN(code, comment);
 
-        LOG.info("addComment:" + comment.getComment());
+        log.info("addComment:" + comment.getComment());
     }
 
-//    @GET
-//    @Path("/updatedbfromsql")
-//    public void updateDB() {
-//        LOG.info("updatedbfromsql start");
-//        if (!mongoDBHelper.isUADBSaved()) {
-//            LOG.info("!saved");
-//            CSVDBImport csvdbImport = new CSVDBImport();
-//            try {
-//                csvdbImport.importDB();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            mongoDBHelper.setUADBSaved();
-//            LOG.info("saved");
-//        }
-//        LOG.info("updatedbfromsql end");
-//    }
+    @GET
+    @Path("/updatedbfromsql")
+    public void updateDB() {
+        log.info("updatedbfromsql start");
+        if (!mongoDBHelper.isUADBSaved()) {
+            log.info("!saved");
+            CSVDBImport csvdbImport = new CSVDBImport();
+            try {
+                csvdbImport.importDB();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            mongoDBHelper.setUADBSaved();
+            log.info("saved");
+        }
+        log.info("updatedbfromsql end");
+    }
 
 
 }

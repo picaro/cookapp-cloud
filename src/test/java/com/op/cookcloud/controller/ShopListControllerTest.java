@@ -2,6 +2,7 @@ package com.op.cookcloud.controller;
 
 import com.op.cookcloud.dao.BaseDaoTest;
 import com.op.cookcloud.model.base.ShopList;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,10 +25,8 @@ import static org.junit.Assert.assertTrue;
  * Time: 13:59
  * To change this template use File | Settings | File Templates.
  */
+@Log4j
 public class ShopListControllerTest extends BaseDaoTest{
-
-    private static final Logger LOG = Logger.getLogger(ShopListControllerTest.class);
-
 
     @Autowired
     private ShopListController shopListController;
@@ -44,7 +43,7 @@ public class ShopListControllerTest extends BaseDaoTest{
 
         ShopList shopList1 = shopListController.read(shopListL.get(0).getId());
         assertEquals(shopList1.getNote(), "aaa");
-        LOG.debug(shopList1.getId());
+        log.debug(shopList1.getId());
     }
 
     @Test

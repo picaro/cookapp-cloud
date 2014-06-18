@@ -41,7 +41,7 @@ public class ProductControllerTest extends BaseDaoTest {
 //        List<Product> productL = productDao.findAll();
 //        Product product1 = productController.read(productL.get(0).getId());
 //       assertEquals(product1.getName(), "aaa");
-//        LOG.debug(product1.getId());
+//        log.debug(product1.getId());
     }
 
     @Test

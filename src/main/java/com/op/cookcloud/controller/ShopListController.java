@@ -4,6 +4,7 @@ import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ShopListDao;
 import com.op.cookcloud.model.base.Shop;
 import com.op.cookcloud.model.base.ShopList;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,8 @@ import java.util.List;
 @Transactional
 @Path("/shoplist")
 @RequestMapping("/shopList")
+@Log4j
 public class ShopListController {
-
-    private static final Logger LOG = Logger.getLogger(ShopListController.class);
 
     @Autowired
     private ShopListDao shopListDao;
@@ -42,8 +42,8 @@ public class ShopListController {
     @Path("{id}")
     public ShopList read(@PathParam("id") Integer id) {
         ShopList shopList = shopListDao.findById(id);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("ShopList found, id: " + id);
+        if (log.isDebugEnabled()) {
+            log.debug("ShopList found, id: " + id);
         }
         return shopList;
     }
@@ -51,8 +51,8 @@ public class ShopListController {
     @PUT
     public void update(@ModelAttribute ShopList shopList) {
         shopListDao.saveOrUpdate(shopList);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("ShopList updated" + shopList);
+        if (log.isDebugEnabled()) {
+            log.debug("ShopList updated" + shopList);
         }
     }
 
@@ -60,7 +60,7 @@ public class ShopListController {
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     public void create(@ModelAttribute ShopList shopList) {
         shopListDao.saveOrUpdate(shopList);
-        LOG.debug("ShopList created: " + shopList);
+        log.debug("ShopList created: " + shopList);
     }
 
     @DELETE
@@ -68,7 +68,7 @@ public class ShopListController {
     public void delete(@PathParam("id") Integer id) {
         ShopList shop = shopListDao.findById(id);
         shopListDao.delete(shop);
-        LOG.debug("ShopList deleted:" + shop);
+        log.debug("ShopList deleted:" + shop);
     }
 
 }

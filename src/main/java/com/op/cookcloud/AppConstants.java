@@ -1,5 +1,6 @@
 package com.op.cookcloud;
 
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +13,10 @@ import java.util.Properties;
  * Time: 11:47 AM
  */
 @Service
+@Log4j
 public class AppConstants {
 
     public static final String UPC_DATABASE_RPC_KEY = "ba88ded7443fb2c270bb2a08e7382d72081cfcc4";
-
-    private static final Logger LOG = Logger.getLogger(AppConstants.class);
-
 
     private static final Properties properties = new Properties();
     public static final String CHARSET_UTF_8 = "; charset=UTF-8";
@@ -72,8 +71,8 @@ public class AppConstants {
         MONGO_PASSWORD = properties.getProperty("MONGO_PASSWORD");
         MONGO_URL = properties.getProperty("MONGO_URL");
 
-        LOG.debug("MONGO_LOGIN:" + MONGO_LOGIN);
-        LOG.error("MONGO_PASSWORD:" + MONGO_PASSWORD);
-        LOG.debug("MONGO_URL:" + MONGO_URL);
+        log.debug("MONGO_LOGIN:" + MONGO_LOGIN);
+        log.error("MONGO_PASSWORD:" + MONGO_PASSWORD);
+        log.debug("MONGO_URL:" + MONGO_URL);
     }
 }

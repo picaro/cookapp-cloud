@@ -2,6 +2,7 @@ package com.op.cookcloud.controller;
 
 import com.op.cookcloud.dao.BaseDaoTest;
 import com.op.cookcloud.model.base.Person;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,10 +24,8 @@ import static org.junit.Assert.assertEquals;
  * Time: 13:59
  * To change this template use File | Settings | File Templates.
  */
+@Log4j
 public class PersonControllerTest extends BaseDaoTest {
-
-    private static final Logger LOG = Logger.getLogger(PersonControllerTest.class);
-
 
     @Autowired
     private PersonController personController;
@@ -57,7 +56,7 @@ public class PersonControllerTest extends BaseDaoTest {
         assertEquals(person1.getGender(), "M");
         assertEquals(person1.getPassword(), "123456");
         assertEquals(person1.getPhone(), "0123456789");
-        LOG.debug(person1.getId());
+        log.debug(person1.getId());
     }
 
     @Test
@@ -79,7 +78,7 @@ public class PersonControllerTest extends BaseDaoTest {
 //        assertEquals(person1.getPassword(), "123456");
 //        assertEquals(person1.getPhone(), "0123456789");
 //
-//        LOG.debug(person1.getId());
+//        log.debug(person1.getId());
     }
 
     @Test

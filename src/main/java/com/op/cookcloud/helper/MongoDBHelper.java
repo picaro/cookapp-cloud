@@ -6,6 +6,7 @@ import com.mongodb.*;
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.model.Comment;
 import com.op.cookcloud.model.Product;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +23,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Service
+@Log4j
 public class MongoDBHelper {
-
-    private static final Logger LOG = Logger.getLogger(MongoDBHelper.class);
 
     public static final String PRODUCT_TABLE = "product";
     private Gson gson = new Gson();
@@ -87,7 +87,7 @@ public class MongoDBHelper {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
             db = mongo.getDB("mongofood");
-            LOG.debug("db:" + db + " pass:" + AppConstants.MONGO_PASSWORD);
+            log.debug("db:" + db + " pass:" + AppConstants.MONGO_PASSWORD);
             boolean auth = db.authenticate(AppConstants.MONGO_LOGIN, AppConstants.MONGO_PASSWORD.toCharArray());
         }
         return db;
@@ -142,7 +142,7 @@ public class MongoDBHelper {
         DBCollection settings = db.getCollection("settings");
         BasicDBObject searchQuery = new BasicDBObject();
         DBCursor cursor = settings.find(searchQuery);
-        LOG.info("isUADBSaved");
+        log.info("isUADBSaved");
         //    if (cursor != null)
         if (cursor.size() == 0) {
             return false;

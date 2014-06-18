@@ -17,3 +17,4 @@ target/
 /atlassian-ide-plugin.xml
 
 /.idea
+/src/main/resources/rebel.xml

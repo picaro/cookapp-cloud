@@ -4,6 +4,7 @@ import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.ProductDao;
 import com.op.cookcloud.model.base.Person;
 import com.op.cookcloud.model.base.Product;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,11 @@ import java.util.List;
 @Service("productService")
 @Transactional
 @RequestMapping("/product")
+@Log4j
 public class ProductController {
 
-    private static final Logger LOG = Logger.getLogger(ProductController.class);
     @Autowired
     private ProductDao productDao;
-
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
@@ -42,21 +42,21 @@ public class ProductController {
     @Path("{id}")
     public Product read(@PathParam("id") Integer id) {
         Product product = productDao.findById(id);
-        LOG.debug("Find product " + product + "by id" + id);
+        log.debug("Find product " + product + "by id" + id);
         return product;
     }
 
     @PUT
     public void update(@ModelAttribute Product product) {
         productDao.saveOrUpdate(product);
-        LOG.debug("Product update: " + product);
+        log.debug("Product update: " + product);
     }
 
     @POST
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     public void create(@ModelAttribute Product product) {
         productDao.saveOrUpdate(product);
-        LOG.debug("Product crated: " + product);
+        log.debug("Product crated: " + product);
 
     }
 
@@ -65,9 +65,9 @@ public class ProductController {
     @RequestMapping(value = "/delete")
     public ModelAndView delete(@RequestParam(value = "id", required = true) Integer id) {
         Product product = productDao.findById(id);
-        LOG.info("Deleting product " + product);
+        log.info("Deleting product " + product);
         productDao.delete(product);
-        LOG.debug("Product deleted: " + product);
+        log.debug("Product deleted: " + product);
         return new ModelAndView("admin");
     }
 

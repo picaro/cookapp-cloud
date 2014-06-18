@@ -2,6 +2,7 @@ package com.op.cookcloud.dao;
 
 import com.op.cookcloud.dao.impl.*;
 import com.op.cookcloud.model.base.*;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = {"classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
 @TransactionConfiguration
 @Transactional
+@Log4j
 public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
-
-    private static final Logger LOG = Logger.getLogger(BaseDaoTest.class);
 
     @Autowired
     protected ShopListDao shopListDao;
@@ -44,7 +44,7 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
     protected PersonDao personDao;
 
     public Person createPerson() {
-        LOG.debug("createPerson");
+        log.debug("createPerson");
         Person person = new Person();
         person.setFirstName("Alex");
         person.setLastName("Ivanov");
@@ -53,7 +53,7 @@ public abstract class BaseDaoTest extends AbstractTransactionalJUnit4SpringConte
         person.setPhone("123456789");
         person.setPassword("123456");
         personDao.saveUser(person);
-        LOG.debug(person.getId());
+        log.debug(person.getId());
         return person;
     }
 

@@ -33,7 +33,7 @@ public class ShopControllerTest extends BaseDaoTest{
 
 //        Shop shop1 = shopController.read(shopController.readAll().get(0).getId() );
 //        assertEquals(shop1.getName(), "aaa");
-//        LOG.debug(shop1.getId());
+//        log.debug(shop1.getId());
     }
 
     @Test

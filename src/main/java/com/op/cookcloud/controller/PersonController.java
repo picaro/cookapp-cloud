@@ -3,6 +3,7 @@ package com.op.cookcloud.controller;
 import com.op.cookcloud.AppConstants;
 import com.op.cookcloud.dao.impl.PersonDao;
 import com.op.cookcloud.model.base.Person;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,8 @@ import java.util.List;
 @Service("personService")
 @Transactional
 @RequestMapping("/person")
+@Log4j
 public class PersonController {
-
-    private static final Logger LOG = Logger.getLogger(PersonController.class);
-
 
     @Autowired
     private PersonDao personDao;
@@ -43,8 +42,8 @@ public class PersonController {
     @Path("{id}")
     public Person read(@PathParam("id") Integer id) {
         Person person = personDao.findById(id);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Person found, id: " + id);
+        if (log.isDebugEnabled()) {
+            log.debug("Person found, id: " + id);
         }
         return person;
     }
@@ -52,8 +51,8 @@ public class PersonController {
     @PUT
     public void update(@ModelAttribute Person person) {
         personDao.saveOrUpdate(person);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Person updated" + person);
+        if (log.isDebugEnabled()) {
+            log.debug("Person updated" + person);
         }
     }
 
@@ -61,7 +60,7 @@ public class PersonController {
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     public void create(@ModelAttribute Person person) {
         personDao.saveOrUpdate(person);
-        LOG.debug("Person created: " + person);
+        log.debug("Person created: " + person);
     }
 
     @DELETE
@@ -69,9 +68,9 @@ public class PersonController {
     @RequestMapping(value = "/delete")
     public ModelAndView  delete(@RequestParam(value = "id", required = true) Integer id) {
         Person person = personDao.findById(id);
-        LOG.debug("Received request to delete person:" + person);
+        log.debug("Received request to delete person:" + person);
         personDao.delete(person);
-        LOG.debug("Person deleted: " + person);
+        log.debug("Person deleted: " + person);
         return new ModelAndView("admin");
     }
 }
