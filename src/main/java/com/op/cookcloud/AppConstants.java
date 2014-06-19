@@ -1,7 +1,6 @@
 package com.op.cookcloud;
 
 import lombok.extern.log4j.Log4j;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
