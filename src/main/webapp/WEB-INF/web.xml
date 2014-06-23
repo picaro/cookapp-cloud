@@ -63,12 +63,12 @@
 	<servlet-mapping>
 		<servlet-name>jersey-servlet</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
+  	</servlet-mapping>
 
-	
+
 	<context-param>
 		<param-name>loginPage</param-name>
-		<param-value>/login</param-value>
+		<param-value>/auth/login</param-value>
 	</context-param>
 
     <!-- Spring Security -->

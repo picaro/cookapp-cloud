@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
+        "applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
 public class EANDirectoryHelperTest {
 
     @Autowired

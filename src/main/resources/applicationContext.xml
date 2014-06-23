@@ -16,8 +16,7 @@
     <import resource="security-context.xml"/>
     <mvc:annotation-driven />
 
-    <bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
-        <property name="authenticationEntryPoint" ref="restAuthenticationEntryPoint" />
-    </bean>
+    <bean id="cUserDetailsService" class="com.op.cookcloud.security.UserDaoDetailsService"/>
+    <bean id="authenticationHelper" class="com.op.cookcloud.security.AuthenticationHelper" />
 
 </beans>

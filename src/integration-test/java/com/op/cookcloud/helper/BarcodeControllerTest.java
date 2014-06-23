@@ -1,5 +1,6 @@
-package com.op.cookcloud.controller;
+package com.op.cookcloud.helper;
 
+import com.op.cookcloud.controller.BarcodeController;
 import com.op.cookcloud.model.Product;
 import org.junit.Before;
 import org.junit.Ignore;

@@ -74,23 +74,23 @@ public class BarcodeController {
         log.info("addComment:" + comment.getComment());
     }
 
-    @GET
-    @Path("/updatedbfromsql")
-    public void updateDB() {
-        log.info("updatedbfromsql start");
-        if (!mongoDBHelper.isUADBSaved()) {
-            log.info("!saved");
-            CSVDBImport csvdbImport = new CSVDBImport();
-            try {
-                csvdbImport.importDB();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            mongoDBHelper.setUADBSaved();
-            log.info("saved");
-        }
-        log.info("updatedbfromsql end");
-    }
+//    @GET
+//    @Path("/updatedbfromsql")
+//    public void updateDB() {
+//        log.info("updatedbfromsql start");
+//        if (!mongoDBHelper.isUADBSaved()) {
+//            log.info("!saved");
+//            CSVDBImport csvdbImport = new CSVDBImport();
+//            try {
+//                csvdbImport.importDB();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            mongoDBHelper.setUADBSaved();
+//            log.info("saved");
+//        }
+//        log.info("updatedbfromsql end");
+//    }
 
 
 }

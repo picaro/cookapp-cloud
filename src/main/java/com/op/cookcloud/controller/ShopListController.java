@@ -22,7 +22,6 @@ import java.util.List;
 @Service("shopListService")
 @Transactional
 @Path("/shoplist")
-@RequestMapping("/shopList")
 @Log4j
 public class ShopListController {
 

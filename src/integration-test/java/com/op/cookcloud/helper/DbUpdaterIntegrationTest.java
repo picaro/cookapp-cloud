@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
+        "applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
 @ActiveProfiles("integration")
 public class DbUpdaterIntegrationTest extends AbstractTransactionalJUnit4SpringContextTests {
 

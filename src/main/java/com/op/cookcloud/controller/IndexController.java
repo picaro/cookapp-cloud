@@ -36,10 +36,10 @@ public class IndexController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String signIn(){
-        return "login";
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String signIn(){
+//        return "login";
+//    }
 }
 
 
