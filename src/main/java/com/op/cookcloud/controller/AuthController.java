@@ -85,17 +85,18 @@ public class AuthController {
     @POST
     @Path("/login")
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
-    public ModelAndView loginUser(@RequestBody SignInForm signInForm) {
-//        ModelAndView modelView = new ModelAndView();
-//        Authentication authentication = authenticationHelper.loginUser(signInForm.getEmail(), signInForm.getPassword(), request);
-//        log.info("authentication:" + authentication.isAuthenticated());
-//        //modelView.addObject("user", signInForm);
+    public SignInForm loginUser(@RequestBody SignInForm signInForm, @Context HttpServletRequest request) {
+        Authentication authentication = authenticationHelper.loginUser(signInForm.getEmail(), signInForm.getPassword(), request);
+        log.info("authentication:" + authentication.isAuthenticated());
+        //modelView.addObject("user", signInForm);
 //        modelView.getModel().put("user", signInForm);
 //        modelView.setView(new RedirectView(""));
 //        //modelView.setc
-//        //return "aaa";
-        List<ShopList> shopList = shopListDao.findAll();
-        return new ModelAndView("shops", "shopList", shopList);
+        //return "aaa";
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.getModel().put("user", signInForm);
+        //List<ShopList> shopList = shopListDao.findAll();
+        return signInForm;
     }
 
 }
