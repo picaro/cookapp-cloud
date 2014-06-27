@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
  * To change this template use File | Settings | File Templates.
  */
 @Ignore(value = "manual run only")
-public class MongoDBHelperTest {
+public class MongoDBHelperIT {
 
     public static final String EAN = "111121";
     MongoDBHelper mongoDBHelper = new MongoDBHelper();

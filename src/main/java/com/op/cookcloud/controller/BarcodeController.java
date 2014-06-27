@@ -41,7 +41,7 @@ public class BarcodeController {
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     @Path("{code}")
-    public Response getProductByCode(@PathParam("code") String code) {
+    public Response getProductByCode(@PathParam("code") String code) throws IOException {
         log.info("getProductByCode:" + code);
 
         // String result = "" + code;//transactionBo.save();

@@ -2,6 +2,8 @@ package com.op.cookcloud.helper;
 
 import com.op.cookcloud.model.Product;
 
+import java.io.IOException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alex3
@@ -12,6 +14,6 @@ import com.op.cookcloud.model.Product;
 public interface BarcodeSearcher {
     public Product lookUpProductByEAN(String code);
     public Product lookUpProductByUPC(String code);
-    public Product lookUpProduct(String code);
+    public Product lookUpProduct(String code) throws IOException;
 
     }

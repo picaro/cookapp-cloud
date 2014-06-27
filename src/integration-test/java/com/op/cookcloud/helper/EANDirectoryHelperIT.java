@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -22,8 +24,8 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
-public class EANDirectoryHelperTest {
+        "classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
+public class EANDirectoryHelperIT {
 
     @Autowired
     private EANdirectoryRuHelper ruHelper;
@@ -34,12 +36,11 @@ public class EANDirectoryHelperTest {
     }
 
     @Test
-    @Ignore
-    public void getProduct() {
+    public void getProduct() throws IOException {
         System.out.println("getProduct");
         Product product = ruHelper.lookUpProduct("5410306866760");
         assertNotNull(product);
-        assertEquals("ACTIFF Javel Ср-во д/кухни спрей 500мл", product.getDescription());
+        assertEquals("ACTIFF", product.getDescription().substring(0,6));
     }
 
 }

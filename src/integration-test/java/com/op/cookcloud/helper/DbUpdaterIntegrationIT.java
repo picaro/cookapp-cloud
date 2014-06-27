@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
+        "classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
 @ActiveProfiles("integration")
-public class DbUpdaterIntegrationTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class DbUpdaterIntegrationIT extends AbstractTransactionalJUnit4SpringContextTests {
 
     private static final String DB_VERSION_CLEANUP_SQL = "DELETE from DB_VERSION;";
 

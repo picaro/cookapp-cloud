@@ -3,8 +3,11 @@ package com.op.cookcloud.helper;
 import com.op.cookcloud.model.Product;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -32,13 +35,14 @@ public class EANdirectoryRuHelper implements BarcodeSearcher {
     }
 
     @Override
-    public Product lookUpProduct(String code) {
-        HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet("http://eandirectory.ru/barcode/" + code);
-        HttpResponse response = null;
+    public Product lookUpProduct(String code) throws IOException {
         Product product = new Product();
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpGet httpget = new HttpGet("http://eandirectory.ru/barcode/" + code);
+        CloseableHttpResponse response = null;
         try {
-            response = client.execute(request);
+            response = httpclient.execute(httpget);
 
             // Get the response
             BufferedReader rd = new BufferedReader
@@ -71,6 +75,8 @@ public class EANdirectoryRuHelper implements BarcodeSearcher {
 
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            response.close();
         }
 
         return product;  //To change body of implemented methods use File | Settings | File Templates.

@@ -16,15 +16,14 @@ import static org.junit.Assert.assertEquals;
  * Time: 1:42
  * To change this template use File | Settings | File Templates.
  */
-public class FacturalHelperTest {
+public class FacturalHelperIT {
 
-    @Ignore
     @Test
     public void getProduct(){
         FacturalHelper facturalHelper = new FacturalHelper();
         System.out.println("FacturalHelperTest");
         Product product = facturalHelper.lookUpProduct("0073010013469");
-        assertEquals("Tampons With Plastic Applicators Unscented Duo Pack Regular Super",product.getName());
+        assertEquals("Tampons With Pearl Plastic Applicators Unscented Duo Pack Regular Super 1 Pack",product.getName());
     }
 
 }
