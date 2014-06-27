@@ -10,10 +10,10 @@
     <global-method-security pre-post-annotations="enabled" />
 
     <http use-expressions="true">
-        <intercept-url pattern="/welcome*" access="ROLE_USER" />
+        <intercept-url pattern="/welcome*" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/rest/secured/*" access="isAuthenticated()" />
         <intercept-url pattern="/site/*" access="isAuthenticated()" />
-        <intercept-url pattern="/admin/*" access="isAuthenticated()" />
+        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
 
         <form-login login-page="/login" default-target-url="/user/" always-use-default-target="true"/>
 

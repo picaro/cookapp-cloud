@@ -18,11 +18,11 @@ public class UserDaoDetailsService implements UserDetailsService {
     @Autowired
     private PersonDao personDao;
 
-    private final Collection<GrantedAuthority> auths;
+  //  private final Collection<GrantedAuthority> auths;
 
     public UserDaoDetailsService() {
-        auths = new HashSet<GrantedAuthority>();
-        auths.add(new GrantedAuthorityImpl("ROLE_USER"));
+//        auths = new HashSet<GrantedAuthority>();
+//        auths.add(new GrantedAuthorityImpl("ROLE_USER"));
     }
 
     @Override

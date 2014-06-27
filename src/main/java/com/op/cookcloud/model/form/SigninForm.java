@@ -14,4 +14,8 @@ public class SignInForm implements Serializable{
     private String email;
 
     private String password;
+
+    private boolean active = false;
+
+    private boolean loggedIn;
 }

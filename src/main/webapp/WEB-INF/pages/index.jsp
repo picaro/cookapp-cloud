@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">HOME</a>
-            <a class="navbar-brand" href="/admin">ADMIN</a>
+            <a class="navbar-brand" href="admin">ADMIN</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -34,7 +34,7 @@
             </ul>
 
             <form class="navbar-form navbar-right" role="search">
-                <a href="/login"  class="btn btn-success">Sign in</a>
+                <a href="login"  class="btn btn-success">Sign in</a>
             </form>
         </div>
 

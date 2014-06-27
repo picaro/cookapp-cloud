@@ -45,6 +45,7 @@ public class AuthController {
     @Autowired
     private AuthenticationHelper authenticationHelper;
 
+
 //    @GET
 //    @Produces({MediaType.APPLICATION_JSON + CHARSET_UTF_8})
 //    @Path("/success")
@@ -88,14 +89,7 @@ public class AuthController {
     public SignInForm loginUser(@RequestBody SignInForm signInForm, @Context HttpServletRequest request) {
         Authentication authentication = authenticationHelper.loginUser(signInForm.getEmail(), signInForm.getPassword(), request);
         log.info("authentication:" + authentication.isAuthenticated());
-        //modelView.addObject("user", signInForm);
-//        modelView.getModel().put("user", signInForm);
-//        modelView.setView(new RedirectView(""));
-//        //modelView.setc
-        //return "aaa";
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.getModel().put("user", signInForm);
-        //List<ShopList> shopList = shopListDao.findAll();
+        signInForm.setLoggedIn(authentication.isAuthenticated());
         return signInForm;
     }
 

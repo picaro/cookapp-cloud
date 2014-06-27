@@ -37,11 +37,11 @@
 
 <div class="well signInPanel">
     <div class="row">
-        <form role="form" method="POST" action="j_spring_security_check" class="login_form" >
+        <form role="form" method="POST" action="login" class="login_form" modelAttribute="signinform">
             <div class="form-group">
                 <form:errors path="email" cssClass="error"/>
-                <label for="name">Email address</label>
-                <input type="email" class="form-control " id="name" placeholder="Enter email" path="name"/>
+                <label for="email">Email address</label>
+                <input type="email" class="form-control " id="email" placeholder="Enter email" path="name"/>
             </div>
             <div class="form-group">
                 <form:errors path="password" cssClass="error"/>

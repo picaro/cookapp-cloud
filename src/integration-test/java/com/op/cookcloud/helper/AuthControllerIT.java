@@ -2,6 +2,7 @@ package com.op.cookcloud.helper;
 
 
 import com.op.cookcloud.model.form.SignInForm;
+import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -9,12 +10,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectWriter;
+import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -26,62 +28,62 @@ import java.util.Arrays;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by Alex on 24.06.2014.
  */
 @Slf4j
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-        "classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {
+//        "classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
 public class AuthControllerIT {
 
-    private MockMvc mockMvc;
+    private SignInForm signInForm = new SignInForm();
+
+    private HttpHeaders headers = new HttpHeaders();
+
+    @Before
+    public void init(){
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+    }
 
     @Test
-    public void testLoginRest() throws Exception {
+    public void whenLoginPassedViaRest() throws Exception {
         log.info("AuthControllerIT","testLoginRest");
-
-        SignInForm signInForm = new SignInForm();
         signInForm.setEmail("test@test.com");
         signInForm.setPassword("11111");
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = ow.writeValueAsString(signInForm);
 
-        HttpEntity<String> requestEntity = new HttpEntity<String>(
-                "{\n" +
-                "    \"email\": \"test@test.com\",\n" +
-                "  \t\"password\": \"11111\"\n" +
-                "}"
- ,headers);
+        HttpEntity<String> requestEntity = new HttpEntity<String>(json,headers);
 
-//        String tradeXml = new RestTemplate().
-//                postForEntity("http://localhost:8080/CookCloud/rest/auth/login/");
-        ResponseEntity<SignInForm> entity = new RestTemplate().postForEntity(
+        ResponseEntity<SignInForm> responseEntity = new RestTemplate().postForEntity(
                 "http://localhost:8080/CookCloud/rest/auth/login/",
                 requestEntity, SignInForm.class);
 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-//        HttpPost httpPost = new HttpPost("http://localhost:8080/CookCloud/rest/auth/login/");
-//        httpPost.setHeader("Accept","application/json");
-//        httpPost.setHeader("Content-Type","application/json");
-//        HttpEntity httpEntity = new StringEntity("{\n" +
-//                "    \"email\": \"test@test.com\",\n" +
-//                "  \t\"password\": \"11111\"\n" +
-//                "}");
-//        httpPost.setEntity(httpEntity);
-//        CloseableHttpResponse response = null;
-//        response = httpclient.execute(httpPost);
-//
-//        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-//        String line = "";
-//        while ((line = rd.readLine()) != null) {
-//            System.out.println(line);
-//        }
-//
-//        assertEquals(response.getEntity().getContentType().getValue(),"application/json; charset=UTF-8");
-  //      log.info("AuthControllerIT", response.getEntity().getContent());
+        assertEquals(202,responseEntity.getStatusCode().value());
+        log.info("AuthControllerIT done", responseEntity);
+    }
+
+    @Test
+    public void whenPasswordIncorrectViaRest() throws Exception {
+        log.info("AuthControllerIT","testLoginRest");
+        signInForm.setEmail("test@test.com");
+        signInForm.setPassword("incorect");
+
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = ow.writeValueAsString(signInForm);
+
+        HttpEntity<String> requestEntity = new HttpEntity<String>(json,headers);
+
+        ResponseEntity<SignInForm> responseEntity = new RestTemplate().postForEntity(
+                "http://localhost:8080/CookCloud/rest/auth/login/",
+                requestEntity, SignInForm.class);
+
+        assertEquals(302,responseEntity.getStatusCode().value());
+        log.info("AuthControllerIT done", responseEntity);
     }
 }

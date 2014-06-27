@@ -24,4 +24,5 @@ public class PersonDao extends AbstractDaoImpl<Person, Integer> {
     public Person findUserByMail(String email) {
         return findByCriteria(Restrictions.like("email", email, MatchMode.EXACT)).get(0);
     }
+
 }

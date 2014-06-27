@@ -19,11 +19,16 @@ public class GrantedAuthorityBuilder {
         //this.user = user;
         auths = new HashSet<GrantedAuthority>();
         auths.add(new GrantedAuthorityImpl("ROLE_USER"));
+        if (user.getEmail().equals("test@test.com")){
+            auths.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+        }
     }
 
     public Collection<GrantedAuthority> buildAuthoritiesList() {
         Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>(auths);
+        authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
         authorities.add(new GrantedAuthorityImpl("ROLE_SUPPORT_USER"));
+        authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
         return authorities;
     }
 
