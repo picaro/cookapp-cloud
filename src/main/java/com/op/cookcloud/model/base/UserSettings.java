@@ -10,6 +10,8 @@ import javax.persistence.*;
 @Table(name = "usersettings")
 public @Data class UserSettings  extends EntityWithId {
 
+    private static final long serialVersionUID = -2094802639410766006L;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", nullable = true)
     private Person person;

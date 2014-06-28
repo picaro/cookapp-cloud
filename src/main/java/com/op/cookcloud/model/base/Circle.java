@@ -14,6 +14,8 @@ import java.util.Set;
 @Table(name = "circle")
 public @Data class Circle extends EntityWithId  {
 
+    private static final long serialVersionUID = 281597321029091830L;
+
     private String name;
 
     private String note;

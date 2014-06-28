@@ -12,6 +12,8 @@ import javax.persistence.*;
 @Table(name = "product")
 public @Data class Product extends EntityWithId  {
 
+    private static final long serialVersionUID = 2031603586369405652L;
+
     private String note;
 
     private String name;

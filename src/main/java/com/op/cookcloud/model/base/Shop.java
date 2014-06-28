@@ -13,6 +13,8 @@ import java.util.Set;
 @Table(name = "shop")
 public @Data class Shop extends EntityWithId  {
 
+    private static final long serialVersionUID = -5405790156658560523L;
+
     private String name;
 
     private String coordinates;

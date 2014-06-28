@@ -15,6 +15,8 @@ public
 @Data
 class ShopList extends EntityWithId {
 
+    private static final long serialVersionUID = 1402877834513796933L;
+
     private String note;
 
     private Date date_created;

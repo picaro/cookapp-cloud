@@ -20,6 +20,7 @@ import java.util.Set;
 @Data
 public class Person extends EntityWithId {
 
+
     @NotEmpty
     private String firstName;
     @NotEmpty

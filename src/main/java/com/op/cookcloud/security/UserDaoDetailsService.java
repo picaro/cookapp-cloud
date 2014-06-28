@@ -4,6 +4,7 @@ import com.op.cookcloud.dao.impl.PersonDao;
 import com.op.cookcloud.dao.impl.RoleDao;
 import com.op.cookcloud.model.base.Person;
 import com.op.cookcloud.model.base.Role;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +17,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+@Slf4j
 public class UserDaoDetailsService implements UserDetailsService {
 
     @Autowired
@@ -24,18 +26,12 @@ public class UserDaoDetailsService implements UserDetailsService {
     @Autowired
     private RoleDao roleDao;
 
-  //  private final Collection<GrantedAuthority> auths;
-
     public UserDaoDetailsService() {
-//        auths = new HashSet<GrantedAuthority>();
-//        auths.add(new GrantedAuthorityImpl("ROLE_USER"));
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException, DataAccessException {
         Person user = personDao.findUserByMail(email);
-//        List<Role> roles = roleDao.findByPeson(user);
-//        user.setRoles(roles);
         Collection<GrantedAuthority> authorities = GrantedAuthorityBuilder.create(user).buildAuthoritiesList();
         return new UserDetailsWithUserInformation(user.getEmail(), user.getPassword(), true, true, true, true, authorities,
                 user.getFirstName());

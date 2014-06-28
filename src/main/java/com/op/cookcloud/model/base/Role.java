@@ -17,6 +17,8 @@ import java.util.Set;
 @Data
 public class Role extends EntityWithId {
 
+    private static final long serialVersionUID = -3500593302899796237L;
+
     @NotEmpty
     private String role_name;
 
