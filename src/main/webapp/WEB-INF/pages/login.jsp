@@ -28,8 +28,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-right" role="search">
-                <a href="${pageContext.request.contextPath}/newUser" class="btn btn-primary">Sign up</a>
-                <a href="${pageContext.request.contextPath}/login" class="btn btn-success">Sign in</a>
+                <a href="<c:url value="/newUser"/>" class="btn btn-primary">Sign up</a>
+                <a href="<c:url value="/login"/>" class="btn btn-success">Sign in</a>
             </form>
         </div>
 

@@ -25,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">HOME</a>
+            <a class="navbar-brand" href="<c:url value="/"/>">HOME</a>
         </div>
     </div>
 </nav>
