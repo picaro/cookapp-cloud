@@ -37,16 +37,16 @@
 
 <div class="well signInPanel">
     <div class="row">
-        <form role="form" method="POST" action="login" class="login_form" modelAttribute="signinform">
+        <form:form role="form" method="POST"  modelAttribute="signinform" action="login" class="login_form" >
             <div class="form-group">
                 <form:errors path="email" cssClass="error"/>
                 <label for="email">Email address</label>
-                <input type="email" class="form-control " id="email" placeholder="Enter email" path="name"/>
+                <form:input type="email" class="form-control " id="email" placeholder="Enter email" path="email"/>
             </div>
             <div class="form-group">
                 <form:errors path="password" cssClass="error"/>
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" path="password"/>
+                <form:input type="password" class="form-control" id="password" placeholder="Password" path="password"/>
             </div>
             <div class="checkbox">
                 <label>
@@ -55,7 +55,7 @@
             </div>
             <button type="submit" class="btn btn-success col-md-5">Sign In</button>
             <a href="#" class="btn btn-Link col-md-5">(forgot password)</a>
-        </form>
+        </form:form>
     </div>
 </div>
 

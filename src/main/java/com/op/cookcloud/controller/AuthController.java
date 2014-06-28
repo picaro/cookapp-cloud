@@ -8,6 +8,7 @@ import com.op.cookcloud.model.base.ShopList;
 import com.op.cookcloud.model.form.SignInForm;
 import com.op.cookcloud.security.AuthenticationHelper;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ import java.util.Map;
 @Service("loginService")
 @Path("/auth")
 @Transactional
-@Log4j
+@Slf4j
 public class AuthController {
 
     @Autowired
@@ -91,6 +92,14 @@ public class AuthController {
         log.info("authentication:" + authentication.isAuthenticated());
         signInForm.setLoggedIn(authentication.isAuthenticated());
         return signInForm;
+    }
+
+    @GET
+    @Path("/logout")
+    public String logoutUser(@Context HttpServletRequest request) {
+        log.info("authentication logout");
+        authenticationHelper.removeUserAuthentication(request);
+        return "/";
     }
 
 }
