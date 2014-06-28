@@ -11,8 +11,6 @@ import java.util.List;
 @Repository
 public class PersonDao extends AbstractDaoImpl<Person, Integer> {
 
-    private static final Logger LOG = Logger.getLogger(PersonDao.class);
-
     protected PersonDao() {
         super(Person.class);
     }

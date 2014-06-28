@@ -25,8 +25,8 @@ CREATE TABLE `user_role` (
 
 -- Insert records to the table 'user_role'
 
-INSERT INTO `user_role` VALUES(1, 'ROLE_ADMIN');
-INSERT INTO `user_role` VALUES(2, 'ROLE_USER');
+INSERT INTO `user_role` VALUES(2, 'ROLE_ADMIN');
+INSERT INTO `user_role` VALUES(1, 'ROLE_USER');
 INSERT INTO `user_role` VALUES(3, 'ROLE_USER');
 
 -- Update 'person'. Change open password to md5

@@ -18,18 +18,18 @@ add
 
 
 
-<profile>
+    <profile>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-               	<db.url>jdbc:mysql://db4free.net:3306/cookcloud</db.url>
+                <mongo.url>ds041248.mongolab.com:41248/mongofood</mongo.url>
+                <mongo.login>admin</mongo.login>
+                <mongo.password>123456</mongo.password>
+              	<db.url>jdbc:mysql://db4free.net:3306/cookcloud</db.url>
                 <db.login>cookcloud</db.login>
                 <db.password>123456</db.password>
             </properties>
     </profile>
-
-
-
 
 *    for local mysql use login root passw 123456

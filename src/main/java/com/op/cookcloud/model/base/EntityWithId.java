@@ -7,8 +7,10 @@ import javax.persistence.MappedSuperclass;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import java.io.Serializable;
+
 @MappedSuperclass
-public class EntityWithId {
+public abstract class EntityWithId implements Serializable {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

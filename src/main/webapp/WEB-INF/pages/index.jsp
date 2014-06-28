@@ -35,7 +35,13 @@
             </ul>
 
             <form class="navbar-form navbar-right" role="search">
-                <a href="<c:url value="/login"/>"  class="btn btn-success">Sign in</a>
+                <c:choose>
+                    <c:when test="${pageContext.request.userPrincipal.authenticated}">
+                        <a href="<c:url value="/logout"/>"  class="btn btn-success">Sign out</a></c:when>
+                    <c:otherwise>
+                        <a href="<c:url value="/login"/>"  class="btn btn-success">Sign in</a></c:otherwise>
+                </c:choose>
+
             </form>
         </div>
 
