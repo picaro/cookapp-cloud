@@ -41,48 +41,10 @@ import java.util.Map;
 @Path("/auth")
 @Transactional
 @Slf4j
-public class AuthController {
+public class AuthControllerRest {
 
     @Autowired
     private AuthenticationHelper authenticationHelper;
-
-
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON + CHARSET_UTF_8})
-//    @Path("/success")
-//    public Map<String, Object> loginSuccess() throws JSONException {
-//
-//        Map<String, Object> result = new HashMap<String, Object>();
-//        String sessionId = request.getSession().getId();
-//        result.put(SESSION_ID, sessionId);
-//        result.put(MESSAGE, "Successfully logged in");
-//        return result;
-//    }
-//
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON + CHARSET_UTF_8})
-//    @Path("/failure")
-//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-//    public Map<String, Object> loginFailure() throws JSONException {
-//
-//        Map<String, Object> result = new HashMap<String, Object>();
-//        result.put(ERROR_CODE, HttpServletResponse.SC_UNAUTHORIZED);
-//        result.put(MESSAGE, "Authentication failure");
-//        return result;
-//    }
-//
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON + CHARSET_UTF_8})
-//    @Path("/logout")
-//    public Map<String, Object> logout() throws JSONException {
-//
-//        Map<String, Object> result = new HashMap<String, Object>();
-//        result.put(MESSAGE, "Successfully logged out");
-//        return result;
-//    }
-
-    @Autowired
-    private ShopListDao shopListDao;
 
     @POST
     @Path("/login")
@@ -96,10 +58,13 @@ public class AuthController {
 
     @GET
     @Path("/logout")
-    public String logoutUser(@Context HttpServletRequest request) {
+    @Produces({MediaType.APPLICATION_JSON + CHARSET_UTF_8})
+    public Map<String, Object> logoutUser(@Context HttpServletRequest request) {
         log.info("authentication logout");
         authenticationHelper.removeUserAuthentication(request);
-        return "/";
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put(MESSAGE, "Successfully logged out");
+        return result;
     }
 
 }

@@ -50,34 +50,7 @@ public class IndexController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String signIn(){
-        return "login";
-    }
 
-    @Autowired
-    private AuthenticationHelper authenticationHelper;
-
-
-    @ModelAttribute("signinform")
-    public SignInForm getSignInForm() {
-        return new SignInForm();
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String signIn2(SignInForm signInForm , Model model, HttpServletRequest request){
-        Authentication authentication = authenticationHelper.loginUser(signInForm.getEmail(), signInForm.getPassword(),  request);
-        log.info("authentication:" + authentication.isAuthenticated());
-        signInForm.setLoggedIn(authentication.isAuthenticated());
-        return "login";
-    }
-
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logoutUser(HttpServletRequest request) {
-        log.info("authentication logout");
-        authenticationHelper.removeUserAuthentication(request);
-        return "redirect:/";
-    }
 }
 
 
