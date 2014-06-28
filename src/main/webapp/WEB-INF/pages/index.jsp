@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
          pageEncoding="utf8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,8 +23,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">HOME</a>
-            <a class="navbar-brand" href="admin">ADMIN</a>
+            <a class="navbar-brand" href="<c:url value="/"/>">HOME</a>
+            <a class="navbar-brand" href="<c:url value="/admin"/>">ADMIN</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -34,7 +35,7 @@
             </ul>
 
             <form class="navbar-form navbar-right" role="search">
-                <a href="login"  class="btn btn-success">Sign in</a>
+                <a href="<c:url value="/login"/>"  class="btn btn-success">Sign in</a>
             </form>
         </div>
 
