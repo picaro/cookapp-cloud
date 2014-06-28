@@ -19,8 +19,7 @@ public class RoleDao extends AbstractDaoImpl<Role, Integer> {
         super(Role.class);
     }
 
-    public List<Role> findByPeson(Person person) {
-
+    public List<Role> findByPerson(Person person) {
         return findByCriteria(Restrictions.eq("person", person));
     }
 

@@ -10,7 +10,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "product")
-public @Data class Product extends EntityWithId  {
+@Data
+public class Product extends EntityWithId  {
 
     private static final long serialVersionUID = 2031603586369405652L;
 
@@ -29,8 +30,5 @@ public @Data class Product extends EntityWithId  {
     @JoinColumn(name = "shoplistid", updatable = false, insertable = false, nullable = false)
     private ShopList shoplist;
 
-    @Override
-    public String toString(){
-        return note;
-    }
+
 }

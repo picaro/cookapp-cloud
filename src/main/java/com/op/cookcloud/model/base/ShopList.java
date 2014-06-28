@@ -33,8 +33,8 @@ class ShopList extends EntityWithId {
             inverseJoinColumns = {@JoinColumn(name = "circleid")})
     private Set<Circle> circles = new HashSet<Circle>();
 
-    @Transient
-    @JsonIgnore
+    //Transient
+    //JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", nullable = true)
     private Person person;

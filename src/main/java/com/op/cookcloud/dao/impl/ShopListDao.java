@@ -21,4 +21,9 @@ public class ShopListDao extends AbstractDaoImpl<ShopList, Integer> {
     public List<ShopList> findByNote(String note) {
         return findByCriteria(Restrictions.like("note", note, MatchMode.EXACT));
     }
+
+    public List<ShopList> findByPerson(String email) {
+        return getCurrentSession().createQuery("FROM ShopList s where s.person.email = '" + email + "'").list();
+        //return this. findByCriteria(Restrictions.like("userid", email, MatchMode.EXACT));
+    }
 }

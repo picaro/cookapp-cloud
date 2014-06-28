@@ -39,6 +39,15 @@ public class ShopListDaoTest extends BaseDaoTest{
         assertTrue(shopListDao.findAll().size() == 0);
     }
 
+    @Test
+    public void shouldReturnShopListsForCurrentUser() throws Exception {
+        ShopList shopList = createShopList();
+        assertTrue(shopListDao.findAll().size() > 0);
+        List<ShopList> shopLists = shopListDao.findByPerson("TestEmail@gmail.com");
+        //shopListDao.delete(shopListNew);
+        assertTrue(shopLists.size() > 0);
+    }
+
 
     @Test
     public void testUpdate() throws Exception {

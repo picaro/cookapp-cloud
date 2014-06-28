@@ -48,17 +48,41 @@
     </div>
 </nav>
 
+<div class="col-md-2 well" style="height:400px;">
+    <div class="list-group">
+        <a href="#" class="list-group-item active">
+            Test Menu
+        </a>
+        <a href="#" class="list-group-item">Shop list</a>
+        <a href="#" class="list-group-item">Family</a>
+        <a href="#" class="list-group-item">Shops</a>
+        <a href="#" class="list-group-item">Fridge</a>
+    </div>
+
+</div>
+
 <div class="container">
     <div class="jumbotron logo_background">
         <div class="container">
             <div class="col-sm-2">
+                <jsp:include page="/product/allProducts"/>
             </div>
             <div class="col-sm-4">
             </div>
         </div>
     </div>
-</div>
 
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 twitter">aaa</div>
+            <div class="col-md-4 sitemap">sss</div>
+            <div class="col-md-6 social"></div>
+            <div class="col-md-6 footer-logo"></div>
+        </div>
+    </div>
+</footer>
 <script>
 </script>
 </body>

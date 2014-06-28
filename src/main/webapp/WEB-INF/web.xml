@@ -6,7 +6,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext.xml, classpath:hibernateContext.xml</param-value>
+        <param-value>classpath:applicationContext.xml</param-value>
    </context-param>
 
 
@@ -49,14 +49,14 @@
         <load-on-startup>1</load-on-startup>
 	</servlet>
 
-    <!-- MVC Servlet - see sample-servlet.xml for specific config -->
+    <!-- MVC Servlet - see uiconfig-servlet.xml for specific config -->
     <servlet>
-        <servlet-name>sample</servlet-name>
+        <servlet-name>uiconfig</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>sample</servlet-name>
+        <servlet-name>uiconfig</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 

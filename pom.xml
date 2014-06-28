@@ -48,7 +48,8 @@
         <junit.version>4.11</junit.version>
         <jdk.version>1.7</jdk.version>
         <springdata.version>1.3.2.RELEASE</springdata.version>
-
+        <commons-fileupload.version>1.2.1</commons-fileupload.version>
+        <tiles.version>3.0.4</tiles.version>
         <spring.version>3.1.4.RELEASE</spring.version>
         <jstl.version>1.2</jstl.version>
         <servlet.version>3.1.0</servlet.version>
@@ -78,6 +79,12 @@
         </dependency>
 
         <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>2.3.3</version>
@@ -88,6 +95,8 @@
             <artifactId>cglib</artifactId>
             <version>2.2.2</version>
         </dependency>
+
+
 
         <!-- Servlet & JSTL -->
         <dependency>
@@ -102,14 +111,21 @@
         </dependency>
         <!-- Display template & layout -->
         <dependency>
-            <groupId>opensymphony</groupId>
-            <artifactId>sitemesh</artifactId>
-            <version>${sitemesh.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>${bootstrap.version}</version>
+        </dependency>
+
+        <!-- Composite-view & layout framework -->
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-core</artifactId>
+            <version>${tiles.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-jsp</artifactId>
+            <version>${tiles.version}</version>
         </dependency>
 
         <!-- Jersey -->
