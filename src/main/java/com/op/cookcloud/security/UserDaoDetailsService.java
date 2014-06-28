@@ -34,8 +34,8 @@ public class UserDaoDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException, DataAccessException {
         Person user = personDao.findUserByMail(email);
-        List<Role> roles = roleDao.findByPeson(user);
-        user.setRoles(roles);
+//        List<Role> roles = roleDao.findByPeson(user);
+//        user.setRoles(roles);
         Collection<GrantedAuthority> authorities = GrantedAuthorityBuilder.create(user).buildAuthoritiesList();
         return new UserDetailsWithUserInformation(user.getEmail(), user.getPassword(), true, true, true, true, authorities,
                 user.getFirstName());
