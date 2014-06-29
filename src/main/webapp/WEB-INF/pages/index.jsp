@@ -65,7 +65,7 @@
     <div class="jumbotron logo_background">
         <div class="container">
             <div class="col-sm-2">
-                <jsp:include page="/product/allProducts"/>
+                <jsp:include page="/product/currentlist"/>
             </div>
             <div class="col-sm-4">
             </div>

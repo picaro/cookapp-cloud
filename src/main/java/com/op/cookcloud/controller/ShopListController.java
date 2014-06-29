@@ -37,6 +37,8 @@ public class ShopListController {
         return new ModelAndView("shops", "shopList", shopList);
     }
 
+
+
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
     @Path("{id}")

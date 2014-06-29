@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -51,17 +52,23 @@ public class ProductController {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON + AppConstants.CHARSET_UTF_8})
-    @RequestMapping(value = "/currentuser")
+    @RequestMapping(value = "/currentlist")
     public ModelAndView readUserProducts() {
-        if (!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) return new ModelAndView();
+        List<Product> productList = new ArrayList<Product>();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication.getPrincipal() instanceof User)){
+            //return new ModelAndView("redirect:/");
+            return new ModelAndView("products" , "productList" ,productList);
+        };
+
         User user = (User)authentication.getPrincipal();
-        //Person person = personDao.findUserByMail(user.getUsername());
 
         List<ShopList> shopLists = shopListDao.findByPerson(user.getUsername());
-        ShopList shopList = shopLists.get(0);
-        List<Product> productList = productDao.findByShopList(shopList);
+        if (shopLists.size() > 0) {
+            ShopList shopList = shopLists.get(0);
+            productList = productDao.findByShopList(shopList);
+        }
         return new ModelAndView("products" , "productList" ,productList);
     }
 

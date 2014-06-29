@@ -24,10 +24,10 @@ public class GrantedAuthorityBuilder {
     private GrantedAuthorityBuilder(Person user) {
         //this.user = user;
         auths = new HashSet<GrantedAuthority>();
-//        auths.add(new SimpleGrantedAuthority("ROLE_USER"));
+        auths.add(new SimpleGrantedAuthority("ROLE_USER".intern()));
 
         for(Role role:user.getRoles()){
-            auths.add(new SimpleGrantedAuthority(role.getRole_name()));
+            auths.add(new SimpleGrantedAuthority(role.getRole_name().intern()));
         }
 //        if (user.getEmail().equals("test@test.com")){
 //            auths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
@@ -36,9 +36,9 @@ public class GrantedAuthorityBuilder {
 
     public Collection<GrantedAuthority> buildAuthoritiesList() {
         Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>(auths);
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        authorities.add(new SimpleGrantedAuthority("ROLE_SUPPORT_USER"));
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER".intern()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_SUPPORT_USER".intern()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN".intern()));
         return authorities;
     }
 
