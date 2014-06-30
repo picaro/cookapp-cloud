@@ -46,7 +46,7 @@
             <div class="msg">${msg}</div>
         </c:if>
 
-        <form:form role="form" method="POST"  modelAttribute="signinform" action="loginPost" class="login_form" >
+        <form:form role="form" method="POST"  modelAttribute="signInForm" class="login_form" >
             <div class="form-group">
                 <form:errors path="email" cssClass="error"/>
                 <label for="email">Email address</label>

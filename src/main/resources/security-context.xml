@@ -13,7 +13,11 @@
         <intercept-url pattern="/rest/secured/*" access="isAuthenticated()" />
         <intercept-url pattern="/site/*" access="isAuthenticated()" />
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-        <form-login login-page="/login" default-target-url="/" always-use-default-target="true"/>
+        <intercept-url pattern="/login*" access="permitAll" />
+        <form-login login-page="/login"
+                    default-target-url="/"
+                    authentication-failure-url="/login?error"
+                    always-use-default-target="true"/>
 
 
         <logout invalidate-session="true"

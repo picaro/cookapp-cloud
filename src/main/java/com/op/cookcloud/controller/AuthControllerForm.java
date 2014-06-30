@@ -6,15 +6,20 @@ import com.op.cookcloud.security.AuthenticationHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -43,31 +48,32 @@ public class AuthControllerForm {
         return "login";
     }
 
-    @ModelAttribute("signinform")
-    public SignInForm getSignInForm() {
+    @ModelAttribute("signInForm")
+    public SignInForm createAttrSignInForm() {
         return new SignInForm();
     }
 
-    @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-    public ModelAndView signInForm(@RequestParam(value = "error", required = false) String error,
-                                   SignInForm signInForm , Model model, HttpServletRequest request){
-        ModelAndView modelNV = new ModelAndView();
 
-        Authentication authentication = authenticationHelper.loginUser(signInForm.getEmail(), signInForm.getPassword(),  request);
-        log.info("authentication:" + authentication.isAuthenticated());
-        if (!(authentication.getPrincipal() instanceof User)){
-            model.addAttribute("error", "Incorrect user");
-            modelNV.getModel().put("error","aaaa");
-            modelNV.getModel().put("email",signInForm.getEmail());
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String signInForm(@Valid SignInForm signInForm ,
+                             BindingResult result, Model model,
+                             HttpServletRequest request,
+                             HttpServletResponse response){
+        Authentication authentication =
+                authenticationHelper.loginUser(signInForm.getEmail(), signInForm.getPassword(),  request);
+        //log.info("authentication:" + authentication.isAuthenticated());
+        if (authentication == null || !(authentication.getPrincipal() instanceof User)){
+            model.addAttribute("error", "User or login incorrect!");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            //modelView.addObject("errorMessage", errorMessage);
 
-            //modelNV.setViewName("login.jsp");
-            return modelNV;
-            // return "redirect:/login";
+            return "login";
         }
         signInForm.setLoggedIn(authentication.isAuthenticated());
-        modelNV.setViewName("redirect:/");
-        return modelNV;//"redirect:/";
+        return "redirect:/";
     }
+
+
 
     /**
      * just interface , could be different realisation

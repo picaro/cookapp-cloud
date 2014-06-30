@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,7 +24,12 @@ public class PersonDao extends AbstractDaoImpl<Person, Integer> {
 
     public Person findUserByMail(String email) {
         log.info("findUserByMail" , "find user : " + email);
-        return findByCriteria(Restrictions.like("email", email, MatchMode.EXACT)).get(0);
+        List<Person> users = findByCriteria(Restrictions.like("email", email, MatchMode.EXACT));
+        if (users.size() == 0)
+        {
+            throw new UsernameNotFoundException("No user with this name");
+        }
+        return users.get(0);
     }
 
 }

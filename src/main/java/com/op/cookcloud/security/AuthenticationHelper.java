@@ -3,6 +3,7 @@ package com.op.cookcloud.security;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -23,7 +24,12 @@ public class AuthenticationHelper {
         log.trace("loginUser:" + phoneNumber);
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(phoneNumber, password);
-        Authentication authentication = authenticationManager.authenticate(token);
+        Authentication authentication = null;
+        try{
+             authentication = authenticationManager.authenticate(token);
+        } catch (BadCredentialsException bc){
+            return null;
+        }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
