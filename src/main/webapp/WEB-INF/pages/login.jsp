@@ -38,7 +38,15 @@
 
 <div class="well signInPanel">
     <div class="row">
-        <form:form role="form" method="POST"  modelAttribute="signinform" action="login" class="login_form" >
+
+        <c:if test="${not empty error}">
+            <div class="error">${error}</div>
+        </c:if>
+        <c:if test="${not empty msg}">
+            <div class="msg">${msg}</div>
+        </c:if>
+
+        <form:form role="form" method="POST"  modelAttribute="signinform" action="loginPost" class="login_form" >
             <div class="form-group">
                 <form:errors path="email" cssClass="error"/>
                 <label for="email">Email address</label>

@@ -6,14 +6,13 @@ import com.op.cookcloud.security.AuthenticationHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
@@ -36,33 +35,49 @@ import static com.op.cookcloud.AppConstants.MESSAGE;
 @Controller
 public class AuthControllerForm {
 
+    @Autowired
+    private AuthenticationHelper authenticationHelper;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String signIn(){
         return "login";
     }
-
-    @Autowired
-    private AuthenticationHelper authenticationHelper;
-
 
     @ModelAttribute("signinform")
     public SignInForm getSignInForm() {
         return new SignInForm();
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String signIn2(SignInForm signInForm , Model model, HttpServletRequest request){
+    @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
+    public ModelAndView signInForm(@RequestParam(value = "error", required = false) String error,
+                                   SignInForm signInForm , Model model, HttpServletRequest request){
+        ModelAndView modelNV = new ModelAndView();
+
         Authentication authentication = authenticationHelper.loginUser(signInForm.getEmail(), signInForm.getPassword(),  request);
         log.info("authentication:" + authentication.isAuthenticated());
+        if (!(authentication.getPrincipal() instanceof User)){
+            model.addAttribute("error", "Incorrect user");
+            modelNV.getModel().put("error","aaaa");
+            modelNV.getModel().put("email",signInForm.getEmail());
+
+            //modelNV.setViewName("login.jsp");
+            return modelNV;
+            // return "redirect:/login";
+        }
         signInForm.setLoggedIn(authentication.isAuthenticated());
-        return "redirect:/";
+        modelNV.setViewName("redirect:/");
+        return modelNV;//"redirect:/";
     }
 
+    /**
+     * just interface , could be different realisation
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutUser(HttpServletRequest request) {
         log.info("authentication logout");
-        authenticationHelper.removeUserAuthentication(request);
-        return "redirect:/";
+        return "redirect:/j_spring_security_logout";
     }
 
 }

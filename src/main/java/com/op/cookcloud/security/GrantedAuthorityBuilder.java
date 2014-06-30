@@ -1,19 +1,16 @@
 package com.op.cookcloud.security;
 
-import com.op.cookcloud.dao.impl.RoleDao;
 import com.op.cookcloud.model.base.Person;
 import com.op.cookcloud.model.base.Role;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
+@Slf4j
 public class GrantedAuthorityBuilder {
-
 
     private final Collection<GrantedAuthority> auths;
 
@@ -22,16 +19,14 @@ public class GrantedAuthorityBuilder {
     }
 
     private GrantedAuthorityBuilder(Person user) {
-        //this.user = user;
+        log.debug("GrantedAuthorityBuilder", "start");
         auths = new HashSet<GrantedAuthority>();
         auths.add(new SimpleGrantedAuthority("ROLE_USER".intern()));
 
-        for(Role role:user.getRoles()){
+        for (Role role : user.getRoles()) {
             auths.add(new SimpleGrantedAuthority(role.getRole_name().intern()));
         }
-//        if (user.getEmail().equals("test@test.com")){
-//            auths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-//        }
+
     }
 
     public Collection<GrantedAuthority> buildAuthoritiesList() {
