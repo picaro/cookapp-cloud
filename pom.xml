@@ -437,7 +437,7 @@
             </plugin>
 
 
-            <plugin>
+            <!--plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.26</version>
@@ -469,7 +469,7 @@
                     <stopPort>9991</stopPort>
                     <stopKey>test</stopKey>
                 </configuration>
-            </plugin>
+            </plugin-->
         </plugins>
         <resources>
             <resource>
