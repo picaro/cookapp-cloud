@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Date: 2/7/13
  */
 @Data
-public class SignInForm implements Serializable{
+public class SignMeInForm implements Serializable{
 
     private String email;
 

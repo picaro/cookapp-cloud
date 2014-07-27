@@ -1,29 +1,15 @@
 package com.op.cookcloud.helper;
 
 
-import com.op.cookcloud.model.form.SignInForm;
-import junit.framework.TestCase;
+import com.op.cookcloud.model.form.SignMeInForm;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.http.*;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 
 import static junit.framework.Assert.assertEquals;
@@ -39,7 +25,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 //        "classpath:/applicationContext-test.xml", "classpath:/hibernateContext-test.xml"})
 public class AuthControllerIT {
 
-    private SignInForm signInForm = new SignInForm();
+    private SignMeInForm signInForm = new SignMeInForm();
 
     private HttpHeaders headers = new HttpHeaders();
 
@@ -60,9 +46,9 @@ public class AuthControllerIT {
 
         HttpEntity<String> requestEntity = new HttpEntity<String>(json,headers);
 
-        ResponseEntity<SignInForm> responseEntity = new RestTemplate().postForEntity(
+        ResponseEntity<SignMeInForm> responseEntity = new RestTemplate().postForEntity(
                 "http://localhost:8080/CookCloud/rest/auth/login/",
-                requestEntity, SignInForm.class);
+                requestEntity, SignMeInForm.class);
 
         assertEquals(202,responseEntity.getStatusCode().value());
         log.info("AuthControllerIT done", responseEntity);
@@ -79,9 +65,9 @@ public class AuthControllerIT {
 
         HttpEntity<String> requestEntity = new HttpEntity<String>(json,headers);
 
-        ResponseEntity<SignInForm> responseEntity = new RestTemplate().postForEntity(
+        ResponseEntity<SignMeInForm> responseEntity = new RestTemplate().postForEntity(
                 "http://localhost:8080/CookCloud/rest/auth/login/",
-                requestEntity, SignInForm.class);
+                requestEntity, SignMeInForm.class);
 
         assertEquals(302,responseEntity.getStatusCode().value());
         log.info("AuthControllerIT done", responseEntity);
