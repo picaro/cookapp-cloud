@@ -35,6 +35,7 @@
             </ul>
 
             <form class="navbar-form navbar-right" role="search">
+                <a href="<c:url value="/newUser"/>" class="btn btn-primary">Sign up</a>
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.authenticated}">
                         <a href="<c:url value="/logout"/>"  class="btn btn-success">Sign out</a></c:when>

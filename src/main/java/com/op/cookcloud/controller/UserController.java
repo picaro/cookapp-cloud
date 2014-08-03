@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -33,9 +34,13 @@ public class UserController {
     @RequestMapping(value = "/newUser", method = RequestMethod.POST)
     public String addNewUser(@Valid @ModelAttribute Person person, BindingResult bindingResult, Model model) {
         model.addAttribute("error", bindingResult);
+
+//        bindingResult.rejectValue("email","email.already.exists.create");
+
         if(bindingResult.hasErrors()){
             return  "userRegistration";
         }
+        person.setDate_registration(Calendar.getInstance().getTime());
         person.setPassword(DigestUtils.md5Hex(person.getPassword()));
         this.personDao.saveOrUpdate(person);
         return "redirect:/login";

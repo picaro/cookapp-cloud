@@ -1,5 +1,8 @@
 package com.op.cookcloud.model.base;
 
+import com.op.cookcloud.validation.CheckUserUniqueEmail;
+import com.op.cookcloud.validation.groups.CreateChecks;
+import com.op.cookcloud.validation.groups.UpdateChecks;
 import lombok.Data;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Type;
@@ -8,6 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.GroupSequence;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -18,6 +22,7 @@ import java.util.Set;
 @Entity
 @Table(name = "person")
 @Data
+@GroupSequence({ CreateChecks.class, UpdateChecks.class, Person.class })
 public class Person extends EntityWithId {
 
 
@@ -25,8 +30,10 @@ public class Person extends EntityWithId {
     private String firstName;
     @NotEmpty
     private String lastName;
+
     @NotEmpty
     @Email
+    @CheckUserUniqueEmail(email = "email", message = "{email.already.exists.update}", errorKey = "email", skipCurrent = false)
     private String email;
     @NotEmpty
     private String password;
