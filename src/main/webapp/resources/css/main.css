@@ -17,7 +17,17 @@
     background: url("../img/food.jpg") repeat-y !important;
     height: 420px;
 }
-.error{
-    color:red;
+
+.error {
+    color: red;
 }
+
+.body_background{
+    background: #D3CDCD;
+}
+
+element.style {
+}
+
+
 
