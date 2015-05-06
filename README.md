@@ -33,3 +33,5 @@ add
     </profile>
 
 *    for local mysql use login root passw 123456
+
+tst
