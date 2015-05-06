@@ -33,7 +33,7 @@ public class Person extends EntityWithId {
 
     @NotEmpty
     @Email
-    @CheckUserUniqueEmail(email = "email", message = "{email.already.exists.update}", errorKey = "email", skipCurrent = false)
+    @CheckUserUniqueEmail(email = "email", errorKey = "email", skipCurrent = true)
     private String email;
     @NotEmpty
     private String password;

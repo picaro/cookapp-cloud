@@ -59,27 +59,27 @@ public class PersonControllerTest extends BaseDaoTest {
         log.debug(person1.getId());
     }
 
-    @Test
-    public void getAllPersonsTest() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
-
-//        List<Person> personL = personController.readAll();
+//    @Test
+//    public void getAllPersonsTest() {
+//        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+//        validator = factory.getValidator();
 //
-//        Person person1 = personL.get(0);
-//
-//        Set<ConstraintViolation<Person>> constraintViolations =
-//                validator.validate(person1);
-//        assertEquals(0, constraintViolations.size());
-//        assertEquals(person1.getFirstName(), "TestFirstName");
-//        assertEquals(person1.getLastName(), "TestLastName");
-//        assertEquals(person1.getEmail(), "TestMail@mail.ru");
-//        assertEquals(person1.getGender(), "M");
-//        assertEquals(person1.getPassword(), "123456");
-//        assertEquals(person1.getPhone(), "0123456789");
-//
-//        log.debug(person1.getId());
-    }
+////        List<Person> personL = personController.readAll();
+////
+////        Person person1 = personL.get(0);
+////
+////        Set<ConstraintViolation<Person>> constraintViolations =
+////                validator.validate(person1);
+////        assertEquals(0, constraintViolations.size());
+////        assertEquals(person1.getFirstName(), "TestFirstName");
+////        assertEquals(person1.getLastName(), "TestLastName");
+////        assertEquals(person1.getEmail(), "TestMail@mail.ru");
+////        assertEquals(person1.getGender(), "M");
+////        assertEquals(person1.getPassword(), "123456");
+////        assertEquals(person1.getPhone(), "0123456789");
+////
+////        log.debug(person1.getId());
+//    }
 
     @Test
     public void deletePersonsTest() {

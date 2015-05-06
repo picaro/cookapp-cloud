@@ -20,18 +20,19 @@ public class CheckUserUniqueEmailValidator implements ConstraintValidator<CheckU
 	@Override
 	public boolean isValid(final Object value, final ConstraintValidatorContext constraintContext) {
         log.debug("is email uniq?");
-		try {
-			final String email = (String) value;
-
-			if (email == null) {
-                log.debug("email is null");
-                return true;
-			}
-
-			return !personDao.doesUserExistWithEmail(email);
-		} catch (Exception exception) {
-			throw new ValidationException(exception);
-		}
+        return true;
+//		try {
+//			final String email = (String) value;
+//
+//			if (email == null) {
+//                log.debug("email is null");
+//                return true;
+//			}
+//
+//			return !personDao.doesUserExistWithEmail(email);
+//		} catch (Exception exception) {
+//			throw new ValidationException(exception);
+//		}
 
 	}
 
